@@ -1,5 +1,5 @@
-f724d7dbc21f37960e0766dfac835a8c263012c0ac15f6b1f75bc74d68415aa1  ./.github/workflows/validate.yml
-45244a427b09d237772a0729d25edf66047a4030f7a6d689e15426235475db88  ./.gitignore
+833f2da015070f8786cab5d82e4a9dacc36d657c9785743595f979d5b10b0df4  ./.github/workflows/validate.yml
+db9ca2e137f36ef10fc02742d267fdfcd00ce92f0ef40aef9568dcdbdd1679e0  ./.gitignore
 353cc9ccca9d4671f909b974e6da15f58830144e77d796ceaa2aa1a548492005  ./contracts/v1.0.0/action-catalog.schema.json
 f1fa7264d8c6106615c6f336810cc30649268d6e692836a50098c7e68d731b54  ./contracts/v1.0.0/action-recommendation.schema.json
 8607dbea1af9fe12771621e167b5332f57f3765809a0920c8a64b057bc58a7b7  ./contracts/v1.0.0/ai-critique.schema.json
