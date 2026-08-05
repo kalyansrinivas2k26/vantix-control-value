@@ -1,0 +1,418 @@
+{
+  "reportType": "PROMISEOPS_FOUNDATION_VALIDATION",
+  "reportVersion": "1.0.0",
+  "generatedAt": "2026-08-05T06:14:12.741Z",
+  "validator": {
+    "engine": "Ajv",
+    "jsonSchemaDraft": "2020-12",
+    "crossContractValidator": "scripts/validate-foundation.mjs"
+  },
+  "fixture": "fixtures/synthetic/mvp-complete-run.v1.0.0.json",
+  "syntheticData": true,
+  "summary": {
+    "status": "PASSED",
+    "passedChecks": 97,
+    "failedChecks": 0,
+    "schemaCount": 13,
+    "evidenceRecordCount": 12,
+    "actionCount": 4,
+    "auditEventCount": 17
+  },
+  "passes": [
+    {
+      "code": "SCHEMA_ACTION_CATALOG",
+      "detail": "Action catalogue passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_RUN_ENVELOPE",
+      "detail": "Complete synthetic run envelope passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_PROMISE_RECORD",
+      "detail": "Promise record passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_EVIDENCE_EVD-SYN-001",
+      "detail": "Evidence EVD-SYN-001 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_EVIDENCE_EVD-SYN-002",
+      "detail": "Evidence EVD-SYN-002 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_EVIDENCE_EVD-SYN-003",
+      "detail": "Evidence EVD-SYN-003 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_EVIDENCE_EVD-SYN-004",
+      "detail": "Evidence EVD-SYN-004 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_EVIDENCE_EVD-SYN-005",
+      "detail": "Evidence EVD-SYN-005 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_EVIDENCE_EVD-SYN-006",
+      "detail": "Evidence EVD-SYN-006 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_EVIDENCE_EVD-SYN-007",
+      "detail": "Evidence EVD-SYN-007 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_EVIDENCE_EVD-SYN-008",
+      "detail": "Evidence EVD-SYN-008 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_EVIDENCE_EVD-SYN-009",
+      "detail": "Evidence EVD-SYN-009 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_EVIDENCE_EVD-SYN-010",
+      "detail": "Evidence EVD-SYN-010 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_EVIDENCE_EVD-SYN-011",
+      "detail": "Evidence EVD-SYN-011 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_EVIDENCE_EVD-SYN-012",
+      "detail": "Evidence EVD-SYN-012 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_ASSESSMENT_ASM-SYN-PREACTION-001",
+      "detail": "Assessment ASM-SYN-PREACTION-001 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AI_DIAGNOSIS",
+      "detail": "AI diagnosis passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AI_CRITIQUE",
+      "detail": "AI critique passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_ACTION_ACT-SYN-ADMIN-001",
+      "detail": "Action ACT-SYN-ADMIN-001 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_ACTION_ACT-SYN-CSM-001",
+      "detail": "Action ACT-SYN-CSM-001 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_ACTION_ACT-SYN-VERIFY-001",
+      "detail": "Action ACT-SYN-VERIFY-001 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_ACTION_ACT-SYN-CLOSE-001",
+      "detail": "Action ACT-SYN-CLOSE-001 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_DECISION_DEC-SYN-ADMIN-001",
+      "detail": "Decision DEC-SYN-ADMIN-001 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_DECISION_DEC-SYN-CSM-001",
+      "detail": "Decision DEC-SYN-CSM-001 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_DECISION_DEC-SYN-CLOSE-001",
+      "detail": "Decision DEC-SYN-CLOSE-001 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_EXECUTION_EXE-SYN-ADMIN-001",
+      "detail": "Execution EXE-SYN-ADMIN-001 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_EXECUTION_EXE-SYN-CSM-001",
+      "detail": "Execution EXE-SYN-CSM-001 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_EXECUTION_EXE-SYN-VERIFY-001",
+      "detail": "Execution EXE-SYN-VERIFY-001 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_EXECUTION_EXE-SYN-CLOSE-001",
+      "detail": "Execution EXE-SYN-CLOSE-001 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_OUTCOME",
+      "detail": "Outcome verification passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AUDIT_AUD-SYN-001",
+      "detail": "Audit event AUD-SYN-001 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AUDIT_AUD-SYN-002",
+      "detail": "Audit event AUD-SYN-002 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AUDIT_AUD-SYN-003",
+      "detail": "Audit event AUD-SYN-003 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AUDIT_AUD-SYN-004",
+      "detail": "Audit event AUD-SYN-004 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AUDIT_AUD-SYN-005",
+      "detail": "Audit event AUD-SYN-005 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AUDIT_AUD-SYN-006",
+      "detail": "Audit event AUD-SYN-006 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AUDIT_AUD-SYN-007",
+      "detail": "Audit event AUD-SYN-007 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AUDIT_AUD-SYN-008",
+      "detail": "Audit event AUD-SYN-008 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AUDIT_AUD-SYN-009",
+      "detail": "Audit event AUD-SYN-009 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AUDIT_AUD-SYN-010",
+      "detail": "Audit event AUD-SYN-010 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AUDIT_AUD-SYN-011",
+      "detail": "Audit event AUD-SYN-011 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AUDIT_AUD-SYN-012",
+      "detail": "Audit event AUD-SYN-012 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AUDIT_AUD-SYN-013",
+      "detail": "Audit event AUD-SYN-013 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AUDIT_AUD-SYN-014",
+      "detail": "Audit event AUD-SYN-014 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AUDIT_AUD-SYN-015",
+      "detail": "Audit event AUD-SYN-015 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AUDIT_AUD-SYN-016",
+      "detail": "Audit event AUD-SYN-016 passed JSON Schema validation."
+    },
+    {
+      "code": "SCHEMA_AUDIT_AUD-SYN-017",
+      "detail": "Audit event AUD-SYN-017 passed JSON Schema validation."
+    },
+    {
+      "code": "UNIQUE_EVIDENCE_IDS",
+      "detail": "evidenceId values are unique."
+    },
+    {
+      "code": "UNIQUE_ACTION_IDS",
+      "detail": "actionId values are unique."
+    },
+    {
+      "code": "UNIQUE_DECISION_IDS",
+      "detail": "decisionId values are unique."
+    },
+    {
+      "code": "UNIQUE_EXECUTION_IDS",
+      "detail": "executionId values are unique."
+    },
+    {
+      "code": "UNIQUE_AUDIT_IDS",
+      "detail": "eventId values are unique."
+    },
+    {
+      "code": "UNIQUE_AUDIT_SEQUENCES",
+      "detail": "sequence values are unique."
+    },
+    {
+      "code": "UNIQUE_ACTION_IDEMPOTENCY_KEYS",
+      "detail": "idempotencyKey values are unique."
+    },
+    {
+      "code": "TRACE_CONTEXT_CONSISTENT",
+      "detail": "Correlation, promise and account identifiers are consistent."
+    },
+    {
+      "code": "SYNTHETIC_FLAGS_CONSISTENT",
+      "detail": "All run records are labelled synthetic."
+    },
+    {
+      "code": "EVIDENCE_REFERENCES_RESOLVE",
+      "detail": "12 referenced evidence IDs resolve."
+    },
+    {
+      "code": "RUN_EVIDENCE_INDEX_COMPLETE",
+      "detail": "Run metadata indexes every evidence record exactly once."
+    },
+    {
+      "code": "COMPLETENESS_RECONCILES",
+      "detail": "Evidence completeness recalculates exactly."
+    },
+    {
+      "code": "STRENGTH_RECONCILES",
+      "detail": "Evidence strength recalculates exactly."
+    },
+    {
+      "code": "CONFIDENCE_RECONCILES",
+      "detail": "Confidence formula recalculates exactly."
+    },
+    {
+      "code": "LIKELIHOOD_RECONCILES",
+      "detail": "Likelihood signals and band recalculate."
+    },
+    {
+      "code": "IMPACT_RECONCILES",
+      "detail": "Impact inputs and band recalculate."
+    },
+    {
+      "code": "PRIORITY_RECONCILES",
+      "detail": "Priority equals likelihood × impact."
+    },
+    {
+      "code": "EFFORT_REMAINS_HUMAN",
+      "detail": "No effort or story points were inferred."
+    },
+    {
+      "code": "AI_ACTION_CODES_CATALOGUED",
+      "detail": "Every AI-recommended action code exists in the catalogue."
+    },
+    {
+      "code": "ACTION_ENABLED_ACT-SYN-ADMIN-001",
+      "detail": "ADMIN_SIMULATE_REPORT_ACCESS_REMEDIATION is enabled."
+    },
+    {
+      "code": "PAYLOAD_HASH_ACT-SYN-ADMIN-001",
+      "detail": "Payload hash matches canonical JSON payload."
+    },
+    {
+      "code": "EXECUTION_BOUND_EXE-SYN-ADMIN-001",
+      "detail": "Execution matches action code, payload hash and idempotency key."
+    },
+    {
+      "code": "HUMAN_APPROVAL_BOUND_ACT-SYN-ADMIN-001",
+      "detail": "Named human approval precedes execution and remains valid."
+    },
+    {
+      "code": "ACTION_ENABLED_ACT-SYN-CSM-001",
+      "detail": "CSM_SIMULATE_CUSTOMER_VERIFICATION_REQUEST is enabled."
+    },
+    {
+      "code": "PAYLOAD_HASH_ACT-SYN-CSM-001",
+      "detail": "Payload hash matches canonical JSON payload."
+    },
+    {
+      "code": "EXECUTION_BOUND_EXE-SYN-CSM-001",
+      "detail": "Execution matches action code, payload hash and idempotency key."
+    },
+    {
+      "code": "HUMAN_APPROVAL_BOUND_ACT-SYN-CSM-001",
+      "detail": "Named human approval precedes execution and remains valid."
+    },
+    {
+      "code": "ACTION_ENABLED_ACT-SYN-VERIFY-001",
+      "detail": "SYSTEM_VERIFY_SALESFORCE_ACCESS is enabled."
+    },
+    {
+      "code": "PAYLOAD_HASH_ACT-SYN-VERIFY-001",
+      "detail": "Payload hash matches canonical JSON payload."
+    },
+    {
+      "code": "EXECUTION_BOUND_EXE-SYN-VERIFY-001",
+      "detail": "Execution matches action code, payload hash and idempotency key."
+    },
+    {
+      "code": "ACTION_ENABLED_ACT-SYN-CLOSE-001",
+      "detail": "CSM_CLOSE_VERIFIED_PROMISE is enabled."
+    },
+    {
+      "code": "PAYLOAD_HASH_ACT-SYN-CLOSE-001",
+      "detail": "Payload hash matches canonical JSON payload."
+    },
+    {
+      "code": "EXECUTION_BOUND_EXE-SYN-CLOSE-001",
+      "detail": "Execution matches action code, payload hash and idempotency key."
+    },
+    {
+      "code": "HUMAN_APPROVAL_BOUND_ACT-SYN-CLOSE-001",
+      "detail": "Named human approval precedes execution and remains valid."
+    },
+    {
+      "code": "OUTCOME_BUSINESS_RULES",
+      "detail": "Technical, customer, SLA and closure outcomes reconcile."
+    },
+    {
+      "code": "CLOSURE_CONTROL_PASSED",
+      "detail": "Promise closure follows verified outcome and approved execution."
+    },
+    {
+      "code": "AUDIT_SEQUENCE_CONTIGUOUS",
+      "detail": "Audit sequence is contiguous."
+    },
+    {
+      "code": "AUDIT_CHAIN_VALID",
+      "detail": "Every audit event points to the prior event."
+    },
+    {
+      "code": "AUDIT_CHRONOLOGY_VALID",
+      "detail": "Audit timestamps are non-decreasing."
+    },
+    {
+      "code": "AUDIT_MANDATORY_EVENTS_PRESENT",
+      "detail": "All mandatory lifecycle event types are present."
+    },
+    {
+      "code": "NEGATIVE_MALFORMED_DIAGNOSIS",
+      "detail": "Malformed diagnosis was rejected by JSON Schema."
+    },
+    {
+      "code": "NEGATIVE_FALSE_OUTCOME_BUSINESS_RULE",
+      "detail": "Valid-shaped false outcome was rejected: ACHIEVED_REQUIRES_TECHNICAL_AND_CUSTOMER_PASS, CLOSURE_NOT_ELIGIBLE"
+    },
+    {
+      "code": "NEGATIVE_UNKNOWN_ACTION_BUSINESS_RULE",
+      "detail": "Valid-shaped uncatalogued action was denied."
+    },
+    {
+      "code": "NEGATIVE_MISSED_SLA_BUSINESS_RULE",
+      "detail": "Valid-shaped missed-SLA claim was rejected: SLA_STATUS_MISMATCH"
+    },
+    {
+      "code": "NEGATIVE_UNEXPECTED_ROUTE_VALUE",
+      "detail": "nextDecision value outside the declared enum was rejected by JSON Schema."
+    },
+    {
+      "code": "NEGATIVE_LOW_CONFIDENCE_BUSINESS_RULE",
+      "detail": "Confidence 60 below minimum 85 correctly deferred to human review."
+    },
+    {
+      "code": "NEGATIVE_REUSED_APPROVAL_BUSINESS_RULE",
+      "detail": "A single-use decisionId reused across two different actionIds was identified as a replay."
+    },
+    {
+      "code": "NEGATIVE_MISMATCHED_PAYLOAD_HASH_BUSINESS_RULE",
+      "detail": "A human decision bound to a payload hash different from the recommended action was identified as an approval-binding mismatch."
+    },
+    {
+      "code": "DUPLICATE_PROMISE_REPLAY_BLOCKED",
+      "detail": "A replayed promise idempotency key is blocked."
+    },
+    {
+      "code": "PUBLIC_RELEASE_HYGIENE",
+      "detail": "No blocked credential, org-domain or prior-table placeholders appear in JSON artifacts."
+    }
+  ],
+  "failures": [],
+  "limitations": [
+    "This validates Foundation Gate contracts and a fabricated expected run.",
+    "The generated Gate 2 n8n workflow is validated separately by scripts/validate-gate2.mjs.",
+    "Local validation does not prove import and execution inside the owner’s n8n instance.",
+    "It does not prove live Salesforce access, a real model response or a real customer outcome."
+  ]
+}

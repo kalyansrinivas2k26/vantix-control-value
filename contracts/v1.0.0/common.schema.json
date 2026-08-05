@@ -1,0 +1,273 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json",
+  "title": "Vantix Control Value Common Definitions",
+  "type": "object",
+  "$defs": {
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "identifier": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "dataSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "system",
+        "recordType",
+        "recordKey"
+      ],
+      "properties": {
+        "system": {
+          "type": "string",
+          "enum": [
+            "SYNTHETIC_FIXTURE",
+            "SALESFORCE",
+            "N8N",
+            "HUMAN",
+            "GEMINI",
+            "PROMISEOPS"
+          ]
+        },
+        "recordType": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "recordKey": {
+          "$ref": "#/$defs/identifier"
+        },
+        "environment": {
+          "type": "string",
+          "enum": [
+            "SYNTHETIC",
+            "SANDBOX",
+            "PRODUCTION"
+          ]
+        }
+      }
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actorType",
+        "actorId",
+        "role"
+      ],
+      "properties": {
+        "actorType": {
+          "type": "string",
+          "enum": [
+            "HUMAN",
+            "SYSTEM",
+            "AI_MODEL"
+          ]
+        },
+        "actorId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "PRODUCT_OWNER",
+            "CUSTOMER_SUCCESS_MANAGER",
+            "CSM_APPROVER",
+            "SALESFORCE_ADMINISTRATOR",
+            "SALESFORCE_ADMIN_APPROVER",
+            "DELIVERY_LEAD",
+            "SECURITY_REVIEWER",
+            "CUSTOMER_AUTHORIZED_USER",
+            "N8N_ORCHESTRATOR",
+            "POLICY_ENGINE",
+            "EXECUTOR",
+            "VERIFIER",
+            "DIAGNOSIS_AGENT",
+            "CRITIQUE_AGENT"
+          ]
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        }
+      }
+    },
+    "evidenceReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceId",
+        "relationship"
+      ],
+      "properties": {
+        "evidenceId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "relationship": {
+          "type": "string",
+          "enum": [
+            "SUPPORTS",
+            "CONTRADICTS",
+            "CONTEXTUALIZES",
+            "VERIFIES"
+          ]
+        },
+        "claimId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "warning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "message",
+        "occurredAt"
+      ],
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/identifier"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/identifier"
+          }
+        }
+      }
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "category",
+        "message",
+        "retryable",
+        "occurredAt"
+      ],
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/identifier"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "VALIDATION",
+            "AUTHENTICATION",
+            "AUTHORIZATION",
+            "RATE_LIMIT",
+            "TIMEOUT",
+            "TRANSIENT",
+            "POLICY",
+            "EXECUTION",
+            "VERIFICATION",
+            "UNKNOWN"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "stage": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "sanitizedDetails": {
+          "type": "string",
+          "maxLength": 2000
+        }
+      }
+    },
+    "versionSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "rulesetVersion",
+        "workflowVersion",
+        "actionCatalogVersion",
+        "promptVersions"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "$ref": "#/$defs/semanticVersion"
+        },
+        "rulesetVersion": {
+          "$ref": "#/$defs/semanticVersion"
+        },
+        "workflowVersion": {
+          "$ref": "#/$defs/semanticVersion"
+        },
+        "actionCatalogVersion": {
+          "$ref": "#/$defs/semanticVersion"
+        },
+        "promptVersions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "diagnosis",
+            "critique"
+          ],
+          "properties": {
+            "diagnosis": {
+              "$ref": "#/$defs/semanticVersion"
+            },
+            "critique": {
+              "$ref": "#/$defs/semanticVersion"
+            }
+          }
+        }
+      }
+    },
+    "jsonScalar": {
+      "type": [
+        "string",
+        "number",
+        "integer",
+        "boolean",
+        "null"
+      ]
+    }
+  }
+}
+

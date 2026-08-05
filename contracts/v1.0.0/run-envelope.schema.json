@@ -1,0 +1,316 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.viridianai.in/promiseops/v1.0.0/run-envelope.schema.json",
+  "title": "Vantix Control Value Complete Run Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordType",
+    "runMetadata",
+    "stageStatuses",
+    "promiseRecord",
+    "evidenceRecords",
+    "deterministicAssessments",
+    "aiDiagnosis",
+    "aiCritique",
+    "actionRecommendations",
+    "humanDecisions",
+    "executionResults",
+    "outcomeVerification",
+    "auditEvents",
+    "reportStatus",
+    "limitations"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/semanticVersion"
+    },
+    "recordType": {
+      "const": "COMPLETE_RUN_ENVELOPE"
+    },
+    "runMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "correlationId",
+        "promiseId",
+        "accountKey",
+        "source",
+        "timestamps",
+        "versions",
+        "syntheticData",
+        "operatingMode",
+        "evidenceRefs",
+        "modelIdentifiers",
+        "warnings",
+        "errors",
+        "executionStatus"
+      ],
+      "properties": {
+        "correlationId": {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+        },
+        "promiseId": {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+        },
+        "accountKey": {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+        },
+        "source": {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/dataSource"
+        },
+        "timestamps": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "startedAt",
+            "updatedAt",
+            "completedAt"
+          ],
+          "properties": {
+            "startedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "completedAt": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        },
+        "versions": {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/versionSet"
+        },
+        "syntheticData": {
+          "type": "boolean"
+        },
+        "operatingMode": {
+          "type": "string",
+          "enum": [
+            "SYNTHETIC_VALIDATION",
+            "SANDBOX_READ_ONLY"
+          ]
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+          }
+        },
+        "modelIdentifiers": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "diagnosis",
+            "critique"
+          ],
+          "properties": {
+            "diagnosis": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 200
+            },
+            "critique": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 200
+            }
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/warning"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/error"
+          }
+        },
+        "executionStatus": {
+          "type": "string",
+          "enum": [
+            "RECEIVED",
+            "VALIDATING",
+            "HUMAN_REVIEW",
+            "AWAITING_APPROVAL",
+            "EXECUTING",
+            "VERIFYING",
+            "RETRY_SCHEDULED",
+            "REROUTED",
+            "ESCALATED",
+            "COMPLETED",
+            "CLOSED",
+            "FAILED",
+            "DEAD_LETTERED",
+            "BLOCKED_DUPLICATE"
+          ]
+        }
+      }
+    },
+    "stageStatuses": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "capture",
+        "validation",
+        "observation",
+        "assessment",
+        "diagnosis",
+        "critique",
+        "policy",
+        "approval",
+        "execution",
+        "verification",
+        "outcome",
+        "closure",
+        "reporting"
+      ],
+      "properties": {
+        "capture": {
+          "$ref": "#/$defs/stageStatus"
+        },
+        "validation": {
+          "$ref": "#/$defs/stageStatus"
+        },
+        "observation": {
+          "$ref": "#/$defs/stageStatus"
+        },
+        "assessment": {
+          "$ref": "#/$defs/stageStatus"
+        },
+        "diagnosis": {
+          "$ref": "#/$defs/stageStatus"
+        },
+        "critique": {
+          "$ref": "#/$defs/stageStatus"
+        },
+        "policy": {
+          "$ref": "#/$defs/stageStatus"
+        },
+        "approval": {
+          "$ref": "#/$defs/stageStatus"
+        },
+        "execution": {
+          "$ref": "#/$defs/stageStatus"
+        },
+        "verification": {
+          "$ref": "#/$defs/stageStatus"
+        },
+        "outcome": {
+          "$ref": "#/$defs/stageStatus"
+        },
+        "closure": {
+          "$ref": "#/$defs/stageStatus"
+        },
+        "reporting": {
+          "$ref": "#/$defs/stageStatus"
+        }
+      }
+    },
+    "promiseRecord": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/promise-record.schema.json"
+    },
+    "evidenceRecords": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/evidence-record.schema.json"
+      }
+    },
+    "deterministicAssessments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/deterministic-assessment.schema.json"
+      }
+    },
+    "aiDiagnosis": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/ai-diagnosis.schema.json"
+    },
+    "aiCritique": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/ai-critique.schema.json"
+    },
+    "actionRecommendations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/action-recommendation.schema.json"
+      }
+    },
+    "humanDecisions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/human-decision.schema.json"
+      }
+    },
+    "executionResults": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/execution-result.schema.json"
+      }
+    },
+    "outcomeVerification": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/outcome-verification.schema.json"
+    },
+    "auditEvents": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/audit-event.schema.json"
+      }
+    },
+    "reportStatus": {
+      "type": "string",
+      "enum": [
+        "NOT_GENERATED",
+        "READY",
+        "FAILED"
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 500
+      }
+    }
+  },
+  "$defs": {
+    "stageStatus": {
+      "type": "string",
+      "enum": [
+        "NOT_STARTED",
+        "PENDING",
+        "PASSED",
+        "REVIEW_REQUIRED",
+        "DENIED",
+        "FAILED",
+        "COMPLETED",
+        "SKIPPED"
+      ]
+    }
+  }
+}
+

@@ -1,0 +1,320 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.viridianai.in/promiseops/v1.0.0/action-recommendation.schema.json",
+  "title": "Vantix Control Value Action Recommendation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordType",
+    "actionId",
+    "correlationId",
+    "promiseId",
+    "accountKey",
+    "generatedAt",
+    "syntheticData",
+    "catalogVersion",
+    "actionCode",
+    "ownerRole",
+    "actionCategory",
+    "description",
+    "rationale",
+    "evidenceRefs",
+    "requestedPayload",
+    "payloadHash",
+    "consequenceLevel",
+    "executionMode",
+    "policyDecision",
+    "policyReasons",
+    "approvalRequired",
+    "requiredApproverRoles",
+    "minimumConfidence",
+    "preconditions",
+    "verificationCriterionIds",
+    "idempotencyKey",
+    "status",
+    "expiresAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/semanticVersion"
+    },
+    "recordType": {
+      "const": "ACTION_RECOMMENDATION"
+    },
+    "actionId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "correlationId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "promiseId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "accountKey": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "syntheticData": {
+      "type": "boolean"
+    },
+    "catalogVersion": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/semanticVersion"
+    },
+    "actionCode": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "ownerRole": {
+      "type": "string",
+      "enum": [
+        "CUSTOMER_SUCCESS_MANAGER",
+        "SALESFORCE_ADMINISTRATOR",
+        "DELIVERY_LEAD",
+        "SYSTEM"
+      ]
+    },
+    "actionCategory": {
+      "type": "string",
+      "enum": [
+        "READ_ONLY_DIAGNOSIS",
+        "INTERNAL_DRAFT",
+        "SALESFORCE_REMEDIATION",
+        "CUSTOMER_COMMUNICATION",
+        "OUTCOME_VERIFICATION",
+        "CLOSURE",
+        "ESCALATION",
+        "DELIVERY_HANDOFF"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 1000
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 2000
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/evidenceReference"
+      }
+    },
+    "requestedPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "payloadVersion",
+        "targetKey",
+        "parameters"
+      ],
+      "properties": {
+        "payloadVersion": {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/semanticVersion"
+        },
+        "targetKey": {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "value",
+              "sensitivity"
+            ],
+            "properties": {
+              "name": {
+                "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+              },
+              "value": {
+                "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/jsonScalar"
+              },
+              "sensitivity": {
+                "type": "string",
+                "enum": [
+                  "PUBLIC",
+                  "INTERNAL",
+                  "CONFIDENTIAL",
+                  "RESTRICTED"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "payloadHash": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/sha256"
+    },
+    "consequenceLevel": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ]
+    },
+    "executionMode": {
+      "type": "string",
+      "enum": [
+        "READ_ONLY",
+        "DRAFT_ONLY",
+        "SIMULATED_WRITE",
+        "SANDBOX_WRITE",
+        "LIVE_WRITE",
+        "HUMAN_TASK"
+      ]
+    },
+    "policyDecision": {
+      "type": "string",
+      "enum": [
+        "ALLOW_AUTO",
+        "REQUIRE_APPROVAL",
+        "DENY",
+        "DEFER_HUMAN_REVIEW"
+      ]
+    },
+    "policyReasons": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 500
+      }
+    },
+    "approvalRequired": {
+      "type": "boolean"
+    },
+    "requiredApproverRoles": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "CSM_APPROVER",
+          "SALESFORCE_ADMIN_APPROVER",
+          "PRODUCT_OWNER",
+          "SECURITY_REVIEWER"
+        ]
+      }
+    },
+    "minimumConfidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "preconditions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "status",
+          "detail",
+          "evidenceRefs"
+        ],
+        "properties": {
+          "code": {
+            "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PASS",
+              "FAIL",
+              "UNKNOWN"
+            ]
+          },
+          "detail": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 500
+          },
+          "evidenceRefs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+            }
+          }
+        }
+      }
+    },
+    "verificationCriterionIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+      }
+    },
+    "idempotencyKey": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "PROPOSED",
+        "AWAITING_APPROVAL",
+        "APPROVED",
+        "REJECTED",
+        "EXECUTING",
+        "EXECUTED",
+        "VERIFIED",
+        "DENIED",
+        "DEFERRED",
+        "CANCELLED"
+      ]
+    },
+    "expiresAt": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "approvalRequired": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "policyDecision": {
+            "const": "REQUIRE_APPROVAL"
+          },
+          "requiredApproverRoles": {
+            "type": "array",
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

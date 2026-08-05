@@ -1,0 +1,256 @@
+{
+  "schemaVersion": "1.0.0",
+  "foundationGate": "FOUNDATION_GATE_1",
+  "asOfDate": "2026-07-30",
+  "gateStatus": "AWAITING_OWNER_APPROVAL",
+  "decisions": [
+    {
+      "decisionId": "DEC-001",
+      "status": "APPROVED_FOR_GATE",
+      "decision": "Vantix Control Value will be a separate workflow and data model.",
+      "rationale": "The promise-to-outcome lifecycle has different units, evidence, states, actions and verification requirements from Salesforce metadata governance.",
+      "implications": [
+        "No direct workflow conversion",
+        "New canonical contracts",
+        "New persistence model"
+      ]
+    },
+    {
+      "decisionId": "DEC-002",
+      "status": "APPROVED_FOR_GATE",
+      "decision": "Only the sanitized public Governance Sentinel JSON may be used as an architectural reference.",
+      "rationale": "Environment-specific exports are excluded from design and public-release work.",
+      "implications": [
+        "No environment URLs or identifiers",
+        "No copied Salesforce queries",
+        "No copied Data Table identifiers or schema"
+      ]
+    },
+    {
+      "decisionId": "DEC-003",
+      "status": "APPROVED_FOR_GATE",
+      "decision": "The first validated run will be fully synthetic.",
+      "rationale": "The complete control loop must be proven before any sandbox or live business-system action.",
+      "implications": [
+        "All records carry syntheticData true",
+        "Report contains a synthetic banner",
+        "Execution adapter is simulated"
+      ]
+    },
+    {
+      "decisionId": "DEC-004",
+      "status": "APPROVED_FOR_GATE",
+      "decision": "Deterministic rules own scores, SLA and outcome status.",
+      "rationale": "These values must be reproducible and must not vary with model output.",
+      "implications": [
+        "AI is qualitative only",
+        "Calculation trace is mandatory",
+        "AI cannot modify priority or confidence"
+      ]
+    },
+    {
+      "decisionId": "DEC-005",
+      "status": "APPROVED_FOR_GATE",
+      "decision": "Technical access restoration and customer successful use are separate mandatory verification criteria.",
+      "rationale": "A Salesforce-side state does not prove the customer achieved the expected outcome.",
+      "implications": [
+        "Two evidence categories",
+        "Two verification results",
+        "Both must pass before closure"
+      ]
+    },
+    {
+      "decisionId": "DEC-006",
+      "status": "APPROVED_FOR_GATE",
+      "decision": "Consequential actions require a named human decision bound to an immutable payload hash.",
+      "rationale": "Human authority must apply to the exact action that executes and cannot be replayed after a change.",
+      "implications": [
+        "Single-use approval",
+        "Approval TTL",
+        "Reapproval after payload/evidence change"
+      ]
+    },
+    {
+      "decisionId": "DEC-007",
+      "status": "APPROVED_FOR_GATE",
+      "decision": "Effort remains a human estimate and is independent of priority.",
+      "rationale": "Risk/priority does not indicate implementation complexity.",
+      "implications": [
+        "No story points",
+        "No AI effort estimate",
+        "HUMAN_ESTIMATION_REQUIRED only"
+      ]
+    }
+  ],
+  "assumptions": [
+    {
+      "assumptionId": "ASM-001",
+      "statement": "The first demonstration uses only fabricated identities, records and timestamps.",
+      "validationPlan": "Fixture scan and public-release validation.",
+      "status": "ACCEPTED_FOR_MVP"
+    },
+    {
+      "assumptionId": "ASM-002",
+      "statement": "Asia/Kolkata, Monday to Friday, with no synthetic holidays is the approved demonstration calendar.",
+      "validationPlan": "Deterministic SLA unit test.",
+      "status": "ACCEPTED_FOR_MVP"
+    },
+    {
+      "assumptionId": "ASM-003",
+      "statement": "The synthetic access evidence is sufficient to demonstrate the diagnosis and verification state model but not real Salesforce authorization behavior.",
+      "validationPlan": "State this limitation in the report and README.",
+      "status": "ACCEPTED_FOR_MVP"
+    },
+    {
+      "assumptionId": "ASM-004",
+      "statement": "A human approval interaction can be represented by a deterministic fixture in automated tests and by an n8n Wait/Form/Webhook step in the interactive demo.",
+      "validationPlan": "Choose the exact n8n surface during workflow design.",
+      "status": "TO_VALIDATE"
+    }
+  ],
+  "risks": [
+    {
+      "riskId": "RSK-001",
+      "risk": "AI invents or overstates a Salesforce cause.",
+      "likelihood": "MEDIUM",
+      "impact": "HIGH",
+      "response": "Strict claims schema, evidence-reference resolution, critique and Human Review fallback.",
+      "ownerRole": "AI_GOVERNANCE_REVIEWER",
+      "status": "OPEN"
+    },
+    {
+      "riskId": "RSK-002",
+      "risk": "A technical state is mistaken for customer outcome proof.",
+      "likelihood": "HIGH",
+      "impact": "HIGH",
+      "response": "Require separate system and customer verification criteria.",
+      "ownerRole": "CUSTOMER_SUCCESS_MANAGER",
+      "status": "MITIGATED_BY_DESIGN"
+    },
+    {
+      "riskId": "RSK-003",
+      "risk": "Approval is replayed after action parameters change.",
+      "likelihood": "MEDIUM",
+      "impact": "CRITICAL",
+      "response": "Bind decision to action ID and SHA-256 payload hash; single use and expiry.",
+      "ownerRole": "SECURITY_REVIEWER",
+      "status": "MITIGATED_BY_DESIGN"
+    },
+    {
+      "riskId": "RSK-004",
+      "risk": "Ambiguous timeout causes duplicate consequential action.",
+      "likelihood": "MEDIUM",
+      "impact": "HIGH",
+      "response": "Idempotency ledger, target-state check and human review before re-execution.",
+      "ownerRole": "N8N_OPERATOR",
+      "status": "MITIGATED_BY_DESIGN"
+    },
+    {
+      "riskId": "RSK-005",
+      "risk": "Portfolio language presents synthetic success as production validation.",
+      "likelihood": "MEDIUM",
+      "impact": "HIGH",
+      "response": "Synthetic flags, limitations and sanitized public-release checklist.",
+      "ownerRole": "PRODUCT_OWNER",
+      "status": "OPEN"
+    },
+    {
+      "riskId": "RSK-006",
+      "risk": "Scope expands into live remediation or commercial SaaS before the control loop works.",
+      "likelihood": "HIGH",
+      "impact": "MEDIUM",
+      "response": "Frozen MVP non-goals and gate approval before expansion.",
+      "ownerRole": "PRODUCT_OWNER",
+      "status": "MITIGATED_BY_GATE"
+    }
+  ],
+  "openQuestions": [
+    {
+      "questionId": "OQ-001",
+      "question": "Which exact n8n version will be the import and validation target?",
+      "blockingForGate1": false,
+      "decisionPoint": "Before workflow JSON generation",
+      "ownerRole": "N8N_OPERATOR"
+    },
+    {
+      "questionId": "OQ-002",
+      "question": "Will the optional second run read synthetic Salesforce sandbox records or remain fixture-only?",
+      "blockingForGate1": false,
+      "decisionPoint": "After synthetic end-to-end pass",
+      "ownerRole": "PRODUCT_OWNER"
+    },
+    {
+      "questionId": "OQ-003",
+      "question": "Which interactive approval surface will be used in the local demo: n8n Form, Wait/Webhook callback or another local human step?",
+      "blockingForGate1": false,
+      "decisionPoint": "Approval node design",
+      "ownerRole": "N8N_OPERATOR"
+    },
+    {
+      "questionId": "OQ-004",
+      "question": "Will any optional sandbox write create only an internal task, or will all action execution remain simulated for MVP?",
+      "blockingForGate1": false,
+      "decisionPoint": "After security review of the read-only run",
+      "ownerRole": "SECURITY_REVIEWER"
+    }
+  ],
+  "futureEnhancements": [
+    {
+      "enhancementId": "ENH-001",
+      "description": "Read synthetic promise/evidence records from Salesforce sandbox through an allowlisted least-privilege integration user.",
+      "prerequisite": "Synthetic workflow passes all positive and negative tests."
+    },
+    {
+      "enhancementId": "ENH-002",
+      "description": "Create an approved internal Salesforce remediation task with a custom External ID for idempotent upsert.",
+      "prerequisite": "Separate sandbox write threat model and user approval."
+    },
+    {
+      "enhancementId": "ENH-003",
+      "description": "Add governed AgileOps Guardian handoff for systemic work.",
+      "prerequisite": "Versioned inter-workflow contract and joint approval policy."
+    },
+    {
+      "enhancementId": "ENH-004",
+      "description": "Add stage-specific evidence requirements for additional promise types.",
+      "prerequisite": "Validated new use-case and defect definitions."
+    },
+    {
+      "enhancementId": "ENH-005",
+      "description": "Add time-series process reporting after sufficient real, comparable observations exist.",
+      "prerequisite": "Stable definitions, representative sample and measurement-system review."
+    }
+  ],
+  "technicalDebt": [
+    {
+      "debtId": "TD-001",
+      "description": "Physical n8n persistence-table columns are not yet defined.",
+      "reasonDeferred": "They must follow the final workflow state transitions and not be copied from another domain.",
+      "targetPhase": "Workflow skeleton"
+    },
+    {
+      "debtId": "TD-002",
+      "description": "Business-day calculation has one frozen timezone/calendar and no holiday provider.",
+      "reasonDeferred": "One deterministic synthetic calendar is sufficient for the MVP.",
+      "targetPhase": "Post-MVP"
+    },
+    {
+      "debtId": "TD-003",
+      "description": "AI model and API route are not pinned in the foundation fixture.",
+      "reasonDeferred": "The fixture truthfully uses a synthetic model-output identifier; runtime model choice belongs to workflow configuration.",
+      "targetPhase": "AI diagnosis implementation"
+    },
+    {
+      "debtId": "TD-004",
+      "description": "No live Salesforce access-verification adapter exists.",
+      "reasonDeferred": "Live access changes and impersonated customer checks are outside the approved MVP.",
+      "targetPhase": "Future sandbox extension"
+    },
+    {
+      "debtId": "TD-005",
+      "description": "8 of the 16 failure categories identified in the external Gate 2 design audit still lack a dedicated automated negative fixture (e.g. stale/conflicting evidence markers, timeout/partial failure, missing customer confirmation).",
+      "reasonDeferred": "The 8 highest-value categories (schema violations, false outcome, unknown action, missed SLA, unexpected route, low confidence, reused approval, mismatched payload hash) were prioritized first; the remainder are enforced in code but not yet independently fixture-tested.",
+      "targetPhase": "Before Gate C is considered fully test-verified"
+    }
+  ]
+}

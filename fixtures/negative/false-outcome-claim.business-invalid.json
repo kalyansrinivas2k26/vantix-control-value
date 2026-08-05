@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0.0",
+  "recordType": "OUTCOME_VERIFICATION",
+  "verificationId": "VER-NEG-001",
+  "correlationId": "PO-RUN-SYN-20260713-001",
+  "promiseId": "PRM-SYN-001",
+  "accountKey": "ACC-SYN-001",
+  "evaluatedAt": "2026-07-17T15:05:00+05:30",
+  "syntheticData": true,
+  "rulesetVersion": "1.0.0",
+  "criteriaResults": [
+    {
+      "criterionId": "CRT-SYN-ACCESS-001",
+      "criterionType": "SALESFORCE_ACCESS_RESTORED",
+      "status": "PASS",
+      "method": "SYSTEM_CHECK",
+      "evidenceRefs": [
+        "EVD-SYN-010"
+      ],
+      "observedAt": "2026-07-13T10:35:00+05:30",
+      "verifiedBy": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-VERIFIER-001",
+        "role": "VERIFIER"
+      },
+      "note": "Technical access passed."
+    },
+    {
+      "criterionId": "CRT-SYN-CUSTOMER-001",
+      "criterionType": "CUSTOMER_REPORT_ACCESSED",
+      "status": "FAIL",
+      "method": "HUMAN_ATTESTATION",
+      "evidenceRefs": [
+        "EVD-SYN-011"
+      ],
+      "observedAt": "2026-07-17T15:00:00+05:30",
+      "verifiedBy": {
+        "actorType": "HUMAN",
+        "actorId": "SYN-CUST-USER-001",
+        "role": "CUSTOMER_AUTHORIZED_USER"
+      },
+      "note": "Customer successful use did not pass."
+    }
+  ],
+  "technicalAccessStatus": "PASS",
+  "customerUseStatus": "FAIL",
+  "overallStatus": "ACHIEVED",
+  "sla": {
+    "dueAt": "2026-07-20T17:00:00+05:30",
+    "completionAt": "2026-07-17T15:00:00+05:30",
+    "status": "DELIVERED_WITHIN_SLA",
+    "calendarId": "CAL-SYN-IN-WEEKDAY-001",
+    "calculatedBy": "DETERMINISTIC_RULE_ENGINE"
+  },
+  "nextDecision": "CLOSE",
+  "decisionBasis": "DETERMINISTIC_RULES",
+  "closureEligible": true,
+  "nextAction": {
+    "actionCode": "CSM_CLOSE_VERIFIED_PROMISE",
+    "ownerRole": "CUSTOMER_SUCCESS_MANAGER",
+    "reason": "This intentionally false claim must be rejected by cross-contract business rules."
+  },
+  "limitations": [
+    "Intentional business-rule-negative test."
+  ],
+  "warnings": []
+}
+

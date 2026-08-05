@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0.0",
+  "recordType": "OUTCOME_VERIFICATION",
+  "verificationId": "VER-NEG-003",
+  "correlationId": "PO-RUN-SYN-20260713-001",
+  "promiseId": "PRM-SYN-001",
+  "accountKey": "ACC-SYN-001",
+  "evaluatedAt": "2026-07-17T15:05:00+05:30",
+  "syntheticData": true,
+  "rulesetVersion": "1.0.0",
+  "criteriaResults": [
+    {
+      "criterionId": "CRT-SYN-ACCESS-001",
+      "criterionType": "SALESFORCE_ACCESS_RESTORED",
+      "status": "PASS",
+      "method": "SYSTEM_CHECK",
+      "evidenceRefs": [
+        "EVD-SYN-010"
+      ],
+      "observedAt": "2026-07-13T10:35:00+05:30",
+      "verifiedBy": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-VERIFIER-001",
+        "role": "VERIFIER"
+      },
+      "note": "Technical access passed."
+    },
+    {
+      "criterionId": "CRT-SYN-CUSTOMER-001",
+      "criterionType": "CUSTOMER_REPORT_ACCESSED",
+      "status": "PASS",
+      "method": "HUMAN_ATTESTATION",
+      "evidenceRefs": [
+        "EVD-SYN-011"
+      ],
+      "observedAt": "2026-07-17T15:00:00+05:30",
+      "verifiedBy": {
+        "actorType": "HUMAN",
+        "actorId": "SYN-CUST-USER-001",
+        "role": "CUSTOMER_AUTHORIZED_USER"
+      },
+      "note": "Customer use confirmed."
+    }
+  ],
+  "technicalAccessStatus": "PASS",
+  "customerUseStatus": "PASS",
+  "overallStatus": "ACHIEVED",
+  "sla": {
+    "dueAt": "2026-07-20T17:00:00+05:30",
+    "completionAt": "2026-07-17T15:00:00+05:30",
+    "status": "DELIVERED_WITHIN_SLA",
+    "calendarId": "CAL-SYN-IN-WEEKDAY-001",
+    "calculatedBy": "DETERMINISTIC_RULE_ENGINE"
+  },
+  "nextDecision": "SILENTLY_CLOSE",
+  "decisionBasis": "DETERMINISTIC_RULES",
+  "closureEligible": true,
+  "nextAction": {
+    "actionCode": "CSM_CLOSE_VERIFIED_PROMISE",
+    "ownerRole": "CUSTOMER_SUCCESS_MANAGER",
+    "reason": "This intentionally invented route value is outside the declared nextDecision enum and must fail schema validation."
+  },
+  "limitations": [
+    "Intentional schema-negative test for an unexpected route/decision value."
+  ],
+  "warnings": []
+}

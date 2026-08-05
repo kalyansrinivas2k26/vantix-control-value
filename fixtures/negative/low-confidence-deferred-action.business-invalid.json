@@ -1,0 +1,67 @@
+{
+  "note": "This is a test-harness wrapper, not a Vantix Control Value record type. Only actionRecommendation is validated against a schema; simulatedRunConfidence is fed into the same policy-evaluation rule used by workflow node 11 to confirm a below-minimum confidence forces human review rather than silently proceeding.",
+  "simulatedRunConfidence": 60,
+  "actionRecommendation": {
+    "schemaVersion": "1.0.0",
+    "recordType": "ACTION_RECOMMENDATION",
+    "actionId": "ACT-NEG-LOWCONF-001",
+    "correlationId": "PO-RUN-SYN-20260713-001",
+    "promiseId": "PRM-SYN-001",
+    "accountKey": "ACC-SYN-001",
+    "generatedAt": "2026-07-13T10:10:00+05:30",
+    "syntheticData": true,
+    "catalogVersion": "1.0.0",
+    "actionCode": "ADMIN_SIMULATE_REPORT_ACCESS_REMEDIATION",
+    "ownerRole": "SALESFORCE_ADMINISTRATOR",
+    "actionCategory": "SALESFORCE_REMEDIATION",
+    "description": "Simulate adding the authorized synthetic customer user to the required report-folder access state.",
+    "rationale": "Intentional negative test: this action requires minimumConfidence 85 in the catalogue, but the simulated run confidence is 60.",
+    "evidenceRefs": [
+      {
+        "evidenceId": "EVD-SYN-007",
+        "relationship": "SUPPORTS",
+        "claimId": "CLM-SYN-002",
+        "required": true
+      }
+    ],
+    "requestedPayload": {
+      "payloadVersion": "1.0.0",
+      "targetKey": "SYN-RPT-FOLDER-001",
+      "parameters": [
+        {
+          "name": "customerUserKey",
+          "value": "SYN-CUST-USER-001",
+          "sensitivity": "INTERNAL"
+        }
+      ]
+    },
+    "payloadHash": "sha256:261552334595c213d09bff2b04300b5bdbbf6229872bb7626559bb5493930afd",
+    "consequenceLevel": "HIGH",
+    "executionMode": "SIMULATED_WRITE",
+    "policyDecision": "REQUIRE_APPROVAL",
+    "policyReasons": [
+      "Intentional business-rule-negative test for confidence-below-minimum deferral."
+    ],
+    "approvalRequired": true,
+    "requiredApproverRoles": [
+      "SALESFORCE_ADMIN_APPROVER"
+    ],
+    "minimumConfidence": 85,
+    "preconditions": [
+      {
+        "code": "EVIDENCE_COMPLETE",
+        "status": "PASS",
+        "detail": "Evidence shape is valid; the defect under test is confidence, not evidence.",
+        "evidenceRefs": [
+          "EVD-SYN-007"
+        ]
+      }
+    ],
+    "verificationCriterionIds": [
+      "CRT-SYN-ACCESS-001"
+    ],
+    "idempotencyKey": "IDEMP:NEG:LOW-CONFIDENCE:V1",
+    "status": "PROPOSED",
+    "expiresAt": "2026-07-14T10:10:00+05:30"
+  }
+}

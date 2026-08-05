@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.viridianai.in/promiseops/v1.0.0/ai-diagnosis.schema.json",
+  "title": "Vantix Control Value AI Diagnosis",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordType",
+    "diagnosisId",
+    "correlationId",
+    "promiseId",
+    "accountKey",
+    "generatedAt",
+    "generatedBy",
+    "syntheticData",
+    "modelIdentifier",
+    "promptVersion",
+    "qualitativeOnly",
+    "rootCauseDomain",
+    "secondaryDomains",
+    "problemSummary",
+    "claims",
+    "recommendedActionCodes",
+    "uncertainties",
+    "limitations",
+    "diagnosisStatus",
+    "warnings"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/semanticVersion"
+    },
+    "recordType": {
+      "const": "AI_DIAGNOSIS"
+    },
+    "diagnosisId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "correlationId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "promiseId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "accountKey": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "generatedBy": {
+      "type": "string",
+      "enum": [
+        "AI_MODEL",
+        "SYNTHETIC_FIXTURE"
+      ]
+    },
+    "syntheticData": {
+      "type": "boolean"
+    },
+    "modelIdentifier": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200
+    },
+    "promptVersion": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/semanticVersion"
+    },
+    "qualitativeOnly": {
+      "const": true
+    },
+    "rootCauseDomain": {
+      "type": "string",
+      "enum": [
+        "CUSTOMER",
+        "OPERATIONS",
+        "DATA",
+        "SALESFORCE_OWNERSHIP",
+        "SALESFORCE_ACCESS",
+        "SALESFORCE_AUTOMATION",
+        "SALESFORCE_CONFIGURATION",
+        "DELIVERY",
+        "UNKNOWN"
+      ]
+    },
+    "secondaryDomains": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "CUSTOMER",
+          "OPERATIONS",
+          "DATA",
+          "SALESFORCE_OWNERSHIP",
+          "SALESFORCE_ACCESS",
+          "SALESFORCE_AUTOMATION",
+          "SALESFORCE_CONFIGURATION",
+          "DELIVERY",
+          "UNKNOWN"
+        ]
+      }
+    },
+    "problemSummary": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2000
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "claimId",
+          "statement",
+          "claimType",
+          "supportStatus",
+          "evidenceRefs"
+        ],
+        "properties": {
+          "claimId": {
+            "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 1000
+          },
+          "claimType": {
+            "type": "string",
+            "enum": [
+              "FACT",
+              "INFERENCE",
+              "UNCERTAINTY"
+            ]
+          },
+          "supportStatus": {
+            "type": "string",
+            "enum": [
+              "SUPPORTED",
+              "PARTIALLY_SUPPORTED",
+              "UNSUPPORTED"
+            ]
+          },
+          "evidenceRefs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "type": "object",
+              "properties": {
+                "claimType": {
+                  "const": "FACT"
+                }
+              }
+            },
+            "then": {
+              "type": "object",
+              "properties": {
+                "evidenceRefs": {
+                  "type": "array",
+                  "minItems": 1
+                },
+                "supportStatus": {
+                  "const": "SUPPORTED"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "recommendedActionCodes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+      }
+    },
+    "uncertainties": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 500
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 500
+      }
+    },
+    "diagnosisStatus": {
+      "type": "string",
+      "enum": [
+        "PROPOSED",
+        "HUMAN_REVIEW_REQUIRED"
+      ]
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/warning"
+      }
+    }
+  }
+}

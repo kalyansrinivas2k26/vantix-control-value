@@ -1,0 +1,2334 @@
+{
+  "schemaVersion": "1.0.0",
+  "recordType": "COMPLETE_RUN_ENVELOPE",
+  "runMetadata": {
+    "correlationId": "PO-RUN-SYN-20260713-001",
+    "promiseId": "PRM-SYN-001",
+    "accountKey": "ACC-SYN-001",
+    "source": {
+      "system": "SYNTHETIC_FIXTURE",
+      "recordType": "VantixControlValueScenario",
+      "recordKey": "SCN-SYN-REPORT-ACCESS-001",
+      "environment": "SYNTHETIC"
+    },
+    "timestamps": {
+      "startedAt": "2026-07-13T09:00:00+05:30",
+      "updatedAt": "2026-07-17T15:12:00+05:30",
+      "completedAt": "2026-07-17T15:12:00+05:30"
+    },
+    "versions": {
+      "schemaVersion": "1.0.0",
+      "rulesetVersion": "1.0.0",
+      "workflowVersion": "0.0.0-foundation-fixture",
+      "actionCatalogVersion": "1.0.0",
+      "promptVersions": {
+        "diagnosis": "1.0.0",
+        "critique": "1.0.0"
+      }
+    },
+    "syntheticData": true,
+    "operatingMode": "SYNTHETIC_VALIDATION",
+    "evidenceRefs": [
+      "EVD-SYN-001",
+      "EVD-SYN-002",
+      "EVD-SYN-003",
+      "EVD-SYN-004",
+      "EVD-SYN-005",
+      "EVD-SYN-006",
+      "EVD-SYN-007",
+      "EVD-SYN-008",
+      "EVD-SYN-009",
+      "EVD-SYN-010",
+      "EVD-SYN-011",
+      "EVD-SYN-012"
+    ],
+    "modelIdentifiers": {
+      "diagnosis": "synthetic-diagnosis-output-fixture-v1",
+      "critique": "synthetic-critique-output-fixture-v1"
+    },
+    "warnings": [
+      {
+        "code": "SYNTHETIC_FIXTURE_ONLY",
+        "message": "This expected run is fabricated for contract and control validation. It is not a real model run, Salesforce action or customer outcome.",
+        "occurredAt": "2026-07-13T09:00:00+05:30",
+        "evidenceRefs": []
+      }
+    ],
+    "errors": [],
+    "executionStatus": "CLOSED"
+  },
+  "stageStatuses": {
+    "capture": "COMPLETED",
+    "validation": "PASSED",
+    "observation": "COMPLETED",
+    "assessment": "COMPLETED",
+    "diagnosis": "COMPLETED",
+    "critique": "PASSED",
+    "policy": "PASSED",
+    "approval": "COMPLETED",
+    "execution": "COMPLETED",
+    "verification": "PASSED",
+    "outcome": "COMPLETED",
+    "closure": "COMPLETED",
+    "reporting": "NOT_STARTED"
+  },
+  "promiseRecord": {
+    "schemaVersion": "1.0.0",
+    "recordType": "PROMISE_RECORD",
+    "promiseId": "PRM-SYN-001",
+    "accountKey": "ACC-SYN-001",
+    "idempotencyKey": "IDEMP:PRM-SYN-001:V1",
+    "source": {
+      "system": "SYNTHETIC_FIXTURE",
+      "recordType": "CustomerPromise",
+      "recordKey": "SYN-PROMISE-SOURCE-001",
+      "environment": "SYNTHETIC"
+    },
+    "createdAt": "2026-07-13T09:00:00+05:30",
+    "updatedAt": "2026-07-17T15:12:00+05:30",
+    "syntheticData": true,
+    "category": "SALESFORCE_REPORT_ACCESS",
+    "promiseStatement": "Restore the authorized customer user's access to the Renewal Readiness Executive Report and obtain confirmation that the customer successfully opened it within five business days.",
+    "expectedOutcome": {
+      "summary": "Salesforce report access is restored, the customer successfully opens the report, and both events are verified within the promised SLA.",
+      "criteria": [
+        {
+          "criterionId": "CRT-SYN-ACCESS-001",
+          "criterionType": "SALESFORCE_ACCESS_RESTORED",
+          "description": "A separate system check confirms that the authorized synthetic customer user has access to the report.",
+          "requiredEvidenceCategories": [
+            "TECHNICAL_VERIFICATION"
+          ]
+        },
+        {
+          "criterionId": "CRT-SYN-CUSTOMER-001",
+          "criterionType": "CUSTOMER_REPORT_ACCESSED",
+          "description": "An authorized customer-use attestation confirms that the synthetic customer successfully opened the report.",
+          "requiredEvidenceCategories": [
+            "CUSTOMER_USE_CONFIRMATION"
+          ]
+        },
+        {
+          "criterionId": "CRT-SYN-SLA-001",
+          "criterionType": "PROMISE_WITHIN_SLA",
+          "description": "The later of technical verification and customer-use confirmation occurs at or before the calculated due time.",
+          "requiredEvidenceCategories": [
+            "TECHNICAL_VERIFICATION",
+            "CUSTOMER_USE_CONFIRMATION"
+          ]
+        }
+      ]
+    },
+    "capturedAt": "2026-07-13T09:00:00+05:30",
+    "committedAt": "2026-07-13T09:00:00+05:30",
+    "dueAt": "2026-07-20T17:00:00+05:30",
+    "businessCalendar": {
+      "calendarId": "CAL-SYN-IN-WEEKDAY-001",
+      "timezone": "Asia/Kolkata",
+      "durationBusinessDays": 5,
+      "weekendDays": [
+        "SATURDAY",
+        "SUNDAY"
+      ],
+      "holidayDates": [],
+      "startTreatment": "START_EXCLUSIVE",
+      "deadlineTreatment": "END_INCLUSIVE"
+    },
+    "status": "CLOSED",
+    "commitmentOwner": {
+      "actorType": "HUMAN",
+      "actorId": "SYN-CSM-001",
+      "role": "CUSTOMER_SUCCESS_MANAGER",
+      "displayName": "Synthetic Customer Success Manager"
+    },
+    "stakeholderKeys": {
+      "csmOwnerKey": "SYN-CSM-001",
+      "adminOwnerKey": "SYN-SFADMIN-001",
+      "customerUserKey": "SYN-CUST-USER-001",
+      "executiveSponsorKey": "SYN-EXEC-SPONSOR-001"
+    },
+    "impactContext": {
+      "arrTier": "TIER_1",
+      "renewalSensitive": true,
+      "renewalDate": "2026-07-31",
+      "strategicStatus": true,
+      "contractualExposure": "HIGH",
+      "executiveSponsorRequired": true
+    },
+    "limitations": [
+      "All identities and records are synthetic.",
+      "The scenario does not prove live Salesforce access behavior."
+    ]
+  },
+  "evidenceRecords": [
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "EVIDENCE_RECORD",
+      "evidenceId": "EVD-SYN-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "source": {
+        "system": "SYNTHETIC_FIXTURE",
+        "recordType": "CommitmentRecord",
+        "recordKey": "SYN-COMMITMENT-001",
+        "environment": "SYNTHETIC"
+      },
+      "createdAt": "2026-07-13T09:00:00+05:30",
+      "observedAt": "2026-07-13T09:00:00+05:30",
+      "validUntil": "2026-07-20T17:00:00+05:30",
+      "syntheticData": true,
+      "evidenceCategory": "PROMISE_SOURCE",
+      "evidenceType": "PROMISE_COMMITMENT",
+      "evidenceClass": "SYSTEM_OF_RECORD",
+      "strengthClass": "CORROBORATING",
+      "trustStatus": "VERIFIED",
+      "subject": {
+        "subjectType": "PROMISE",
+        "subjectKey": "PRM-SYN-001"
+      },
+      "contentSummary": "Synthetic CRM commitment record captures the exact report-access promise and five-business-day deadline.",
+      "factAssertions": [
+        {
+          "claimKey": "promise.durationBusinessDays",
+          "value": 5,
+          "unit": "business_days"
+        },
+        {
+          "claimKey": "promise.category",
+          "value": "SALESFORCE_REPORT_ACCESS"
+        }
+      ],
+      "verificationMethod": "FIXTURE_ASSERTION",
+      "verifiedBy": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-ORCHESTRATOR-001",
+        "role": "N8N_ORCHESTRATOR",
+        "displayName": "Vantix Control Value Synthetic Orchestrator"
+      },
+      "supportsCriteria": [
+        "CRT-SYN-ACCESS-001",
+        "CRT-SYN-CUSTOMER-001",
+        "CRT-SYN-SLA-001"
+      ],
+      "warnings": []
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "EVIDENCE_RECORD",
+      "evidenceId": "EVD-SYN-002",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "source": {
+        "system": "SYNTHETIC_FIXTURE",
+        "recordType": "Account",
+        "recordKey": "ACC-SYN-001",
+        "environment": "SYNTHETIC"
+      },
+      "createdAt": "2026-07-13T09:01:00+05:30",
+      "observedAt": "2026-07-13T09:01:00+05:30",
+      "validUntil": "2026-07-20T17:00:00+05:30",
+      "syntheticData": true,
+      "evidenceCategory": "ACCOUNT_IDENTITY",
+      "evidenceType": "ACCOUNT_MASTER",
+      "evidenceClass": "SYSTEM_OF_RECORD",
+      "strengthClass": "AUTHORITATIVE",
+      "trustStatus": "VERIFIED",
+      "subject": {
+        "subjectType": "ACCOUNT",
+        "subjectKey": "ACC-SYN-001"
+      },
+      "contentSummary": "Fabricated strategic account Meridian Industrial Systems is active and mapped to the promise.",
+      "factAssertions": [
+        {
+          "claimKey": "account.name",
+          "value": "Meridian Industrial Systems"
+        },
+        {
+          "claimKey": "account.arrTier",
+          "value": "TIER_1"
+        },
+        {
+          "claimKey": "account.strategicStatus",
+          "value": true
+        }
+      ],
+      "verificationMethod": "FIXTURE_ASSERTION",
+      "verifiedBy": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-ORCHESTRATOR-001",
+        "role": "N8N_ORCHESTRATOR",
+        "displayName": "Vantix Control Value Synthetic Orchestrator"
+      },
+      "supportsCriteria": [],
+      "warnings": []
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "EVIDENCE_RECORD",
+      "evidenceId": "EVD-SYN-003",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "source": {
+        "system": "SYNTHETIC_FIXTURE",
+        "recordType": "RenewalOpportunity",
+        "recordKey": "SYN-RENEWAL-001",
+        "environment": "SYNTHETIC"
+      },
+      "createdAt": "2026-07-13T09:02:00+05:30",
+      "observedAt": "2026-07-13T09:02:00+05:30",
+      "validUntil": "2026-07-31T23:59:59+05:30",
+      "syntheticData": true,
+      "evidenceCategory": "RENEWAL_CONTEXT",
+      "evidenceType": "RENEWAL_RECORD",
+      "evidenceClass": "SYSTEM_OF_RECORD",
+      "strengthClass": "AUTHORITATIVE",
+      "trustStatus": "VERIFIED",
+      "subject": {
+        "subjectType": "RENEWAL",
+        "subjectKey": "SYN-RENEWAL-001"
+      },
+      "contentSummary": "Synthetic renewal record confirms a 31 July 2026 renewal date and high contractual exposure.",
+      "factAssertions": [
+        {
+          "claimKey": "renewal.date",
+          "value": "2026-07-31"
+        },
+        {
+          "claimKey": "renewal.contractualExposure",
+          "value": "HIGH"
+        }
+      ],
+      "verificationMethod": "FIXTURE_ASSERTION",
+      "verifiedBy": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-ORCHESTRATOR-001",
+        "role": "N8N_ORCHESTRATOR",
+        "displayName": "Vantix Control Value Synthetic Orchestrator"
+      },
+      "supportsCriteria": [
+        "CRT-SYN-SLA-001"
+      ],
+      "warnings": []
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "EVIDENCE_RECORD",
+      "evidenceId": "EVD-SYN-004",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "source": {
+        "system": "SYNTHETIC_FIXTURE",
+        "recordType": "OwnerAssignment",
+        "recordKey": "SYN-CSM-OWNER-001",
+        "environment": "SYNTHETIC"
+      },
+      "createdAt": "2026-07-13T09:03:00+05:30",
+      "observedAt": "2026-07-13T09:03:00+05:30",
+      "validUntil": "2026-07-20T17:00:00+05:30",
+      "syntheticData": true,
+      "evidenceCategory": "CSM_OWNERSHIP",
+      "evidenceType": "OWNER_ASSIGNMENT",
+      "evidenceClass": "SYSTEM_OF_RECORD",
+      "strengthClass": "AUTHORITATIVE",
+      "trustStatus": "VERIFIED",
+      "subject": {
+        "subjectType": "USER",
+        "subjectKey": "SYN-CSM-001"
+      },
+      "contentSummary": "Synthetic active CSM owner is assigned to the account and promise.",
+      "factAssertions": [
+        {
+          "claimKey": "owner.role",
+          "value": "CUSTOMER_SUCCESS_MANAGER"
+        },
+        {
+          "claimKey": "owner.active",
+          "value": true
+        }
+      ],
+      "verificationMethod": "FIXTURE_ASSERTION",
+      "verifiedBy": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-ORCHESTRATOR-001",
+        "role": "N8N_ORCHESTRATOR",
+        "displayName": "Vantix Control Value Synthetic Orchestrator"
+      },
+      "supportsCriteria": [],
+      "warnings": []
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "EVIDENCE_RECORD",
+      "evidenceId": "EVD-SYN-005",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "source": {
+        "system": "SYNTHETIC_FIXTURE",
+        "recordType": "OwnerAssignment",
+        "recordKey": "SYN-ADMIN-OWNER-001",
+        "environment": "SYNTHETIC"
+      },
+      "createdAt": "2026-07-13T09:04:00+05:30",
+      "observedAt": "2026-07-13T09:04:00+05:30",
+      "validUntil": "2026-07-20T17:00:00+05:30",
+      "syntheticData": true,
+      "evidenceCategory": "ADMIN_OWNERSHIP",
+      "evidenceType": "OWNER_ASSIGNMENT",
+      "evidenceClass": "SYSTEM_OF_RECORD",
+      "strengthClass": "AUTHORITATIVE",
+      "trustStatus": "VERIFIED",
+      "subject": {
+        "subjectType": "USER",
+        "subjectKey": "SYN-SFADMIN-001"
+      },
+      "contentSummary": "Synthetic active Salesforce Administrator owner is available for report-access diagnosis.",
+      "factAssertions": [
+        {
+          "claimKey": "owner.role",
+          "value": "SALESFORCE_ADMINISTRATOR"
+        },
+        {
+          "claimKey": "owner.active",
+          "value": true
+        }
+      ],
+      "verificationMethod": "FIXTURE_ASSERTION",
+      "verifiedBy": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-ORCHESTRATOR-001",
+        "role": "N8N_ORCHESTRATOR",
+        "displayName": "Vantix Control Value Synthetic Orchestrator"
+      },
+      "supportsCriteria": [],
+      "warnings": []
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "EVIDENCE_RECORD",
+      "evidenceId": "EVD-SYN-006",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "source": {
+        "system": "HUMAN",
+        "recordType": "CustomerIncidentAttestation",
+        "recordKey": "SYN-CUSTOMER-INCIDENT-001",
+        "environment": "SYNTHETIC"
+      },
+      "createdAt": "2026-07-13T09:05:00+05:30",
+      "observedAt": "2026-07-13T08:45:00+05:30",
+      "validUntil": "2026-07-20T17:00:00+05:30",
+      "syntheticData": true,
+      "evidenceCategory": "CUSTOMER_PROBLEM",
+      "evidenceType": "CUSTOMER_INCIDENT_ATTESTATION",
+      "evidenceClass": "CUSTOMER_ATTESTATION",
+      "strengthClass": "HUMAN_CONFIRMED",
+      "trustStatus": "VERIFIED",
+      "subject": {
+        "subjectType": "USER",
+        "subjectKey": "SYN-CUST-USER-001"
+      },
+      "contentSummary": "Authorized synthetic customer user reports that the Renewal Readiness Executive Report cannot be opened.",
+      "factAssertions": [
+        {
+          "claimKey": "customer.reportAccessResult",
+          "value": "DENIED"
+        },
+        {
+          "claimKey": "customer.reportKey",
+          "value": "SYN-REPORT-001"
+        }
+      ],
+      "verificationMethod": "HUMAN_CONFIRMATION",
+      "verifiedBy": {
+        "actorType": "HUMAN",
+        "actorId": "SYN-CUST-USER-001",
+        "role": "CUSTOMER_AUTHORIZED_USER",
+        "displayName": "Synthetic Authorized Customer User"
+      },
+      "supportsCriteria": [
+        "CRT-SYN-ACCESS-001",
+        "CRT-SYN-CUSTOMER-001"
+      ],
+      "warnings": []
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "EVIDENCE_RECORD",
+      "evidenceId": "EVD-SYN-007",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "source": {
+        "system": "SYNTHETIC_FIXTURE",
+        "recordType": "SalesforceAccessObservation",
+        "recordKey": "SYN-ACCESS-DIAG-001",
+        "environment": "SYNTHETIC"
+      },
+      "createdAt": "2026-07-13T09:30:00+05:30",
+      "observedAt": "2026-07-13T09:30:00+05:30",
+      "validUntil": "2026-07-13T11:30:00+05:30",
+      "syntheticData": true,
+      "evidenceCategory": "ACCESS_DIAGNOSTIC",
+      "evidenceType": "SALESFORCE_ACCESS_OBSERVATION",
+      "evidenceClass": "SYSTEM_OBSERVATION",
+      "strengthClass": "AUTHORITATIVE",
+      "trustStatus": "VERIFIED",
+      "subject": {
+        "subjectType": "USER",
+        "subjectKey": "SYN-CUST-USER-001"
+      },
+      "contentSummary": "Synthetic access diagnostic shows base user, object and Run Reports permissions present while report-folder access is absent.",
+      "factAssertions": [
+        {
+          "claimKey": "salesforce.userActive",
+          "value": true
+        },
+        {
+          "claimKey": "salesforce.baseObjectAccess",
+          "value": true
+        },
+        {
+          "claimKey": "salesforce.runReportsPermission",
+          "value": true
+        },
+        {
+          "claimKey": "salesforce.reportFolderAccess",
+          "value": false
+        },
+        {
+          "claimKey": "salesforce.accessTestResult",
+          "value": "DENIED"
+        }
+      ],
+      "verificationMethod": "SYSTEM_TEST",
+      "verifiedBy": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-VERIFIER-001",
+        "role": "VERIFIER",
+        "displayName": "Vantix Control Value Synthetic Verifier"
+      },
+      "supportsCriteria": [
+        "CRT-SYN-ACCESS-001"
+      ],
+      "warnings": []
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "EVIDENCE_RECORD",
+      "evidenceId": "EVD-SYN-008",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "source": {
+        "system": "SYNTHETIC_FIXTURE",
+        "recordType": "SalesforceReportConfiguration",
+        "recordKey": "SYN-REPORT-CONFIG-001",
+        "environment": "SYNTHETIC"
+      },
+      "createdAt": "2026-07-13T09:35:00+05:30",
+      "observedAt": "2026-07-13T09:35:00+05:30",
+      "validUntil": "2026-07-13T11:35:00+05:30",
+      "syntheticData": true,
+      "evidenceCategory": "TARGET_CONFIGURATION",
+      "evidenceType": "SALESFORCE_REPORT_CONFIGURATION",
+      "evidenceClass": "SYSTEM_OBSERVATION",
+      "strengthClass": "CORROBORATING",
+      "trustStatus": "VERIFIED",
+      "subject": {
+        "subjectType": "REPORT_FOLDER",
+        "subjectKey": "SYN-RPT-FOLDER-001"
+      },
+      "contentSummary": "Synthetic report configuration links the report to a folder whose access list omits the authorized customer user.",
+      "factAssertions": [
+        {
+          "claimKey": "report.key",
+          "value": "SYN-REPORT-001"
+        },
+        {
+          "claimKey": "report.folderKey",
+          "value": "SYN-RPT-FOLDER-001"
+        },
+        {
+          "claimKey": "reportFolder.customerUserIncluded",
+          "value": false
+        }
+      ],
+      "verificationMethod": "FIXTURE_ASSERTION",
+      "verifiedBy": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-VERIFIER-001",
+        "role": "VERIFIER",
+        "displayName": "Vantix Control Value Synthetic Verifier"
+      },
+      "supportsCriteria": [
+        "CRT-SYN-ACCESS-001"
+      ],
+      "warnings": []
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "EVIDENCE_RECORD",
+      "evidenceId": "EVD-SYN-009",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "source": {
+        "system": "PROMISEOPS",
+        "recordType": "ExecutionResult",
+        "recordKey": "EXE-SYN-ADMIN-001",
+        "environment": "SYNTHETIC"
+      },
+      "createdAt": "2026-07-13T10:26:00+05:30",
+      "observedAt": "2026-07-13T10:26:00+05:30",
+      "validUntil": null,
+      "syntheticData": true,
+      "evidenceCategory": "EXECUTION_RESULT",
+      "evidenceType": "ACTION_EXECUTION",
+      "evidenceClass": "EXECUTION_ARTIFACT",
+      "strengthClass": "AUTHORITATIVE",
+      "trustStatus": "VERIFIED",
+      "subject": {
+        "subjectType": "ACTION",
+        "subjectKey": "ACT-SYN-ADMIN-001"
+      },
+      "contentSummary": "Approved synthetic Admin remediation executed successfully and changed only the mock report-folder access state.",
+      "factAssertions": [
+        {
+          "claimKey": "execution.status",
+          "value": "SUCCEEDED"
+        },
+        {
+          "claimKey": "execution.synthetic",
+          "value": true
+        }
+      ],
+      "verificationMethod": "EXECUTION_RESULT",
+      "verifiedBy": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-EXECUTOR-001",
+        "role": "EXECUTOR",
+        "displayName": "Vantix Control Value Synthetic Executor"
+      },
+      "supportsCriteria": [
+        "CRT-SYN-ACCESS-001"
+      ],
+      "warnings": []
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "EVIDENCE_RECORD",
+      "evidenceId": "EVD-SYN-010",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "source": {
+        "system": "PROMISEOPS",
+        "recordType": "SystemAccessTest",
+        "recordKey": "SYN-ACCESS-VERIFY-001",
+        "environment": "SYNTHETIC"
+      },
+      "createdAt": "2026-07-13T10:35:00+05:30",
+      "observedAt": "2026-07-13T10:35:00+05:30",
+      "validUntil": "2026-07-20T17:00:00+05:30",
+      "syntheticData": true,
+      "evidenceCategory": "TECHNICAL_VERIFICATION",
+      "evidenceType": "SYSTEM_ACCESS_TEST",
+      "evidenceClass": "SYSTEM_OBSERVATION",
+      "strengthClass": "AUTHORITATIVE",
+      "trustStatus": "VERIFIED",
+      "subject": {
+        "subjectType": "REPORT",
+        "subjectKey": "SYN-REPORT-001"
+      },
+      "contentSummary": "Separate synthetic system check confirms the expected report-folder access state and successful report-open test.",
+      "factAssertions": [
+        {
+          "claimKey": "salesforce.reportFolderAccess",
+          "value": true
+        },
+        {
+          "claimKey": "salesforce.reportOpenTest",
+          "value": "PASS"
+        }
+      ],
+      "verificationMethod": "SYSTEM_TEST",
+      "verifiedBy": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-VERIFIER-001",
+        "role": "VERIFIER",
+        "displayName": "Vantix Control Value Synthetic Verifier"
+      },
+      "supportsCriteria": [
+        "CRT-SYN-ACCESS-001",
+        "CRT-SYN-SLA-001"
+      ],
+      "warnings": []
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "EVIDENCE_RECORD",
+      "evidenceId": "EVD-SYN-011",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "source": {
+        "system": "HUMAN",
+        "recordType": "CustomerSuccessConfirmation",
+        "recordKey": "SYN-CUSTOMER-CONFIRM-001",
+        "environment": "SYNTHETIC"
+      },
+      "createdAt": "2026-07-17T15:00:00+05:30",
+      "observedAt": "2026-07-17T15:00:00+05:30",
+      "validUntil": null,
+      "syntheticData": true,
+      "evidenceCategory": "CUSTOMER_USE_CONFIRMATION",
+      "evidenceType": "CUSTOMER_SUCCESS_CONFIRMATION",
+      "evidenceClass": "CUSTOMER_ATTESTATION",
+      "strengthClass": "HUMAN_CONFIRMED",
+      "trustStatus": "VERIFIED",
+      "subject": {
+        "subjectType": "CUSTOMER_OUTCOME",
+        "subjectKey": "PRM-SYN-001"
+      },
+      "contentSummary": "Authorized synthetic customer user confirms that the Renewal Readiness Executive Report opened successfully.",
+      "factAssertions": [
+        {
+          "claimKey": "customer.reportAccessResult",
+          "value": "SUCCESS"
+        },
+        {
+          "claimKey": "customer.reportKey",
+          "value": "SYN-REPORT-001"
+        },
+        {
+          "claimKey": "customer.confirmedAt",
+          "value": "2026-07-17T15:00:00+05:30"
+        }
+      ],
+      "verificationMethod": "HUMAN_CONFIRMATION",
+      "verifiedBy": {
+        "actorType": "HUMAN",
+        "actorId": "SYN-CUST-USER-001",
+        "role": "CUSTOMER_AUTHORIZED_USER",
+        "displayName": "Synthetic Authorized Customer User"
+      },
+      "supportsCriteria": [
+        "CRT-SYN-CUSTOMER-001",
+        "CRT-SYN-SLA-001"
+      ],
+      "warnings": []
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "EVIDENCE_RECORD",
+      "evidenceId": "EVD-SYN-012",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "source": {
+        "system": "HUMAN",
+        "recordType": "HumanClosureDecision",
+        "recordKey": "DEC-SYN-CLOSE-001",
+        "environment": "SYNTHETIC"
+      },
+      "createdAt": "2026-07-17T15:10:00+05:30",
+      "observedAt": "2026-07-17T15:10:00+05:30",
+      "validUntil": "2026-07-18T15:10:00+05:30",
+      "syntheticData": true,
+      "evidenceCategory": "CLOSURE_AUTHORIZATION",
+      "evidenceType": "HUMAN_CLOSURE_DECISION",
+      "evidenceClass": "INTERNAL_HUMAN_ATTESTATION",
+      "strengthClass": "HUMAN_CONFIRMED",
+      "trustStatus": "VERIFIED",
+      "subject": {
+        "subjectType": "PROMISE",
+        "subjectKey": "PRM-SYN-001"
+      },
+      "contentSummary": "Named synthetic CSM approver authorizes closure after reviewing both verification criteria.",
+      "factAssertions": [
+        {
+          "claimKey": "closure.decision",
+          "value": "APPROVE"
+        },
+        {
+          "claimKey": "closure.verificationId",
+          "value": "VER-SYN-001"
+        }
+      ],
+      "verificationMethod": "HUMAN_CONFIRMATION",
+      "verifiedBy": {
+        "actorType": "HUMAN",
+        "actorId": "SYN-CSM-APPROVER-001",
+        "role": "CSM_APPROVER",
+        "displayName": "Synthetic CSM Approver"
+      },
+      "supportsCriteria": [],
+      "warnings": []
+    }
+  ],
+  "deterministicAssessments": [
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "DETERMINISTIC_ASSESSMENT",
+      "assessmentId": "ASM-SYN-PREACTION-001",
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "assessedAt": "2026-07-13T10:05:00+05:30",
+      "assessmentStage": "PRE_ACTION",
+      "syntheticData": true,
+      "rulesetVersion": "1.0.0",
+      "evidenceCompleteness": {
+        "requiredCategoryCount": 8,
+        "presentCategoryCount": 8,
+        "missingCategories": [],
+        "conflictingEvidenceRefs": [],
+        "malformedEvidenceRefs": [],
+        "staleEvidenceRefs": [],
+        "percent": 100
+      },
+      "evidenceStrength": {
+        "categoryScores": [
+          {
+            "category": "PROMISE_SOURCE",
+            "score": 80,
+            "evidenceRefs": [
+              "EVD-SYN-001"
+            ]
+          },
+          {
+            "category": "ACCOUNT_IDENTITY",
+            "score": 100,
+            "evidenceRefs": [
+              "EVD-SYN-002"
+            ]
+          },
+          {
+            "category": "RENEWAL_CONTEXT",
+            "score": 100,
+            "evidenceRefs": [
+              "EVD-SYN-003"
+            ]
+          },
+          {
+            "category": "CSM_OWNERSHIP",
+            "score": 100,
+            "evidenceRefs": [
+              "EVD-SYN-004"
+            ]
+          },
+          {
+            "category": "ADMIN_OWNERSHIP",
+            "score": 100,
+            "evidenceRefs": [
+              "EVD-SYN-005"
+            ]
+          },
+          {
+            "category": "CUSTOMER_PROBLEM",
+            "score": 80,
+            "evidenceRefs": [
+              "EVD-SYN-006"
+            ]
+          },
+          {
+            "category": "ACCESS_DIAGNOSTIC",
+            "score": 100,
+            "evidenceRefs": [
+              "EVD-SYN-007"
+            ]
+          },
+          {
+            "category": "TARGET_CONFIGURATION",
+            "score": 100,
+            "evidenceRefs": [
+              "EVD-SYN-008"
+            ]
+          }
+        ],
+        "averagePercent": 95
+      },
+      "likelihood": {
+        "score": 4,
+        "label": "HIGH",
+        "rawSignalScore": 6,
+        "signals": [
+          {
+            "signalCode": "ACTIVE_BLOCKER",
+            "active": true,
+            "weight": 2,
+            "evidenceRefs": [
+              "EVD-SYN-006",
+              "EVD-SYN-007"
+            ]
+          },
+          {
+            "signalCode": "DUE_WITHIN_5_BUSINESS_DAYS",
+            "active": true,
+            "weight": 2,
+            "evidenceRefs": [
+              "EVD-SYN-001"
+            ]
+          },
+          {
+            "signalCode": "NO_EXECUTED_REMEDIATION",
+            "active": true,
+            "weight": 2,
+            "evidenceRefs": [
+              "EVD-SYN-007",
+              "EVD-SYN-008"
+            ]
+          }
+        ],
+        "meaning": "LIKELIHOOD_OF_PROMISE_NON_DELIVERY_NOT_CHURN_PREDICTION"
+      },
+      "impact": {
+        "score": 5,
+        "label": "VERY_HIGH",
+        "rawImpactScore": 8,
+        "inputs": {
+          "arrTierPoints": 3,
+          "renewalProximityPoints": 2,
+          "strategicStatusPoints": 1,
+          "contractualExposurePoints": 2
+        }
+      },
+      "priority": {
+        "score": 20,
+        "tier": "P1_CRITICAL",
+        "formula": "LIKELIHOOD_SCORE_X_IMPACT_SCORE"
+      },
+      "confidence": {
+        "score": 98,
+        "label": "HIGH",
+        "formula": "0.60_COMPLETENESS_PLUS_0.40_STRENGTH",
+        "humanReviewRequired": false,
+        "reviewReasons": []
+      },
+      "effort": {
+        "status": "HUMAN_ESTIMATION_REQUIRED",
+        "estimate": null
+      },
+      "calculationTrace": {
+        "inputEvidenceRefs": [
+          "EVD-SYN-001",
+          "EVD-SYN-002",
+          "EVD-SYN-003",
+          "EVD-SYN-004",
+          "EVD-SYN-005",
+          "EVD-SYN-006",
+          "EVD-SYN-007",
+          "EVD-SYN-008"
+        ],
+        "calculatedBy": "DETERMINISTIC_RULE_ENGINE",
+        "calculationHash": "sha256:19eab367637f248a67cfccd91d4d47aad4a86d10f35e615341d0760b0875959c"
+      }
+    }
+  ],
+  "aiDiagnosis": {
+    "schemaVersion": "1.0.0",
+    "recordType": "AI_DIAGNOSIS",
+    "diagnosisId": "DIA-SYN-001",
+    "correlationId": "PO-RUN-SYN-20260713-001",
+    "promiseId": "PRM-SYN-001",
+    "accountKey": "ACC-SYN-001",
+    "generatedAt": "2026-07-13T10:07:00+05:30",
+    "generatedBy": "SYNTHETIC_FIXTURE",
+    "syntheticData": true,
+    "modelIdentifier": "synthetic-diagnosis-output-fixture-v1",
+    "promptVersion": "1.0.0",
+    "qualitativeOnly": true,
+    "rootCauseDomain": "SALESFORCE_ACCESS",
+    "secondaryDomains": [],
+    "problemSummary": "The supplied synthetic evidence indicates a Salesforce report-folder access gap rather than a customer behavior, ownership or general object-permission problem.",
+    "claims": [
+      {
+        "claimId": "CLM-SYN-001",
+        "statement": "The authorized synthetic customer user currently cannot access the named report.",
+        "claimType": "FACT",
+        "supportStatus": "SUPPORTED",
+        "evidenceRefs": [
+          "EVD-SYN-006",
+          "EVD-SYN-007"
+        ]
+      },
+      {
+        "claimId": "CLM-SYN-002",
+        "statement": "Base user, object and Run Reports permissions are present while report-folder access is absent.",
+        "claimType": "FACT",
+        "supportStatus": "SUPPORTED",
+        "evidenceRefs": [
+          "EVD-SYN-007",
+          "EVD-SYN-008"
+        ]
+      },
+      {
+        "claimId": "CLM-SYN-003",
+        "statement": "The most supported cause domain is Salesforce access at the report-folder layer.",
+        "claimType": "INFERENCE",
+        "supportStatus": "SUPPORTED",
+        "evidenceRefs": [
+          "EVD-SYN-007",
+          "EVD-SYN-008"
+        ]
+      },
+      {
+        "claimId": "CLM-SYN-004",
+        "statement": "The fixture cannot establish how a live Salesforce org would calculate effective access.",
+        "claimType": "UNCERTAINTY",
+        "supportStatus": "PARTIALLY_SUPPORTED",
+        "evidenceRefs": [
+          "EVD-SYN-007",
+          "EVD-SYN-008"
+        ]
+      },
+      {
+        "claimId": "CLM-SYN-005",
+        "statement": "A customer-ownership or CSM/Admin-ownership misassignment is not supported as the cause, since ownership evidence shows both roles correctly assigned.",
+        "claimType": "INFERENCE",
+        "supportStatus": "UNSUPPORTED",
+        "evidenceRefs": [
+          "EVD-SYN-004",
+          "EVD-SYN-005"
+        ]
+      }
+    ],
+    "recommendedActionCodes": [
+      "ADMIN_SIMULATE_REPORT_ACCESS_REMEDIATION",
+      "CSM_SIMULATE_CUSTOMER_VERIFICATION_REQUEST"
+    ],
+    "uncertainties": [
+      "The evidence is a synthetic representation and is not a live effective-access evaluation.",
+      "An ownership-misassignment cause was considered and ruled out; it was not re-tested against a live org."
+    ],
+    "limitations": [
+      "The diagnosis is qualitative and cannot change deterministic scores.",
+      "The diagnosis cannot approve, execute or verify an action."
+    ],
+    "diagnosisStatus": "PROPOSED",
+    "warnings": [
+      {
+        "code": "SYNTHETIC_AI_OUTPUT",
+        "message": "This diagnosis is a pre-authored schema fixture and not an actual Gemini response.",
+        "occurredAt": "2026-07-13T10:07:00+05:30",
+        "evidenceRefs": [
+          "EVD-SYN-006",
+          "EVD-SYN-007",
+          "EVD-SYN-008"
+        ]
+      }
+    ]
+  },
+  "aiCritique": {
+    "schemaVersion": "1.0.0",
+    "recordType": "AI_CRITIQUE",
+    "critiqueId": "CRQ-SYN-001",
+    "targetDiagnosisId": "DIA-SYN-001",
+    "correlationId": "PO-RUN-SYN-20260713-001",
+    "promiseId": "PRM-SYN-001",
+    "generatedAt": "2026-07-13T10:08:00+05:30",
+    "generatedBy": "SYNTHETIC_FIXTURE",
+    "syntheticData": true,
+    "modelIdentifier": "synthetic-critique-output-fixture-v1",
+    "promptVersion": "1.0.0",
+    "claimReviews": [
+      {
+        "claimId": "CLM-SYN-001",
+        "verdict": "SUPPORTED",
+        "evidenceRefs": [
+          "EVD-SYN-006",
+          "EVD-SYN-007"
+        ],
+        "reviewNote": "Customer attestation and diagnostic observation agree."
+      },
+      {
+        "claimId": "CLM-SYN-002",
+        "verdict": "SUPPORTED",
+        "evidenceRefs": [
+          "EVD-SYN-007",
+          "EVD-SYN-008"
+        ],
+        "reviewNote": "Both supplied access records support the permission-layer distinction."
+      },
+      {
+        "claimId": "CLM-SYN-003",
+        "verdict": "SUPPORTED",
+        "evidenceRefs": [
+          "EVD-SYN-007",
+          "EVD-SYN-008"
+        ],
+        "reviewNote": "The inference is bounded to the supplied synthetic evidence."
+      },
+      {
+        "claimId": "CLM-SYN-004",
+        "verdict": "SUPPORTED",
+        "evidenceRefs": [
+          "EVD-SYN-007",
+          "EVD-SYN-008"
+        ],
+        "reviewNote": "The limitation correctly prevents a live-environment claim."
+      },
+      {
+        "claimId": "CLM-SYN-005",
+        "verdict": "UNSUPPORTED",
+        "evidenceRefs": [
+          "EVD-SYN-004",
+          "EVD-SYN-005"
+        ],
+        "reviewNote": "Correctly ruled out: both ownership evidence records are VERIFIED and show no assignment gap, so ownership is not the driver here."
+      }
+    ],
+    "actionReviews": [
+      {
+        "actionCode": "ADMIN_SIMULATE_REPORT_ACCESS_REMEDIATION",
+        "verdict": "SUPPORTED",
+        "reviewNote": "The action is enabled only for synthetic execution and matches the supported cause."
+      },
+      {
+        "actionCode": "CSM_SIMULATE_CUSTOMER_VERIFICATION_REQUEST",
+        "verdict": "SUPPORTED",
+        "reviewNote": "The action supports required customer-use verification and remains approval-controlled."
+      }
+    ],
+    "overallDecision": "PASS",
+    "reviewNote": "The diagnosis is internally consistent, evidence-cited and bounded to enabled synthetic actions.",
+    "cannotApproveActions": true
+  },
+  "actionRecommendations": [
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "ACTION_RECOMMENDATION",
+      "actionId": "ACT-SYN-ADMIN-001",
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "generatedAt": "2026-07-13T10:10:00+05:30",
+      "syntheticData": true,
+      "catalogVersion": "1.0.0",
+      "actionCode": "ADMIN_SIMULATE_REPORT_ACCESS_REMEDIATION",
+      "ownerRole": "SALESFORCE_ADMINISTRATOR",
+      "actionCategory": "SALESFORCE_REMEDIATION",
+      "description": "Simulate adding the authorized synthetic customer user to the required report-folder access state.",
+      "rationale": "Verified access evidence isolates the blocker to the report-folder layer while base access is present.",
+      "evidenceRefs": [
+        {
+          "evidenceId": "EVD-SYN-007",
+          "relationship": "SUPPORTS",
+          "claimId": "CLM-SYN-002",
+          "required": true
+        },
+        {
+          "evidenceId": "EVD-SYN-008",
+          "relationship": "SUPPORTS",
+          "claimId": "CLM-SYN-003",
+          "required": true
+        }
+      ],
+      "requestedPayload": {
+        "payloadVersion": "1.0.0",
+        "targetKey": "SYN-RPT-FOLDER-001",
+        "parameters": [
+          {
+            "name": "customerUserKey",
+            "value": "SYN-CUST-USER-001",
+            "sensitivity": "INTERNAL"
+          },
+          {
+            "name": "reportFolderKey",
+            "value": "SYN-RPT-FOLDER-001",
+            "sensitivity": "INTERNAL"
+          },
+          {
+            "name": "accessState",
+            "value": "GRANTED",
+            "sensitivity": "INTERNAL"
+          }
+        ]
+      },
+      "payloadHash": "sha256:261552334595c213d09bff2b04300b5bdbbf6229872bb7626559bb5493930afd",
+      "consequenceLevel": "HIGH",
+      "executionMode": "SIMULATED_WRITE",
+      "policyDecision": "REQUIRE_APPROVAL",
+      "policyReasons": [
+        "Access remediation is consequential even when demonstrated through a synthetic adapter.",
+        "Catalogue requires a Salesforce Admin approver."
+      ],
+      "approvalRequired": true,
+      "requiredApproverRoles": [
+        "SALESFORCE_ADMIN_APPROVER"
+      ],
+      "minimumConfidence": 85,
+      "preconditions": [
+        {
+          "code": "EVIDENCE_COMPLETE",
+          "status": "PASS",
+          "detail": "All pre-action evidence categories are present.",
+          "evidenceRefs": [
+            "EVD-SYN-001",
+            "EVD-SYN-007",
+            "EVD-SYN-008"
+          ]
+        },
+        {
+          "code": "SYNTHETIC_TARGET_ONLY",
+          "status": "PASS",
+          "detail": "Target belongs to the synthetic fixture.",
+          "evidenceRefs": [
+            "EVD-SYN-008"
+          ]
+        }
+      ],
+      "verificationCriterionIds": [
+        "CRT-SYN-ACCESS-001"
+      ],
+      "idempotencyKey": "IDEMP:PRM-SYN-001:ADMIN-ACCESS:V1",
+      "status": "EXECUTED",
+      "expiresAt": "2026-07-14T10:10:00+05:30"
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "ACTION_RECOMMENDATION",
+      "actionId": "ACT-SYN-CSM-001",
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "generatedAt": "2026-07-13T10:10:00+05:30",
+      "syntheticData": true,
+      "catalogVersion": "1.0.0",
+      "actionCode": "CSM_SIMULATE_CUSTOMER_VERIFICATION_REQUEST",
+      "ownerRole": "CUSTOMER_SUCCESS_MANAGER",
+      "actionCategory": "CUSTOMER_COMMUNICATION",
+      "description": "Simulate delivery of the approved request asking the authorized synthetic customer user to test the report.",
+      "rationale": "Customer-use confirmation is required separately from the Salesforce-side access check.",
+      "evidenceRefs": [
+        {
+          "evidenceId": "EVD-SYN-001",
+          "relationship": "SUPPORTS",
+          "claimId": null,
+          "required": true
+        },
+        {
+          "evidenceId": "EVD-SYN-006",
+          "relationship": "SUPPORTS",
+          "claimId": "CLM-SYN-001",
+          "required": true
+        }
+      ],
+      "requestedPayload": {
+        "payloadVersion": "1.0.0",
+        "targetKey": "SYN-CUST-USER-001",
+        "parameters": [
+          {
+            "name": "customerUserKey",
+            "value": "SYN-CUST-USER-001",
+            "sensitivity": "INTERNAL"
+          },
+          {
+            "name": "reportKey",
+            "value": "SYN-REPORT-001",
+            "sensitivity": "INTERNAL"
+          },
+          {
+            "name": "approvedMessageRef",
+            "value": "MSG-SYN-001",
+            "sensitivity": "INTERNAL"
+          }
+        ]
+      },
+      "payloadHash": "sha256:052aefd65f770c0f7c573bc50c3f25a4b2ceeb200aff8d9361628e585d63435a",
+      "consequenceLevel": "HIGH",
+      "executionMode": "SIMULATED_WRITE",
+      "policyDecision": "REQUIRE_APPROVAL",
+      "policyReasons": [
+        "Customer communication requires explicit human approval.",
+        "The MVP records a synthetic delivery and contacts no real customer."
+      ],
+      "approvalRequired": true,
+      "requiredApproverRoles": [
+        "CSM_APPROVER"
+      ],
+      "minimumConfidence": 85,
+      "preconditions": [
+        {
+          "code": "CUSTOMER_TARGET_SYNTHETIC",
+          "status": "PASS",
+          "detail": "The target is the authorized synthetic customer user.",
+          "evidenceRefs": [
+            "EVD-SYN-006"
+          ]
+        }
+      ],
+      "verificationCriterionIds": [
+        "CRT-SYN-CUSTOMER-001"
+      ],
+      "idempotencyKey": "IDEMP:PRM-SYN-001:CSM-VERIFY:V1",
+      "status": "EXECUTED",
+      "expiresAt": "2026-07-14T10:10:00+05:30"
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "ACTION_RECOMMENDATION",
+      "actionId": "ACT-SYN-VERIFY-001",
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "generatedAt": "2026-07-13T10:27:00+05:30",
+      "syntheticData": true,
+      "catalogVersion": "1.0.0",
+      "actionCode": "SYSTEM_VERIFY_SALESFORCE_ACCESS",
+      "ownerRole": "SYSTEM",
+      "actionCategory": "OUTCOME_VERIFICATION",
+      "description": "Run a separate read-only synthetic report-access check after remediation execution.",
+      "rationale": "An execution success record cannot by itself prove that the expected access state exists.",
+      "evidenceRefs": [
+        {
+          "evidenceId": "EVD-SYN-009",
+          "relationship": "CONTEXTUALIZES",
+          "claimId": null,
+          "required": true
+        },
+        {
+          "evidenceId": "EVD-SYN-008",
+          "relationship": "SUPPORTS",
+          "claimId": "CLM-SYN-002",
+          "required": true
+        }
+      ],
+      "requestedPayload": {
+        "payloadVersion": "1.0.0",
+        "targetKey": "SYN-REPORT-001",
+        "parameters": [
+          {
+            "name": "customerUserKey",
+            "value": "SYN-CUST-USER-001",
+            "sensitivity": "INTERNAL"
+          },
+          {
+            "name": "reportKey",
+            "value": "SYN-REPORT-001",
+            "sensitivity": "INTERNAL"
+          },
+          {
+            "name": "reportFolderKey",
+            "value": "SYN-RPT-FOLDER-001",
+            "sensitivity": "INTERNAL"
+          }
+        ]
+      },
+      "payloadHash": "sha256:8e7159ee1392374622638ca47267df20f48de248822ee631d850c4d6ebad0ff8",
+      "consequenceLevel": "NONE",
+      "executionMode": "READ_ONLY",
+      "policyDecision": "ALLOW_AUTO",
+      "policyReasons": [
+        "Action is a read-only verification against a synthetic target."
+      ],
+      "approvalRequired": false,
+      "requiredApproverRoles": [],
+      "minimumConfidence": 65,
+      "preconditions": [
+        {
+          "code": "REMEDIATION_EXECUTION_RECORDED",
+          "status": "PASS",
+          "detail": "Synthetic Admin execution result exists.",
+          "evidenceRefs": [
+            "EVD-SYN-009"
+          ]
+        }
+      ],
+      "verificationCriterionIds": [
+        "CRT-SYN-ACCESS-001"
+      ],
+      "idempotencyKey": "IDEMP:PRM-SYN-001:VERIFY-ACCESS:V1",
+      "status": "VERIFIED",
+      "expiresAt": null
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "ACTION_RECOMMENDATION",
+      "actionId": "ACT-SYN-CLOSE-001",
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "generatedAt": "2026-07-17T15:06:00+05:30",
+      "syntheticData": true,
+      "catalogVersion": "1.0.0",
+      "actionCode": "CSM_CLOSE_VERIFIED_PROMISE",
+      "ownerRole": "CUSTOMER_SUCCESS_MANAGER",
+      "actionCategory": "CLOSURE",
+      "description": "Close the synthetic promise after both technical and customer verification pass.",
+      "rationale": "The deterministic outcome is achieved within SLA, but closure still requires a named human decision.",
+      "evidenceRefs": [
+        {
+          "evidenceId": "EVD-SYN-010",
+          "relationship": "VERIFIES",
+          "claimId": null,
+          "required": true
+        },
+        {
+          "evidenceId": "EVD-SYN-011",
+          "relationship": "VERIFIES",
+          "claimId": null,
+          "required": true
+        }
+      ],
+      "requestedPayload": {
+        "payloadVersion": "1.0.0",
+        "targetKey": "PRM-SYN-001",
+        "parameters": [
+          {
+            "name": "promiseId",
+            "value": "PRM-SYN-001",
+            "sensitivity": "INTERNAL"
+          },
+          {
+            "name": "closureStatus",
+            "value": "CLOSED",
+            "sensitivity": "INTERNAL"
+          },
+          {
+            "name": "verificationId",
+            "value": "VER-SYN-001",
+            "sensitivity": "INTERNAL"
+          }
+        ]
+      },
+      "payloadHash": "sha256:e21306353b7deed715ce44fb4817cf98ea494b2f3ba7bc34c031f4d3639fc529",
+      "consequenceLevel": "MEDIUM",
+      "executionMode": "SIMULATED_WRITE",
+      "policyDecision": "REQUIRE_APPROVAL",
+      "policyReasons": [
+        "Promise closure changes lifecycle status.",
+        "A CSM approver must confirm the verified outcome."
+      ],
+      "approvalRequired": true,
+      "requiredApproverRoles": [
+        "CSM_APPROVER"
+      ],
+      "minimumConfidence": 85,
+      "preconditions": [
+        {
+          "code": "TECHNICAL_VERIFICATION_PASS",
+          "status": "PASS",
+          "detail": "System access verification passed.",
+          "evidenceRefs": [
+            "EVD-SYN-010"
+          ]
+        },
+        {
+          "code": "CUSTOMER_USE_CONFIRMATION_PASS",
+          "status": "PASS",
+          "detail": "Authorized customer-use confirmation passed.",
+          "evidenceRefs": [
+            "EVD-SYN-011"
+          ]
+        }
+      ],
+      "verificationCriterionIds": [
+        "CRT-SYN-ACCESS-001",
+        "CRT-SYN-CUSTOMER-001",
+        "CRT-SYN-SLA-001"
+      ],
+      "idempotencyKey": "IDEMP:PRM-SYN-001:CLOSE:V1",
+      "status": "EXECUTED",
+      "expiresAt": "2026-07-18T15:06:00+05:30"
+    }
+  ],
+  "humanDecisions": [
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "HUMAN_DECISION",
+      "decisionId": "DEC-SYN-ADMIN-001",
+      "actionId": "ACT-SYN-ADMIN-001",
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "payloadHash": "sha256:261552334595c213d09bff2b04300b5bdbbf6229872bb7626559bb5493930afd",
+      "decision": "APPROVE",
+      "decisionStatus": "CONSUMED",
+      "decidedBy": {
+        "actorType": "HUMAN",
+        "actorId": "SYN-SFADMIN-APPROVER-001",
+        "role": "SALESFORCE_ADMIN_APPROVER",
+        "displayName": "Synthetic Salesforce Admin Approver"
+      },
+      "decidedAt": "2026-07-13T10:20:00+05:30",
+      "validUntil": "2026-07-14T10:20:00+05:30",
+      "consumedAt": "2026-07-13T10:25:00+05:30",
+      "rationale": "The evidence supports a folder-access cause and the action is restricted to the synthetic executor.",
+      "conditions": [
+        "No Salesforce write is permitted.",
+        "A separate access check must follow execution."
+      ],
+      "separationOfDuties": {
+        "passed": true,
+        "requesterActorId": "PO-POLICY-ENGINE-001",
+        "approverActorId": "SYN-SFADMIN-APPROVER-001",
+        "policy": "Requester and approver are different actors; approver holds the required Admin approver role."
+      },
+      "singleUse": true,
+      "syntheticData": true
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "HUMAN_DECISION",
+      "decisionId": "DEC-SYN-CSM-001",
+      "actionId": "ACT-SYN-CSM-001",
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "payloadHash": "sha256:052aefd65f770c0f7c573bc50c3f25a4b2ceeb200aff8d9361628e585d63435a",
+      "decision": "APPROVE",
+      "decisionStatus": "CONSUMED",
+      "decidedBy": {
+        "actorType": "HUMAN",
+        "actorId": "SYN-CSM-APPROVER-001",
+        "role": "CSM_APPROVER",
+        "displayName": "Synthetic CSM Approver"
+      },
+      "decidedAt": "2026-07-13T10:21:00+05:30",
+      "validUntil": "2026-07-14T10:21:00+05:30",
+      "consumedAt": "2026-07-13T10:30:00+05:30",
+      "rationale": "The approved synthetic request is necessary to collect separate customer-use confirmation.",
+      "conditions": [
+        "No real message may be sent.",
+        "The customer response must be recorded as separate evidence."
+      ],
+      "separationOfDuties": {
+        "passed": true,
+        "requesterActorId": "PO-POLICY-ENGINE-001",
+        "approverActorId": "SYN-CSM-APPROVER-001",
+        "policy": "Requester and approver are different actors; approver holds the required CSM approver role."
+      },
+      "singleUse": true,
+      "syntheticData": true
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "HUMAN_DECISION",
+      "decisionId": "DEC-SYN-CLOSE-001",
+      "actionId": "ACT-SYN-CLOSE-001",
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "payloadHash": "sha256:e21306353b7deed715ce44fb4817cf98ea494b2f3ba7bc34c031f4d3639fc529",
+      "decision": "APPROVE",
+      "decisionStatus": "CONSUMED",
+      "decidedBy": {
+        "actorType": "HUMAN",
+        "actorId": "SYN-CSM-APPROVER-001",
+        "role": "CSM_APPROVER",
+        "displayName": "Synthetic CSM Approver"
+      },
+      "decidedAt": "2026-07-17T15:10:00+05:30",
+      "validUntil": "2026-07-18T15:10:00+05:30",
+      "consumedAt": "2026-07-17T15:12:00+05:30",
+      "rationale": "Both required verification criteria passed and the deterministic SLA result is within the promise window.",
+      "conditions": [
+        "Closure must remain labelled synthetic."
+      ],
+      "separationOfDuties": {
+        "passed": true,
+        "requesterActorId": "PO-POLICY-ENGINE-001",
+        "approverActorId": "SYN-CSM-APPROVER-001",
+        "policy": "System proposed closure; a named human CSM approver authorized it."
+      },
+      "singleUse": true,
+      "syntheticData": true
+    }
+  ],
+  "executionResults": [
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "EXECUTION_RESULT",
+      "executionId": "EXE-SYN-ADMIN-001",
+      "actionId": "ACT-SYN-ADMIN-001",
+      "actionCode": "ADMIN_SIMULATE_REPORT_ACCESS_REMEDIATION",
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "attemptNumber": 1,
+      "executionMode": "SIMULATED_WRITE",
+      "executor": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-EXECUTOR-001",
+        "role": "EXECUTOR",
+        "displayName": "Vantix Control Value Synthetic Executor"
+      },
+      "startedAt": "2026-07-13T10:25:00+05:30",
+      "completedAt": "2026-07-13T10:26:00+05:30",
+      "status": "SUCCEEDED",
+      "idempotencyKey": "IDEMP:PRM-SYN-001:ADMIN-ACCESS:V1",
+      "payloadHash": "sha256:261552334595c213d09bff2b04300b5bdbbf6229872bb7626559bb5493930afd",
+      "target": {
+        "system": "SYNTHETIC_EXECUTOR",
+        "targetType": "REPORT_FOLDER_ACCESS_STATE",
+        "targetKey": "SYN-RPT-FOLDER-001",
+        "environment": "SYNTHETIC"
+      },
+      "changeSummary": [
+        {
+          "field": "reportFolderAccess",
+          "before": "DENIED",
+          "after": "GRANTED"
+        }
+      ],
+      "responseReference": "EVD-SYN-009",
+      "retry": {
+        "retryable": false,
+        "ambiguous": false,
+        "maxAttempts": 2,
+        "attemptsRemaining": 1,
+        "nextRetryAt": null
+      },
+      "error": null,
+      "syntheticData": true
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "EXECUTION_RESULT",
+      "executionId": "EXE-SYN-CSM-001",
+      "actionId": "ACT-SYN-CSM-001",
+      "actionCode": "CSM_SIMULATE_CUSTOMER_VERIFICATION_REQUEST",
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "attemptNumber": 1,
+      "executionMode": "SIMULATED_WRITE",
+      "executor": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-EXECUTOR-001",
+        "role": "EXECUTOR",
+        "displayName": "Vantix Control Value Synthetic Executor"
+      },
+      "startedAt": "2026-07-13T10:30:00+05:30",
+      "completedAt": "2026-07-13T10:31:00+05:30",
+      "status": "SUCCEEDED",
+      "idempotencyKey": "IDEMP:PRM-SYN-001:CSM-VERIFY:V1",
+      "payloadHash": "sha256:052aefd65f770c0f7c573bc50c3f25a4b2ceeb200aff8d9361628e585d63435a",
+      "target": {
+        "system": "CUSTOMER_COMMUNICATION_SIMULATOR",
+        "targetType": "VERIFICATION_REQUEST",
+        "targetKey": "SYN-CUST-USER-001",
+        "environment": "SYNTHETIC"
+      },
+      "changeSummary": [
+        {
+          "field": "syntheticDeliveryStatus",
+          "before": "NOT_SENT",
+          "after": "SIMULATED_DELIVERED"
+        }
+      ],
+      "responseReference": "MSG-SYN-001",
+      "retry": {
+        "retryable": false,
+        "ambiguous": false,
+        "maxAttempts": 1,
+        "attemptsRemaining": 0,
+        "nextRetryAt": null
+      },
+      "error": null,
+      "syntheticData": true
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "EXECUTION_RESULT",
+      "executionId": "EXE-SYN-VERIFY-001",
+      "actionId": "ACT-SYN-VERIFY-001",
+      "actionCode": "SYSTEM_VERIFY_SALESFORCE_ACCESS",
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "attemptNumber": 1,
+      "executionMode": "READ_ONLY",
+      "executor": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-VERIFIER-001",
+        "role": "VERIFIER",
+        "displayName": "Vantix Control Value Synthetic Verifier"
+      },
+      "startedAt": "2026-07-13T10:34:00+05:30",
+      "completedAt": "2026-07-13T10:35:00+05:30",
+      "status": "SUCCEEDED",
+      "idempotencyKey": "IDEMP:PRM-SYN-001:VERIFY-ACCESS:V1",
+      "payloadHash": "sha256:8e7159ee1392374622638ca47267df20f48de248822ee631d850c4d6ebad0ff8",
+      "target": {
+        "system": "SYNTHETIC_EXECUTOR",
+        "targetType": "REPORT_ACCESS_TEST",
+        "targetKey": "SYN-REPORT-001",
+        "environment": "SYNTHETIC"
+      },
+      "changeSummary": [],
+      "responseReference": "EVD-SYN-010",
+      "retry": {
+        "retryable": false,
+        "ambiguous": false,
+        "maxAttempts": 3,
+        "attemptsRemaining": 2,
+        "nextRetryAt": null
+      },
+      "error": null,
+      "syntheticData": true
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "EXECUTION_RESULT",
+      "executionId": "EXE-SYN-CLOSE-001",
+      "actionId": "ACT-SYN-CLOSE-001",
+      "actionCode": "CSM_CLOSE_VERIFIED_PROMISE",
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "attemptNumber": 1,
+      "executionMode": "SIMULATED_WRITE",
+      "executor": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-EXECUTOR-001",
+        "role": "EXECUTOR",
+        "displayName": "Vantix Control Value Synthetic Executor"
+      },
+      "startedAt": "2026-07-17T15:12:00+05:30",
+      "completedAt": "2026-07-17T15:12:00+05:30",
+      "status": "SUCCEEDED",
+      "idempotencyKey": "IDEMP:PRM-SYN-001:CLOSE:V1",
+      "payloadHash": "sha256:e21306353b7deed715ce44fb4817cf98ea494b2f3ba7bc34c031f4d3639fc529",
+      "target": {
+        "system": "PROMISEOPS",
+        "targetType": "PROMISE",
+        "targetKey": "PRM-SYN-001",
+        "environment": "SYNTHETIC"
+      },
+      "changeSummary": [
+        {
+          "field": "promiseStatus",
+          "before": "FULFILLED",
+          "after": "CLOSED"
+        }
+      ],
+      "responseReference": "EVD-SYN-012",
+      "retry": {
+        "retryable": false,
+        "ambiguous": false,
+        "maxAttempts": 2,
+        "attemptsRemaining": 1,
+        "nextRetryAt": null
+      },
+      "error": null,
+      "syntheticData": true
+    }
+  ],
+  "outcomeVerification": {
+    "schemaVersion": "1.0.0",
+    "recordType": "OUTCOME_VERIFICATION",
+    "verificationId": "VER-SYN-001",
+    "correlationId": "PO-RUN-SYN-20260713-001",
+    "promiseId": "PRM-SYN-001",
+    "accountKey": "ACC-SYN-001",
+    "evaluatedAt": "2026-07-17T15:05:00+05:30",
+    "syntheticData": true,
+    "rulesetVersion": "1.0.0",
+    "criteriaResults": [
+      {
+        "criterionId": "CRT-SYN-ACCESS-001",
+        "criterionType": "SALESFORCE_ACCESS_RESTORED",
+        "status": "PASS",
+        "method": "SYSTEM_CHECK",
+        "evidenceRefs": [
+          "EVD-SYN-010"
+        ],
+        "observedAt": "2026-07-13T10:35:00+05:30",
+        "verifiedBy": {
+          "actorType": "SYSTEM",
+          "actorId": "PO-VERIFIER-001",
+          "role": "VERIFIER",
+          "displayName": "Vantix Control Value Synthetic Verifier"
+        },
+        "note": "A separate synthetic system check reports access restored."
+      },
+      {
+        "criterionId": "CRT-SYN-CUSTOMER-001",
+        "criterionType": "CUSTOMER_REPORT_ACCESSED",
+        "status": "PASS",
+        "method": "HUMAN_ATTESTATION",
+        "evidenceRefs": [
+          "EVD-SYN-011"
+        ],
+        "observedAt": "2026-07-17T15:00:00+05:30",
+        "verifiedBy": {
+          "actorType": "HUMAN",
+          "actorId": "SYN-CUST-USER-001",
+          "role": "CUSTOMER_AUTHORIZED_USER",
+          "displayName": "Synthetic Authorized Customer User"
+        },
+        "note": "Authorized synthetic customer user confirms successful report access."
+      },
+      {
+        "criterionId": "CRT-SYN-SLA-001",
+        "criterionType": "PROMISE_WITHIN_SLA",
+        "status": "PASS",
+        "method": "DETERMINISTIC_TIME_CALCULATION",
+        "evidenceRefs": [
+          "EVD-SYN-010",
+          "EVD-SYN-011"
+        ],
+        "observedAt": "2026-07-17T15:05:00+05:30",
+        "verifiedBy": {
+          "actorType": "SYSTEM",
+          "actorId": "PO-POLICY-ENGINE-001",
+          "role": "POLICY_ENGINE",
+          "displayName": "Vantix Control Value Deterministic Policy Engine"
+        },
+        "note": "The later required verification occurred before the due time."
+      }
+    ],
+    "technicalAccessStatus": "PASS",
+    "customerUseStatus": "PASS",
+    "overallStatus": "ACHIEVED",
+    "sla": {
+      "dueAt": "2026-07-20T17:00:00+05:30",
+      "completionAt": "2026-07-17T15:00:00+05:30",
+      "status": "DELIVERED_WITHIN_SLA",
+      "calendarId": "CAL-SYN-IN-WEEKDAY-001",
+      "calculatedBy": "DETERMINISTIC_RULE_ENGINE"
+    },
+    "nextDecision": "CLOSE",
+    "decisionBasis": "DETERMINISTIC_RULES",
+    "closureEligible": true,
+    "nextAction": {
+      "actionCode": "CSM_CLOSE_VERIFIED_PROMISE",
+      "ownerRole": "CUSTOMER_SUCCESS_MANAGER",
+      "reason": "Both required verification criteria passed within the promised SLA."
+    },
+    "limitations": [
+      "The outcome is a synthetic control-loop demonstration and not a real customer result."
+    ],
+    "warnings": [
+      {
+        "code": "SYNTHETIC_OUTCOME",
+        "message": "Outcome verification is based only on fabricated evidence records.",
+        "occurredAt": "2026-07-17T15:05:00+05:30",
+        "evidenceRefs": [
+          "EVD-SYN-010",
+          "EVD-SYN-011"
+        ]
+      }
+    ]
+  },
+  "auditEvents": [
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "AUDIT_EVENT",
+      "eventId": "AUD-SYN-001",
+      "sequence": 1,
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "occurredAt": "2026-07-13T09:00:00+05:30",
+      "actor": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-ORCHESTRATOR-001",
+        "role": "N8N_ORCHESTRATOR"
+      },
+      "eventType": "RUN_STARTED",
+      "stage": "CAPTURE",
+      "objectType": "RUN",
+      "objectId": "PO-RUN-SYN-20260713-001",
+      "action": "Initialize immutable run context",
+      "result": "SUCCESS",
+      "evidenceRefs": [],
+      "previousEventId": null,
+      "payloadHash": null,
+      "containsSensitiveData": false,
+      "syntheticData": true,
+      "note": "Synthetic run initialized."
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "AUDIT_EVENT",
+      "eventId": "AUD-SYN-002",
+      "sequence": 2,
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "occurredAt": "2026-07-13T09:00:01+05:30",
+      "actor": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-ORCHESTRATOR-001",
+        "role": "N8N_ORCHESTRATOR"
+      },
+      "eventType": "PROMISE_CAPTURED",
+      "stage": "CAPTURE",
+      "objectType": "PROMISE",
+      "objectId": "PRM-SYN-001",
+      "action": "Capture canonical promise record",
+      "result": "SUCCESS",
+      "evidenceRefs": [
+        "EVD-SYN-001"
+      ],
+      "previousEventId": "AUD-SYN-001",
+      "payloadHash": null,
+      "containsSensitiveData": false,
+      "syntheticData": true,
+      "note": "Promise fixture captured."
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "AUDIT_EVENT",
+      "eventId": "AUD-SYN-003",
+      "sequence": 3,
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "occurredAt": "2026-07-13T09:00:02+05:30",
+      "actor": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-ORCHESTRATOR-001",
+        "role": "N8N_ORCHESTRATOR"
+      },
+      "eventType": "DUPLICATE_CHECK_PASSED",
+      "stage": "VALIDATION",
+      "objectType": "PROMISE",
+      "objectId": "PRM-SYN-001",
+      "action": "Check promise idempotency key",
+      "result": "SUCCESS",
+      "evidenceRefs": [
+        "EVD-SYN-001"
+      ],
+      "previousEventId": "AUD-SYN-002",
+      "payloadHash": null,
+      "containsSensitiveData": false,
+      "syntheticData": true,
+      "note": "No active or successful matching idempotency key exists."
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "AUDIT_EVENT",
+      "eventId": "AUD-SYN-004",
+      "sequence": 4,
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "occurredAt": "2026-07-13T10:00:00+05:30",
+      "actor": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-ORCHESTRATOR-001",
+        "role": "N8N_ORCHESTRATOR"
+      },
+      "eventType": "EVIDENCE_VALIDATED",
+      "stage": "OBSERVATION",
+      "objectType": "EVIDENCE",
+      "objectId": "EVD-SYN-008",
+      "action": "Validate pre-action evidence set",
+      "result": "SUCCESS",
+      "evidenceRefs": [
+        "EVD-SYN-001",
+        "EVD-SYN-002",
+        "EVD-SYN-003",
+        "EVD-SYN-004",
+        "EVD-SYN-005",
+        "EVD-SYN-006",
+        "EVD-SYN-007",
+        "EVD-SYN-008"
+      ],
+      "previousEventId": "AUD-SYN-003",
+      "payloadHash": null,
+      "containsSensitiveData": false,
+      "syntheticData": true,
+      "note": "All required pre-action evidence categories passed validation."
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "AUDIT_EVENT",
+      "eventId": "AUD-SYN-005",
+      "sequence": 5,
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "occurredAt": "2026-07-13T10:05:00+05:30",
+      "actor": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-POLICY-ENGINE-001",
+        "role": "POLICY_ENGINE"
+      },
+      "eventType": "ASSESSMENT_COMPLETED",
+      "stage": "ASSESSMENT",
+      "objectType": "ASSESSMENT",
+      "objectId": "ASM-SYN-PREACTION-001",
+      "action": "Calculate deterministic assessment",
+      "result": "SUCCESS",
+      "evidenceRefs": [
+        "EVD-SYN-001",
+        "EVD-SYN-002",
+        "EVD-SYN-003",
+        "EVD-SYN-004",
+        "EVD-SYN-005",
+        "EVD-SYN-006",
+        "EVD-SYN-007",
+        "EVD-SYN-008"
+      ],
+      "previousEventId": "AUD-SYN-004",
+      "payloadHash": "sha256:19eab367637f248a67cfccd91d4d47aad4a86d10f35e615341d0760b0875959c",
+      "containsSensitiveData": false,
+      "syntheticData": true,
+      "note": "Likelihood, impact, priority and confidence calculated without AI."
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "AUDIT_EVENT",
+      "eventId": "AUD-SYN-006",
+      "sequence": 6,
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "occurredAt": "2026-07-13T10:07:00+05:30",
+      "actor": {
+        "actorType": "AI_MODEL",
+        "actorId": "SYN-DIAGNOSIS-FIXTURE-001",
+        "role": "DIAGNOSIS_AGENT"
+      },
+      "eventType": "AI_DIAGNOSIS_COMPLETED",
+      "stage": "DIAGNOSIS",
+      "objectType": "DIAGNOSIS",
+      "objectId": "DIA-SYN-001",
+      "action": "Produce bounded qualitative diagnosis fixture",
+      "result": "SUCCESS",
+      "evidenceRefs": [
+        "EVD-SYN-006",
+        "EVD-SYN-007",
+        "EVD-SYN-008"
+      ],
+      "previousEventId": "AUD-SYN-005",
+      "payloadHash": null,
+      "containsSensitiveData": false,
+      "syntheticData": true,
+      "note": "Pre-authored synthetic AI output used only for contract validation."
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "AUDIT_EVENT",
+      "eventId": "AUD-SYN-007",
+      "sequence": 7,
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "occurredAt": "2026-07-13T10:08:00+05:30",
+      "actor": {
+        "actorType": "AI_MODEL",
+        "actorId": "SYN-CRITIQUE-FIXTURE-001",
+        "role": "CRITIQUE_AGENT"
+      },
+      "eventType": "AI_CRITIQUE_COMPLETED",
+      "stage": "CRITIQUE",
+      "objectType": "CRITIQUE",
+      "objectId": "CRQ-SYN-001",
+      "action": "Check diagnosis evidence and consistency",
+      "result": "SUCCESS",
+      "evidenceRefs": [
+        "EVD-SYN-006",
+        "EVD-SYN-007",
+        "EVD-SYN-008"
+      ],
+      "previousEventId": "AUD-SYN-006",
+      "payloadHash": null,
+      "containsSensitiveData": false,
+      "syntheticData": true,
+      "note": "Critique passed but did not approve any action."
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "AUDIT_EVENT",
+      "eventId": "AUD-SYN-008",
+      "sequence": 8,
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "occurredAt": "2026-07-13T10:10:00+05:30",
+      "actor": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-POLICY-ENGINE-001",
+        "role": "POLICY_ENGINE"
+      },
+      "eventType": "POLICY_DECISION_RECORDED",
+      "stage": "POLICY",
+      "objectType": "ACTION",
+      "objectId": "ACT-SYN-ADMIN-001",
+      "action": "Require approval for Admin and CSM consequential actions",
+      "result": "PENDING",
+      "evidenceRefs": [
+        "EVD-SYN-001",
+        "EVD-SYN-006",
+        "EVD-SYN-007",
+        "EVD-SYN-008"
+      ],
+      "previousEventId": "AUD-SYN-007",
+      "payloadHash": "sha256:261552334595c213d09bff2b04300b5bdbbf6229872bb7626559bb5493930afd",
+      "containsSensitiveData": false,
+      "syntheticData": true,
+      "note": "No action may execute before a valid human decision."
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "AUDIT_EVENT",
+      "eventId": "AUD-SYN-009",
+      "sequence": 9,
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "occurredAt": "2026-07-13T10:20:00+05:30",
+      "actor": {
+        "actorType": "HUMAN",
+        "actorId": "SYN-SFADMIN-APPROVER-001",
+        "role": "SALESFORCE_ADMIN_APPROVER"
+      },
+      "eventType": "HUMAN_DECISION_RECORDED",
+      "stage": "APPROVAL",
+      "objectType": "DECISION",
+      "objectId": "DEC-SYN-ADMIN-001",
+      "action": "Approve synthetic Admin remediation",
+      "result": "SUCCESS",
+      "evidenceRefs": [
+        "EVD-SYN-007",
+        "EVD-SYN-008"
+      ],
+      "previousEventId": "AUD-SYN-008",
+      "payloadHash": "sha256:261552334595c213d09bff2b04300b5bdbbf6229872bb7626559bb5493930afd",
+      "containsSensitiveData": false,
+      "syntheticData": true,
+      "note": "Approval is single-use and payload-bound."
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "AUDIT_EVENT",
+      "eventId": "AUD-SYN-010",
+      "sequence": 10,
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "occurredAt": "2026-07-13T10:26:00+05:30",
+      "actor": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-EXECUTOR-001",
+        "role": "EXECUTOR"
+      },
+      "eventType": "ACTION_EXECUTION_COMPLETED",
+      "stage": "EXECUTION",
+      "objectType": "EXECUTION",
+      "objectId": "EXE-SYN-ADMIN-001",
+      "action": "Execute approved synthetic Admin remediation",
+      "result": "SUCCESS",
+      "evidenceRefs": [
+        "EVD-SYN-009"
+      ],
+      "previousEventId": "AUD-SYN-009",
+      "payloadHash": "sha256:261552334595c213d09bff2b04300b5bdbbf6229872bb7626559bb5493930afd",
+      "containsSensitiveData": false,
+      "syntheticData": true,
+      "note": "No Salesforce write occurred."
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "AUDIT_EVENT",
+      "eventId": "AUD-SYN-011",
+      "sequence": 11,
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "occurredAt": "2026-07-13T10:27:00+05:30",
+      "actor": {
+        "actorType": "HUMAN",
+        "actorId": "SYN-CSM-APPROVER-001",
+        "role": "CSM_APPROVER"
+      },
+      "eventType": "HUMAN_DECISION_RECORDED",
+      "stage": "APPROVAL",
+      "objectType": "DECISION",
+      "objectId": "DEC-SYN-CSM-001",
+      "action": "Approve synthetic customer verification request",
+      "result": "SUCCESS",
+      "evidenceRefs": [
+        "EVD-SYN-001",
+        "EVD-SYN-006"
+      ],
+      "previousEventId": "AUD-SYN-010",
+      "payloadHash": "sha256:052aefd65f770c0f7c573bc50c3f25a4b2ceeb200aff8d9361628e585d63435a",
+      "containsSensitiveData": false,
+      "syntheticData": true,
+      "note": "Approval permits simulation only."
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "AUDIT_EVENT",
+      "eventId": "AUD-SYN-012",
+      "sequence": 12,
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "occurredAt": "2026-07-13T10:31:00+05:30",
+      "actor": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-EXECUTOR-001",
+        "role": "EXECUTOR"
+      },
+      "eventType": "ACTION_EXECUTION_COMPLETED",
+      "stage": "EXECUTION",
+      "objectType": "EXECUTION",
+      "objectId": "EXE-SYN-CSM-001",
+      "action": "Simulate approved customer verification request",
+      "result": "SUCCESS",
+      "evidenceRefs": [
+        "EVD-SYN-006"
+      ],
+      "previousEventId": "AUD-SYN-011",
+      "payloadHash": "sha256:052aefd65f770c0f7c573bc50c3f25a4b2ceeb200aff8d9361628e585d63435a",
+      "containsSensitiveData": false,
+      "syntheticData": true,
+      "note": "No real customer was contacted."
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "AUDIT_EVENT",
+      "eventId": "AUD-SYN-013",
+      "sequence": 13,
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "occurredAt": "2026-07-13T10:35:00+05:30",
+      "actor": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-VERIFIER-001",
+        "role": "VERIFIER"
+      },
+      "eventType": "TECHNICAL_VERIFICATION_COMPLETED",
+      "stage": "VERIFICATION",
+      "objectType": "VERIFICATION",
+      "objectId": "VER-SYN-001",
+      "action": "Verify synthetic Salesforce access state",
+      "result": "SUCCESS",
+      "evidenceRefs": [
+        "EVD-SYN-010"
+      ],
+      "previousEventId": "AUD-SYN-012",
+      "payloadHash": "sha256:8e7159ee1392374622638ca47267df20f48de248822ee631d850c4d6ebad0ff8",
+      "containsSensitiveData": false,
+      "syntheticData": true,
+      "note": "Technical verification is distinct from customer confirmation."
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "AUDIT_EVENT",
+      "eventId": "AUD-SYN-014",
+      "sequence": 14,
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "occurredAt": "2026-07-17T15:00:00+05:30",
+      "actor": {
+        "actorType": "HUMAN",
+        "actorId": "SYN-CUST-USER-001",
+        "role": "CUSTOMER_AUTHORIZED_USER"
+      },
+      "eventType": "CUSTOMER_CONFIRMATION_RECORDED",
+      "stage": "VERIFICATION",
+      "objectType": "EVIDENCE",
+      "objectId": "EVD-SYN-011",
+      "action": "Record synthetic customer-use confirmation",
+      "result": "SUCCESS",
+      "evidenceRefs": [
+        "EVD-SYN-011"
+      ],
+      "previousEventId": "AUD-SYN-013",
+      "payloadHash": null,
+      "containsSensitiveData": false,
+      "syntheticData": true,
+      "note": "Authorized human attestation records actual-use evidence within the fixture."
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "AUDIT_EVENT",
+      "eventId": "AUD-SYN-015",
+      "sequence": 15,
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "occurredAt": "2026-07-17T15:05:00+05:30",
+      "actor": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-POLICY-ENGINE-001",
+        "role": "POLICY_ENGINE"
+      },
+      "eventType": "OUTCOME_VERIFIED",
+      "stage": "OUTCOME",
+      "objectType": "VERIFICATION",
+      "objectId": "VER-SYN-001",
+      "action": "Evaluate outcome and SLA deterministically",
+      "result": "SUCCESS",
+      "evidenceRefs": [
+        "EVD-SYN-010",
+        "EVD-SYN-011"
+      ],
+      "previousEventId": "AUD-SYN-014",
+      "payloadHash": null,
+      "containsSensitiveData": false,
+      "syntheticData": true,
+      "note": "Both required outcome criteria passed within SLA."
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "AUDIT_EVENT",
+      "eventId": "AUD-SYN-016",
+      "sequence": 16,
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "occurredAt": "2026-07-17T15:10:00+05:30",
+      "actor": {
+        "actorType": "HUMAN",
+        "actorId": "SYN-CSM-APPROVER-001",
+        "role": "CSM_APPROVER"
+      },
+      "eventType": "HUMAN_DECISION_RECORDED",
+      "stage": "CLOSURE",
+      "objectType": "DECISION",
+      "objectId": "DEC-SYN-CLOSE-001",
+      "action": "Approve promise closure",
+      "result": "SUCCESS",
+      "evidenceRefs": [
+        "EVD-SYN-010",
+        "EVD-SYN-011",
+        "EVD-SYN-012"
+      ],
+      "previousEventId": "AUD-SYN-015",
+      "payloadHash": "sha256:e21306353b7deed715ce44fb4817cf98ea494b2f3ba7bc34c031f4d3639fc529",
+      "containsSensitiveData": false,
+      "syntheticData": true,
+      "note": "System did not approve its own closure proposal."
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "recordType": "AUDIT_EVENT",
+      "eventId": "AUD-SYN-017",
+      "sequence": 17,
+      "correlationId": "PO-RUN-SYN-20260713-001",
+      "promiseId": "PRM-SYN-001",
+      "accountKey": "ACC-SYN-001",
+      "occurredAt": "2026-07-17T15:12:00+05:30",
+      "actor": {
+        "actorType": "SYSTEM",
+        "actorId": "PO-EXECUTOR-001",
+        "role": "EXECUTOR"
+      },
+      "eventType": "PROMISE_CLOSED",
+      "stage": "CLOSURE",
+      "objectType": "PROMISE",
+      "objectId": "PRM-SYN-001",
+      "action": "Execute human-approved synthetic closure",
+      "result": "SUCCESS",
+      "evidenceRefs": [
+        "EVD-SYN-010",
+        "EVD-SYN-011",
+        "EVD-SYN-012"
+      ],
+      "previousEventId": "AUD-SYN-016",
+      "payloadHash": "sha256:e21306353b7deed715ce44fb4817cf98ea494b2f3ba7bc34c031f4d3639fc529",
+      "containsSensitiveData": false,
+      "syntheticData": true,
+      "note": "Synthetic promise closed after verification and human approval."
+    }
+  ],
+  "reportStatus": "NOT_GENERATED",
+  "limitations": [
+    "This is an expected Foundation Gate fixture, not output from a built n8n workflow.",
+    "All Salesforce, AI, human and customer events are fabricated for validation.",
+    "No production-readiness or real-customer-outcome claim may be made from this fixture."
+  ]
+}

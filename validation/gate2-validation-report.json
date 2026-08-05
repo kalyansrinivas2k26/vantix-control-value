@@ -1,0 +1,595 @@
+{
+  "generatedAt": "2026-08-05T06:14:12.798Z",
+  "gate": "GATE_2",
+  "workflowVersion": "0.2.0-gate2",
+  "summary": {
+    "total": 103,
+    "passed": 103,
+    "failed": 0
+  },
+  "runtime": {
+    "finalRoute": "CLOSE",
+    "executionStatus": "CLOSED",
+    "checkpoints": [
+      "CONTEXT_INITIALIZED",
+      "CANONICAL_INTAKE_VALIDATED",
+      "PROMISE_IDEMPOTENCY_RESERVED",
+      "DETERMINISTIC_ASSESSMENT_REPRODUCED",
+      "DIAGNOSIS_INPUT_BOUNDED",
+      "AI_DIAGNOSIS_REPLAYED_SYNTHETICALLY",
+      "AI_CRITIQUE_REPLAYED_SYNTHETICALLY",
+      "AI_OUTPUTS_VALIDATED_BY_CODE",
+      "ACTION_POLICY_EVALUATED",
+      "HUMAN_APPROVALS_VALIDATED_AND_CONSUMED",
+      "SYNTHETIC_ACTIONS_EXECUTED_IDEMPOTENTLY",
+      "TECHNICAL_ACCESS_VERIFIED_SEPARATELY",
+      "CUSTOMER_USE_VERIFIED_BY_ATTESTATION",
+      "OUTCOME_AND_SLA_DETERMINED",
+      "RECOVERY_OR_CLOSURE_ROUTE_SELECTED",
+      "COMPLETE_RUN_ENVELOPE_VALIDATED"
+    ],
+    "policyDecisions": [
+      {
+        "actionId": "ACT-SYN-ADMIN-001",
+        "decision": "REQUIRE_APPROVAL",
+        "approvalRequired": true,
+        "approverRoles": [
+          "SALESFORCE_ADMIN_APPROVER"
+        ]
+      },
+      {
+        "actionId": "ACT-SYN-CSM-001",
+        "decision": "REQUIRE_APPROVAL",
+        "approvalRequired": true,
+        "approverRoles": [
+          "CSM_APPROVER"
+        ]
+      },
+      {
+        "actionId": "ACT-SYN-VERIFY-001",
+        "decision": "ALLOW_AUTO",
+        "approvalRequired": false,
+        "approverRoles": []
+      },
+      {
+        "actionId": "ACT-SYN-CLOSE-001",
+        "decision": "REQUIRE_APPROVAL",
+        "approvalRequired": true,
+        "approverRoles": [
+          "CSM_APPROVER"
+        ]
+      }
+    ],
+    "calculated": {
+      "completeness": 100,
+      "strength": 95,
+      "likelihood": 4,
+      "impact": 5,
+      "priority": 20,
+      "confidence": 98,
+      "effort": "HUMAN_ESTIMATION_REQUIRED"
+    },
+    "outcome": {
+      "achieved": true,
+      "withinSla": true,
+      "nextDecision": "CLOSE"
+    }
+  },
+  "checks": [
+    {
+      "code": "WF_NAME",
+      "status": "PASS",
+      "detail": "Vantix Control Value v0.2 - Synthetic Governed Outcome Loop"
+    },
+    {
+      "code": "WF_INACTIVE_ON_IMPORT",
+      "status": "PASS",
+      "detail": "Workflow imports inactive."
+    },
+    {
+      "code": "WF_SYNTHETIC_ONLY",
+      "status": "PASS",
+      "detail": "Gate 2 cannot perform live changes."
+    },
+    {
+      "code": "WF_NODE_COUNT",
+      "status": "PASS",
+      "detail": "20 nodes"
+    },
+    {
+      "code": "ERROR_TRIGGER",
+      "status": "PASS",
+      "detail": "Separate error workflow has an Error Trigger."
+    },
+    {
+      "code": "SANITIZE_RECOVERS_CORRELATION_ID",
+      "status": "PASS",
+      "detail": "Got: PO-RUN-SYN-20260713-001"
+    },
+    {
+      "code": "SANITIZE_RECOVERS_PROMISE_ID",
+      "status": "PASS",
+      "detail": "Got: PRM-SYN-001"
+    },
+    {
+      "code": "SANITIZE_RECOVERS_ACCOUNT_KEY",
+      "status": "PASS",
+      "detail": "Got: ACC-SYN-001"
+    },
+    {
+      "code": "SANITIZE_STRIPS_CONTEXT_TAG_FROM_DISPLAY",
+      "status": "PASS",
+      "detail": "Got: PO_SCHEMA_REQUIRED_MISSING: BREAK_THIS_ON_PURPOSE"
+    },
+    {
+      "code": "NODE_04",
+      "status": "PASS",
+      "detail": "04 Validate Canonical Intake"
+    },
+    {
+      "code": "NODE_05",
+      "status": "PASS",
+      "detail": "05 Enforce Duplicate Promise Protection"
+    },
+    {
+      "code": "NODE_06",
+      "status": "PASS",
+      "detail": "06 Calculate Deterministic Assessment"
+    },
+    {
+      "code": "NODE_08",
+      "status": "PASS",
+      "detail": "08 AI Diagnosis - Synthetic Structured Replay"
+    },
+    {
+      "code": "NODE_09",
+      "status": "PASS",
+      "detail": "09 AI Critique - Synthetic Structured Replay"
+    },
+    {
+      "code": "NODE_10",
+      "status": "PASS",
+      "detail": "10 Validate AI Outputs Deterministically"
+    },
+    {
+      "code": "NODE_11",
+      "status": "PASS",
+      "detail": "11 Evaluate Action Catalogue Policy"
+    },
+    {
+      "code": "NODE_12",
+      "status": "PASS",
+      "detail": "12 Validate Human Approval Boundaries"
+    },
+    {
+      "code": "NODE_13",
+      "status": "PASS",
+      "detail": "13 Execute Permitted Synthetic Actions"
+    },
+    {
+      "code": "NODE_14",
+      "status": "PASS",
+      "detail": "14 Verify Technical Access Separately"
+    },
+    {
+      "code": "NODE_15",
+      "status": "PASS",
+      "detail": "15 Verify Customer Use Separately"
+    },
+    {
+      "code": "NODE_16",
+      "status": "PASS",
+      "detail": "16 Determine SLA and Outcome"
+    },
+    {
+      "code": "NODE_17",
+      "status": "PASS",
+      "detail": "17 Retry Reroute Escalate or Close"
+    },
+    {
+      "code": "NODE_18",
+      "status": "PASS",
+      "detail": "18 Validate Complete Run Envelope"
+    },
+    {
+      "code": "NODE_19",
+      "status": "PASS",
+      "detail": "19 Build Executive HTML Report"
+    },
+    {
+      "code": "JS_promiseops-001",
+      "status": "PASS",
+      "detail": "02 Load Synthetic Promise Fixture syntax valid"
+    },
+    {
+      "code": "JS_promiseops-002",
+      "status": "PASS",
+      "detail": "03 Initialize Correlation Context syntax valid"
+    },
+    {
+      "code": "JS_promiseops-003",
+      "status": "PASS",
+      "detail": "04 Validate Canonical Intake syntax valid"
+    },
+    {
+      "code": "JS_promiseops-004",
+      "status": "PASS",
+      "detail": "05 Enforce Duplicate Promise Protection syntax valid"
+    },
+    {
+      "code": "JS_promiseops-005",
+      "status": "PASS",
+      "detail": "06 Calculate Deterministic Assessment syntax valid"
+    },
+    {
+      "code": "JS_promiseops-006",
+      "status": "PASS",
+      "detail": "07 Observe Evidence and Build Diagnosis Input syntax valid"
+    },
+    {
+      "code": "JS_promiseops-007",
+      "status": "PASS",
+      "detail": "08 AI Diagnosis - Synthetic Structured Replay syntax valid"
+    },
+    {
+      "code": "JS_promiseops-008",
+      "status": "PASS",
+      "detail": "09 AI Critique - Synthetic Structured Replay syntax valid"
+    },
+    {
+      "code": "JS_promiseops-009",
+      "status": "PASS",
+      "detail": "10 Validate AI Outputs Deterministically syntax valid"
+    },
+    {
+      "code": "JS_promiseops-010",
+      "status": "PASS",
+      "detail": "11 Evaluate Action Catalogue Policy syntax valid"
+    },
+    {
+      "code": "JS_promiseops-011",
+      "status": "PASS",
+      "detail": "12 Validate Human Approval Boundaries syntax valid"
+    },
+    {
+      "code": "JS_promiseops-012",
+      "status": "PASS",
+      "detail": "13 Execute Permitted Synthetic Actions syntax valid"
+    },
+    {
+      "code": "JS_promiseops-013",
+      "status": "PASS",
+      "detail": "14 Verify Technical Access Separately syntax valid"
+    },
+    {
+      "code": "JS_promiseops-014",
+      "status": "PASS",
+      "detail": "15 Verify Customer Use Separately syntax valid"
+    },
+    {
+      "code": "JS_promiseops-015",
+      "status": "PASS",
+      "detail": "16 Determine SLA and Outcome syntax valid"
+    },
+    {
+      "code": "JS_promiseops-016",
+      "status": "PASS",
+      "detail": "17 Retry Reroute Escalate or Close syntax valid"
+    },
+    {
+      "code": "JS_promiseops-017",
+      "status": "PASS",
+      "detail": "18 Validate Complete Run Envelope syntax valid"
+    },
+    {
+      "code": "JS_promiseops-018",
+      "status": "PASS",
+      "detail": "19 Build Executive HTML Report syntax valid"
+    },
+    {
+      "code": "JS_promiseops-019",
+      "status": "PASS",
+      "detail": "02 Sanitize Failure Context syntax valid"
+    },
+    {
+      "code": "JS_promiseops-020",
+      "status": "PASS",
+      "detail": "03 Create Dead Letter Packet syntax valid"
+    },
+    {
+      "code": "HYGIENE_SECRET_FIELD_1",
+      "status": "PASS",
+      "detail": "No prohibited exported value: SECRET_FIELD_1"
+    },
+    {
+      "code": "HYGIENE_SECRET_FIELD_2",
+      "status": "PASS",
+      "detail": "No prohibited exported value: SECRET_FIELD_2"
+    },
+    {
+      "code": "HYGIENE_SECRET_FIELD_3",
+      "status": "PASS",
+      "detail": "No prohibited exported value: SECRET_FIELD_3"
+    },
+    {
+      "code": "HYGIENE_INSTANCE_URL",
+      "status": "PASS",
+      "detail": "No prohibited exported value: INSTANCE_URL"
+    },
+    {
+      "code": "HYGIENE_LIVE_ACCESS_ACTION_EXPORT",
+      "status": "PASS",
+      "detail": "No prohibited exported value: LIVE_ACCESS_ACTION_EXPORT"
+    },
+    {
+      "code": "HYGIENE_COPIED_DPMO_NODE",
+      "status": "PASS",
+      "detail": "No prohibited exported value: COPIED_DPMO_NODE"
+    },
+    {
+      "code": "HYGIENE_COPIED_STORY_NODE",
+      "status": "PASS",
+      "detail": "No prohibited exported value: COPIED_STORY_NODE"
+    },
+    {
+      "code": "NO_SALESFORCE_WRITE_NODE",
+      "status": "PASS",
+      "detail": "No Salesforce write node in synthetic Gate 2."
+    },
+    {
+      "code": "NO_EMBEDDED_CREDENTIALS",
+      "status": "PASS",
+      "detail": "No credential references in public workflow."
+    },
+    {
+      "code": "CONNECTION_SOURCE_01 Manual Trigger - Synthetic Gate 2",
+      "status": "PASS",
+      "detail": "01 Manual Trigger - Synthetic Gate 2"
+    },
+    {
+      "code": "CONNECTION_TARGET_02 Load Synthetic Promise Fixture",
+      "status": "PASS",
+      "detail": "02 Load Synthetic Promise Fixture"
+    },
+    {
+      "code": "CONNECTION_SOURCE_02 Load Synthetic Promise Fixture",
+      "status": "PASS",
+      "detail": "02 Load Synthetic Promise Fixture"
+    },
+    {
+      "code": "CONNECTION_TARGET_03 Initialize Correlation Context",
+      "status": "PASS",
+      "detail": "03 Initialize Correlation Context"
+    },
+    {
+      "code": "CONNECTION_SOURCE_03 Initialize Correlation Context",
+      "status": "PASS",
+      "detail": "03 Initialize Correlation Context"
+    },
+    {
+      "code": "CONNECTION_TARGET_04 Validate Canonical Intake",
+      "status": "PASS",
+      "detail": "04 Validate Canonical Intake"
+    },
+    {
+      "code": "CONNECTION_SOURCE_04 Validate Canonical Intake",
+      "status": "PASS",
+      "detail": "04 Validate Canonical Intake"
+    },
+    {
+      "code": "CONNECTION_TARGET_05 Enforce Duplicate Promise Protection",
+      "status": "PASS",
+      "detail": "05 Enforce Duplicate Promise Protection"
+    },
+    {
+      "code": "CONNECTION_SOURCE_05 Enforce Duplicate Promise Protection",
+      "status": "PASS",
+      "detail": "05 Enforce Duplicate Promise Protection"
+    },
+    {
+      "code": "CONNECTION_TARGET_06 Calculate Deterministic Assessment",
+      "status": "PASS",
+      "detail": "06 Calculate Deterministic Assessment"
+    },
+    {
+      "code": "CONNECTION_SOURCE_06 Calculate Deterministic Assessment",
+      "status": "PASS",
+      "detail": "06 Calculate Deterministic Assessment"
+    },
+    {
+      "code": "CONNECTION_TARGET_07 Observe Evidence and Build Diagnosis Input",
+      "status": "PASS",
+      "detail": "07 Observe Evidence and Build Diagnosis Input"
+    },
+    {
+      "code": "CONNECTION_SOURCE_07 Observe Evidence and Build Diagnosis Input",
+      "status": "PASS",
+      "detail": "07 Observe Evidence and Build Diagnosis Input"
+    },
+    {
+      "code": "CONNECTION_TARGET_08 AI Diagnosis - Synthetic Structured Replay",
+      "status": "PASS",
+      "detail": "08 AI Diagnosis - Synthetic Structured Replay"
+    },
+    {
+      "code": "CONNECTION_SOURCE_08 AI Diagnosis - Synthetic Structured Replay",
+      "status": "PASS",
+      "detail": "08 AI Diagnosis - Synthetic Structured Replay"
+    },
+    {
+      "code": "CONNECTION_TARGET_09 AI Critique - Synthetic Structured Replay",
+      "status": "PASS",
+      "detail": "09 AI Critique - Synthetic Structured Replay"
+    },
+    {
+      "code": "CONNECTION_SOURCE_09 AI Critique - Synthetic Structured Replay",
+      "status": "PASS",
+      "detail": "09 AI Critique - Synthetic Structured Replay"
+    },
+    {
+      "code": "CONNECTION_TARGET_10 Validate AI Outputs Deterministically",
+      "status": "PASS",
+      "detail": "10 Validate AI Outputs Deterministically"
+    },
+    {
+      "code": "CONNECTION_SOURCE_10 Validate AI Outputs Deterministically",
+      "status": "PASS",
+      "detail": "10 Validate AI Outputs Deterministically"
+    },
+    {
+      "code": "CONNECTION_TARGET_11 Evaluate Action Catalogue Policy",
+      "status": "PASS",
+      "detail": "11 Evaluate Action Catalogue Policy"
+    },
+    {
+      "code": "CONNECTION_SOURCE_11 Evaluate Action Catalogue Policy",
+      "status": "PASS",
+      "detail": "11 Evaluate Action Catalogue Policy"
+    },
+    {
+      "code": "CONNECTION_TARGET_12 Validate Human Approval Boundaries",
+      "status": "PASS",
+      "detail": "12 Validate Human Approval Boundaries"
+    },
+    {
+      "code": "CONNECTION_SOURCE_12 Validate Human Approval Boundaries",
+      "status": "PASS",
+      "detail": "12 Validate Human Approval Boundaries"
+    },
+    {
+      "code": "CONNECTION_TARGET_13 Execute Permitted Synthetic Actions",
+      "status": "PASS",
+      "detail": "13 Execute Permitted Synthetic Actions"
+    },
+    {
+      "code": "CONNECTION_SOURCE_13 Execute Permitted Synthetic Actions",
+      "status": "PASS",
+      "detail": "13 Execute Permitted Synthetic Actions"
+    },
+    {
+      "code": "CONNECTION_TARGET_14 Verify Technical Access Separately",
+      "status": "PASS",
+      "detail": "14 Verify Technical Access Separately"
+    },
+    {
+      "code": "CONNECTION_SOURCE_14 Verify Technical Access Separately",
+      "status": "PASS",
+      "detail": "14 Verify Technical Access Separately"
+    },
+    {
+      "code": "CONNECTION_TARGET_15 Verify Customer Use Separately",
+      "status": "PASS",
+      "detail": "15 Verify Customer Use Separately"
+    },
+    {
+      "code": "CONNECTION_SOURCE_15 Verify Customer Use Separately",
+      "status": "PASS",
+      "detail": "15 Verify Customer Use Separately"
+    },
+    {
+      "code": "CONNECTION_TARGET_16 Determine SLA and Outcome",
+      "status": "PASS",
+      "detail": "16 Determine SLA and Outcome"
+    },
+    {
+      "code": "CONNECTION_SOURCE_16 Determine SLA and Outcome",
+      "status": "PASS",
+      "detail": "16 Determine SLA and Outcome"
+    },
+    {
+      "code": "CONNECTION_TARGET_17 Retry Reroute Escalate or Close",
+      "status": "PASS",
+      "detail": "17 Retry Reroute Escalate or Close"
+    },
+    {
+      "code": "CONNECTION_SOURCE_17 Retry Reroute Escalate or Close",
+      "status": "PASS",
+      "detail": "17 Retry Reroute Escalate or Close"
+    },
+    {
+      "code": "CONNECTION_TARGET_18 Validate Complete Run Envelope",
+      "status": "PASS",
+      "detail": "18 Validate Complete Run Envelope"
+    },
+    {
+      "code": "CONNECTION_SOURCE_18 Validate Complete Run Envelope",
+      "status": "PASS",
+      "detail": "18 Validate Complete Run Envelope"
+    },
+    {
+      "code": "CONNECTION_TARGET_19 Build Executive HTML Report",
+      "status": "PASS",
+      "detail": "19 Build Executive HTML Report"
+    },
+    {
+      "code": "CONNECTION_SOURCE_19 Build Executive HTML Report",
+      "status": "PASS",
+      "detail": "19 Build Executive HTML Report"
+    },
+    {
+      "code": "CONNECTION_TARGET_20 Create Downloadable Executive Report",
+      "status": "PASS",
+      "detail": "20 Create Downloadable Executive Report"
+    },
+    {
+      "code": "CUSTOM_DATA_CORRELATION_ID",
+      "status": "PASS",
+      "detail": "Execution customData carries correlationId for the error workflow."
+    },
+    {
+      "code": "CUSTOM_DATA_PROMISE_ID",
+      "status": "PASS",
+      "detail": "Execution customData carries promiseId for the error workflow."
+    },
+    {
+      "code": "CUSTOM_DATA_ACCOUNT_KEY",
+      "status": "PASS",
+      "detail": "Execution customData carries accountKey for the error workflow."
+    },
+    {
+      "code": "RUNTIME_REPORT_CLOSURE_BANNER",
+      "status": "PASS",
+      "detail": "Executive HTML visibly states closure status."
+    },
+    {
+      "code": "RUNTIME_FINAL_ROUTE",
+      "status": "PASS",
+      "detail": "CLOSE"
+    },
+    {
+      "code": "RUNTIME_EXECUTION_STATUS",
+      "status": "PASS",
+      "detail": "CLOSED"
+    },
+    {
+      "code": "RUNTIME_PRIORITY",
+      "status": "PASS",
+      "detail": "20/25"
+    },
+    {
+      "code": "RUNTIME_CONFIDENCE",
+      "status": "PASS",
+      "detail": "98/100"
+    },
+    {
+      "code": "RUNTIME_TECHNICAL_VERIFICATION",
+      "status": "PASS",
+      "detail": "Technical access independently checked."
+    },
+    {
+      "code": "RUNTIME_CUSTOMER_VERIFICATION",
+      "status": "PASS",
+      "detail": "Customer use independently checked."
+    },
+    {
+      "code": "RUNTIME_REPORT_LABEL",
+      "status": "PASS",
+      "detail": "Executive HTML is visibly synthetic."
+    },
+    {
+      "code": "ERROR_MESSAGE_CARRIES_CORRELATION_CONTEXT",
+      "status": "PASS",
+      "detail": "Thrown message without $execution available: PO_SCHEMA_REQUIRED_MISSING: __FORCE_LIVE_N8N_REGRESSION_TEST__ [correlationId=PO-RUN-SYN-20260713-001|promiseId=PRM-SYN-001|accountKey=ACC-SYN-001]"
+    }
+  ]
+}

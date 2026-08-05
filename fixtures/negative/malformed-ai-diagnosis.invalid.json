@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "recordType": "AI_DIAGNOSIS",
+  "diagnosisId": "DIA-NEG-001",
+  "correlationId": "PO-RUN-NEG-001",
+  "promiseId": "PRM-SYN-001",
+  "accountKey": "ACC-SYN-001",
+  "generatedAt": "2026-07-13T10:07:00+05:30",
+  "generatedBy": "AI_MODEL",
+  "syntheticData": true,
+  "promptVersion": "1.0.0",
+  "qualitativeOnly": true,
+  "rootCauseDomain": "MAGICAL_CAUSE",
+  "secondaryDomains": [],
+  "problemSummary": "This deliberately malformed diagnosis must be rejected by the schema validator.",
+  "claims": [
+    {
+      "claimId": "CLM-NEG-001",
+      "statement": "The model invented a factual claim without an evidence reference.",
+      "claimType": "FACT",
+      "supportStatus": "SUPPORTED",
+      "evidenceRefs": []
+    }
+  ],
+  "recommendedActionCodes": [
+    "AI_INVENTED_LIVE_FIX"
+  ],
+  "uncertainties": [],
+  "limitations": [
+    "Intentional schema-negative test."
+  ],
+  "diagnosisStatus": "PROPOSED",
+  "warnings": []
+}
+

@@ -1,0 +1,517 @@
+{
+  "schemaVersion": "1.0.0",
+  "catalogVersion": "1.0.0",
+  "catalogStatus": "ACTIVE",
+  "syntheticFirst": true,
+  "defaultUnknownActionPolicy": "DENY",
+  "actions": [
+    {
+      "actionCode": "SYSTEM_VALIDATE_PROMISE_AND_EVIDENCE",
+      "name": "Validate promise and evidence",
+      "description": "Validate canonical schemas, identifiers, evidence references and duplicate keys without changing a business system.",
+      "ownerRole": "SYSTEM",
+      "actionCategory": "READ_ONLY_DIAGNOSIS",
+      "enabled": true,
+      "futureOnly": false,
+      "permittedOperatingModes": [
+        "SYNTHETIC_VALIDATION",
+        "SANDBOX_READ_ONLY"
+      ],
+      "permittedExecutionModes": [
+        "READ_ONLY"
+      ],
+      "consequenceLevel": "NONE",
+      "policyDecision": "ALLOW_AUTO",
+      "approvalRequired": false,
+      "approverRoles": [],
+      "minimumConfidence": 0,
+      "requiresEvidenceCategories": [
+        "PROMISE_SOURCE"
+      ],
+      "allowedParameterNames": [
+        "schemaVersion",
+        "idempotencyKey"
+      ],
+      "verificationCriterionTypes": [
+        "OTHER"
+      ],
+      "retryPolicy": {
+        "maxAttempts": 1,
+        "blindRetryAllowed": false,
+        "ambiguousTimeoutPolicy": "NOT_APPLICABLE"
+      },
+      "securityControls": [
+        "No external write",
+        "Reject unknown properties",
+        "Record validation result in audit ledger"
+      ]
+    },
+    {
+      "actionCode": "ADMIN_DIAGNOSE_REPORT_ACCESS",
+      "name": "Diagnose Salesforce report access",
+      "description": "Inspect allowlisted synthetic or sandbox evidence for user, report and folder access without changing Salesforce.",
+      "ownerRole": "SALESFORCE_ADMINISTRATOR",
+      "actionCategory": "READ_ONLY_DIAGNOSIS",
+      "enabled": true,
+      "futureOnly": false,
+      "permittedOperatingModes": [
+        "SYNTHETIC_VALIDATION",
+        "SANDBOX_READ_ONLY"
+      ],
+      "permittedExecutionModes": [
+        "READ_ONLY"
+      ],
+      "consequenceLevel": "NONE",
+      "policyDecision": "ALLOW_AUTO",
+      "approvalRequired": false,
+      "approverRoles": [],
+      "minimumConfidence": 65,
+      "requiresEvidenceCategories": [
+        "CUSTOMER_PROBLEM",
+        "ACCESS_DIAGNOSTIC",
+        "TARGET_CONFIGURATION"
+      ],
+      "allowedParameterNames": [
+        "customerUserKey",
+        "reportKey",
+        "reportFolderKey"
+      ],
+      "verificationCriterionTypes": [
+        "SALESFORCE_ACCESS_RESTORED"
+      ],
+      "retryPolicy": {
+        "maxAttempts": 3,
+        "blindRetryAllowed": true,
+        "ambiguousTimeoutPolicy": "VERIFY_THEN_RETRY"
+      },
+      "securityControls": [
+        "Allowlisted fields only",
+        "Least-privilege read access",
+        "No raw token or credential in payload"
+      ]
+    },
+    {
+      "actionCode": "ADMIN_SIMULATE_REPORT_ACCESS_REMEDIATION",
+      "name": "Simulate report-access remediation",
+      "description": "Apply the approved access-state change only inside the synthetic executor so the approval and verification loop can be demonstrated safely.",
+      "ownerRole": "SALESFORCE_ADMINISTRATOR",
+      "actionCategory": "SALESFORCE_REMEDIATION",
+      "enabled": true,
+      "futureOnly": false,
+      "permittedOperatingModes": [
+        "SYNTHETIC_VALIDATION"
+      ],
+      "permittedExecutionModes": [
+        "SIMULATED_WRITE"
+      ],
+      "consequenceLevel": "HIGH",
+      "policyDecision": "REQUIRE_APPROVAL",
+      "approvalRequired": true,
+      "approverRoles": [
+        "SALESFORCE_ADMIN_APPROVER"
+      ],
+      "minimumConfidence": 85,
+      "requiresEvidenceCategories": [
+        "ACCESS_DIAGNOSTIC",
+        "TARGET_CONFIGURATION"
+      ],
+      "allowedParameterNames": [
+        "customerUserKey",
+        "reportFolderKey",
+        "accessState"
+      ],
+      "verificationCriterionTypes": [
+        "SALESFORCE_ACCESS_RESTORED"
+      ],
+      "retryPolicy": {
+        "maxAttempts": 2,
+        "blindRetryAllowed": false,
+        "ambiguousTimeoutPolicy": "HUMAN_REVIEW"
+      },
+      "securityControls": [
+        "Synthetic executor only",
+        "Human approval bound to payload hash",
+        "Idempotency check before execution",
+        "No Salesforce write"
+      ]
+    },
+    {
+      "actionCode": "CSM_DRAFT_CUSTOMER_VERIFICATION_REQUEST",
+      "name": "Draft customer verification request",
+      "description": "Prepare an internal draft asking the authorized customer user to confirm successful report access.",
+      "ownerRole": "CUSTOMER_SUCCESS_MANAGER",
+      "actionCategory": "INTERNAL_DRAFT",
+      "enabled": true,
+      "futureOnly": false,
+      "permittedOperatingModes": [
+        "SYNTHETIC_VALIDATION",
+        "SANDBOX_READ_ONLY"
+      ],
+      "permittedExecutionModes": [
+        "DRAFT_ONLY"
+      ],
+      "consequenceLevel": "LOW",
+      "policyDecision": "ALLOW_AUTO",
+      "approvalRequired": false,
+      "approverRoles": [],
+      "minimumConfidence": 65,
+      "requiresEvidenceCategories": [
+        "PROMISE_SOURCE",
+        "CUSTOMER_PROBLEM"
+      ],
+      "allowedParameterNames": [
+        "customerUserKey",
+        "reportKey",
+        "draftText"
+      ],
+      "verificationCriterionTypes": [
+        "CUSTOMER_REPORT_ACCESSED"
+      ],
+      "retryPolicy": {
+        "maxAttempts": 1,
+        "blindRetryAllowed": false,
+        "ambiguousTimeoutPolicy": "NOT_APPLICABLE"
+      },
+      "securityControls": [
+        "Draft is not sent",
+        "No customer contact data in public fixture",
+        "Draft references only validated facts"
+      ]
+    },
+    {
+      "actionCode": "CSM_SIMULATE_CUSTOMER_VERIFICATION_REQUEST",
+      "name": "Simulate approved customer verification request",
+      "description": "Record a synthetic delivery event for the approved customer-verification request without contacting a real customer.",
+      "ownerRole": "CUSTOMER_SUCCESS_MANAGER",
+      "actionCategory": "CUSTOMER_COMMUNICATION",
+      "enabled": true,
+      "futureOnly": false,
+      "permittedOperatingModes": [
+        "SYNTHETIC_VALIDATION"
+      ],
+      "permittedExecutionModes": [
+        "SIMULATED_WRITE"
+      ],
+      "consequenceLevel": "HIGH",
+      "policyDecision": "REQUIRE_APPROVAL",
+      "approvalRequired": true,
+      "approverRoles": [
+        "CSM_APPROVER"
+      ],
+      "minimumConfidence": 85,
+      "requiresEvidenceCategories": [
+        "PROMISE_SOURCE",
+        "CUSTOMER_PROBLEM"
+      ],
+      "allowedParameterNames": [
+        "customerUserKey",
+        "reportKey",
+        "approvedMessageRef"
+      ],
+      "verificationCriterionTypes": [
+        "CUSTOMER_REPORT_ACCESSED"
+      ],
+      "retryPolicy": {
+        "maxAttempts": 1,
+        "blindRetryAllowed": false,
+        "ambiguousTimeoutPolicy": "NO_RETRY"
+      },
+      "securityControls": [
+        "Synthetic delivery only",
+        "Human approval bound to payload hash",
+        "No automatic resend"
+      ]
+    },
+    {
+      "actionCode": "SYSTEM_VERIFY_SALESFORCE_ACCESS",
+      "name": "Verify Salesforce access",
+      "description": "Perform a read-only synthetic or sandbox check that the expected report-access state is present.",
+      "ownerRole": "SYSTEM",
+      "actionCategory": "OUTCOME_VERIFICATION",
+      "enabled": true,
+      "futureOnly": false,
+      "permittedOperatingModes": [
+        "SYNTHETIC_VALIDATION",
+        "SANDBOX_READ_ONLY"
+      ],
+      "permittedExecutionModes": [
+        "READ_ONLY"
+      ],
+      "consequenceLevel": "NONE",
+      "policyDecision": "ALLOW_AUTO",
+      "approvalRequired": false,
+      "approverRoles": [],
+      "minimumConfidence": 65,
+      "requiresEvidenceCategories": [
+        "EXECUTION_RESULT",
+        "TARGET_CONFIGURATION"
+      ],
+      "allowedParameterNames": [
+        "customerUserKey",
+        "reportKey",
+        "reportFolderKey"
+      ],
+      "verificationCriterionTypes": [
+        "SALESFORCE_ACCESS_RESTORED"
+      ],
+      "retryPolicy": {
+        "maxAttempts": 3,
+        "blindRetryAllowed": true,
+        "ambiguousTimeoutPolicy": "VERIFY_THEN_RETRY"
+      },
+      "securityControls": [
+        "Read-only verification",
+        "Execution result is not accepted as verification by itself",
+        "Verification evidence stored separately"
+      ]
+    },
+    {
+      "actionCode": "CSM_RECORD_CUSTOMER_USE_CONFIRMATION",
+      "name": "Record customer-use confirmation",
+      "description": "Record an authorized human attestation that the customer successfully accessed the report.",
+      "ownerRole": "CUSTOMER_SUCCESS_MANAGER",
+      "actionCategory": "OUTCOME_VERIFICATION",
+      "enabled": true,
+      "futureOnly": false,
+      "permittedOperatingModes": [
+        "SYNTHETIC_VALIDATION",
+        "SANDBOX_READ_ONLY"
+      ],
+      "permittedExecutionModes": [
+        "HUMAN_TASK"
+      ],
+      "consequenceLevel": "MEDIUM",
+      "policyDecision": "REQUIRE_APPROVAL",
+      "approvalRequired": true,
+      "approverRoles": [
+        "CSM_APPROVER"
+      ],
+      "minimumConfidence": 65,
+      "requiresEvidenceCategories": [
+        "TECHNICAL_VERIFICATION"
+      ],
+      "allowedParameterNames": [
+        "customerUserKey",
+        "reportKey",
+        "confirmationStatus",
+        "confirmedAt"
+      ],
+      "verificationCriterionTypes": [
+        "CUSTOMER_REPORT_ACCESSED"
+      ],
+      "retryPolicy": {
+        "maxAttempts": 1,
+        "blindRetryAllowed": false,
+        "ambiguousTimeoutPolicy": "NO_RETRY"
+      },
+      "securityControls": [
+        "Named human attestation",
+        "Customer use cannot be inferred by AI",
+        "Timestamp and evidence reference required"
+      ]
+    },
+    {
+      "actionCode": "CSM_CLOSE_VERIFIED_PROMISE",
+      "name": "Close verified promise",
+      "description": "Close the Vantix Control Value promise only after all required outcome criteria pass and a human owner approves closure.",
+      "ownerRole": "CUSTOMER_SUCCESS_MANAGER",
+      "actionCategory": "CLOSURE",
+      "enabled": true,
+      "futureOnly": false,
+      "permittedOperatingModes": [
+        "SYNTHETIC_VALIDATION"
+      ],
+      "permittedExecutionModes": [
+        "SIMULATED_WRITE"
+      ],
+      "consequenceLevel": "MEDIUM",
+      "policyDecision": "REQUIRE_APPROVAL",
+      "approvalRequired": true,
+      "approverRoles": [
+        "CSM_APPROVER"
+      ],
+      "minimumConfidence": 85,
+      "requiresEvidenceCategories": [
+        "TECHNICAL_VERIFICATION",
+        "CUSTOMER_USE_CONFIRMATION"
+      ],
+      "allowedParameterNames": [
+        "promiseId",
+        "closureStatus",
+        "verificationId"
+      ],
+      "verificationCriterionTypes": [
+        "SALESFORCE_ACCESS_RESTORED",
+        "CUSTOMER_REPORT_ACCESSED",
+        "PROMISE_WITHIN_SLA"
+      ],
+      "retryPolicy": {
+        "maxAttempts": 2,
+        "blindRetryAllowed": false,
+        "ambiguousTimeoutPolicy": "HUMAN_REVIEW"
+      },
+      "securityControls": [
+        "Both technical and customer criteria must pass",
+        "Human closure approval required",
+        "Closed-without-verification defect check enforced"
+      ]
+    },
+    {
+      "actionCode": "SYSTEM_REROUTE_TO_HUMAN_REVIEW",
+      "name": "Reroute to human review",
+      "description": "Create an internal review state when evidence, model output, policy or execution cannot safely continue.",
+      "ownerRole": "SYSTEM",
+      "actionCategory": "ESCALATION",
+      "enabled": true,
+      "futureOnly": false,
+      "permittedOperatingModes": [
+        "SYNTHETIC_VALIDATION",
+        "SANDBOX_READ_ONLY"
+      ],
+      "permittedExecutionModes": [
+        "HUMAN_TASK"
+      ],
+      "consequenceLevel": "LOW",
+      "policyDecision": "ALLOW_AUTO",
+      "approvalRequired": false,
+      "approverRoles": [],
+      "minimumConfidence": 0,
+      "requiresEvidenceCategories": [],
+      "allowedParameterNames": [
+        "reasonCode",
+        "recoveryOwnerRole"
+      ],
+      "verificationCriterionTypes": [
+        "OTHER"
+      ],
+      "retryPolicy": {
+        "maxAttempts": 1,
+        "blindRetryAllowed": false,
+        "ambiguousTimeoutPolicy": "NOT_APPLICABLE"
+      },
+      "securityControls": [
+        "No external action",
+        "Preserve correlation and evidence references",
+        "Named recovery owner required"
+      ]
+    },
+    {
+      "actionCode": "CSM_ESCALATE_PROMISE_BREACH",
+      "name": "Escalate promise breach",
+      "description": "Create an approved internal escalation packet for a breached or terminally failed customer promise.",
+      "ownerRole": "CUSTOMER_SUCCESS_MANAGER",
+      "actionCategory": "ESCALATION",
+      "enabled": true,
+      "futureOnly": false,
+      "permittedOperatingModes": [
+        "SYNTHETIC_VALIDATION"
+      ],
+      "permittedExecutionModes": [
+        "SIMULATED_WRITE"
+      ],
+      "consequenceLevel": "HIGH",
+      "policyDecision": "REQUIRE_APPROVAL",
+      "approvalRequired": true,
+      "approverRoles": [
+        "CSM_APPROVER",
+        "PRODUCT_OWNER"
+      ],
+      "minimumConfidence": 65,
+      "requiresEvidenceCategories": [
+        "PROMISE_SOURCE"
+      ],
+      "allowedParameterNames": [
+        "promiseId",
+        "reasonCode",
+        "escalationOwnerKey"
+      ],
+      "verificationCriterionTypes": [
+        "OTHER"
+      ],
+      "retryPolicy": {
+        "maxAttempts": 1,
+        "blindRetryAllowed": false,
+        "ambiguousTimeoutPolicy": "HUMAN_REVIEW"
+      },
+      "securityControls": [
+        "Internal synthetic escalation only",
+        "Human approval required",
+        "No customer communication"
+      ]
+    },
+    {
+      "actionCode": "ADMIN_ASSIGN_LIVE_REPORT_ACCESS",
+      "name": "Assign live Salesforce report access",
+      "description": "Directly change Salesforce report, folder, permission or sharing access.",
+      "ownerRole": "SALESFORCE_ADMINISTRATOR",
+      "actionCategory": "SALESFORCE_REMEDIATION",
+      "enabled": false,
+      "futureOnly": true,
+      "permittedOperatingModes": [],
+      "permittedExecutionModes": [],
+      "consequenceLevel": "CRITICAL",
+      "policyDecision": "DENY",
+      "approvalRequired": true,
+      "approverRoles": [
+        "SALESFORCE_ADMIN_APPROVER",
+        "SECURITY_REVIEWER"
+      ],
+      "minimumConfidence": 100,
+      "requiresEvidenceCategories": [
+        "ACCESS_DIAGNOSTIC",
+        "TARGET_CONFIGURATION"
+      ],
+      "allowedParameterNames": [],
+      "verificationCriterionTypes": [
+        "SALESFORCE_ACCESS_RESTORED"
+      ],
+      "retryPolicy": {
+        "maxAttempts": 1,
+        "blindRetryAllowed": false,
+        "ambiguousTimeoutPolicy": "NO_RETRY"
+      },
+      "securityControls": [
+        "Disabled in MVP",
+        "Requires separate future threat model and sandbox validation",
+        "No implementation authority granted"
+      ]
+    },
+    {
+      "actionCode": "DELIVERY_CREATE_AGILEOPS_HANDOFF",
+      "name": "Create AgileOps handoff",
+      "description": "Send a systemic remediation request to VANTIX AgileOps Guardian as governed delivery work.",
+      "ownerRole": "DELIVERY_LEAD",
+      "actionCategory": "DELIVERY_HANDOFF",
+      "enabled": false,
+      "futureOnly": true,
+      "permittedOperatingModes": [],
+      "permittedExecutionModes": [],
+      "consequenceLevel": "HIGH",
+      "policyDecision": "DENY",
+      "approvalRequired": true,
+      "approverRoles": [
+        "PRODUCT_OWNER",
+        "CSM_APPROVER",
+        "SALESFORCE_ADMIN_APPROVER"
+      ],
+      "minimumConfidence": 85,
+      "requiresEvidenceCategories": [
+        "ACCESS_DIAGNOSTIC"
+      ],
+      "allowedParameterNames": [],
+      "verificationCriterionTypes": [
+        "OTHER"
+      ],
+      "retryPolicy": {
+        "maxAttempts": 1,
+        "blindRetryAllowed": false,
+        "ambiguousTimeoutPolicy": "NO_RETRY"
+      },
+      "securityControls": [
+        "Disabled in MVP",
+        "No story-point inference",
+        "Requires future integration contract"
+      ]
+    }
+  ]
+}

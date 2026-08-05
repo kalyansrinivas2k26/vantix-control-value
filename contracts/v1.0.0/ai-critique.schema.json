@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.viridianai.in/promiseops/v1.0.0/ai-critique.schema.json",
+  "title": "Vantix Control Value AI Critique",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordType",
+    "critiqueId",
+    "targetDiagnosisId",
+    "correlationId",
+    "promiseId",
+    "generatedAt",
+    "generatedBy",
+    "syntheticData",
+    "modelIdentifier",
+    "promptVersion",
+    "claimReviews",
+    "actionReviews",
+    "overallDecision",
+    "reviewNote",
+    "cannotApproveActions"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/semanticVersion"
+    },
+    "recordType": {
+      "const": "AI_CRITIQUE"
+    },
+    "critiqueId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "targetDiagnosisId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "correlationId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "promiseId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "generatedBy": {
+      "type": "string",
+      "enum": [
+        "AI_MODEL",
+        "SYNTHETIC_FIXTURE"
+      ]
+    },
+    "syntheticData": {
+      "type": "boolean"
+    },
+    "modelIdentifier": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200
+    },
+    "promptVersion": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/semanticVersion"
+    },
+    "claimReviews": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "claimId",
+          "verdict",
+          "evidenceRefs",
+          "reviewNote"
+        ],
+        "properties": {
+          "claimId": {
+            "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+          },
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "SUPPORTED",
+              "AMBIGUOUS",
+              "UNSUPPORTED"
+            ]
+          },
+          "evidenceRefs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+            }
+          },
+          "reviewNote": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 500
+          }
+        }
+      }
+    },
+    "actionReviews": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "actionCode",
+          "verdict",
+          "reviewNote"
+        ],
+        "properties": {
+          "actionCode": {
+            "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+          },
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "SUPPORTED",
+              "UNSUPPORTED",
+              "UNKNOWN_CODE"
+            ]
+          },
+          "reviewNote": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 500
+          }
+        }
+      }
+    },
+    "overallDecision": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "FLAG_HUMAN_REVIEW"
+      ]
+    },
+    "reviewNote": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 1000
+    },
+    "cannotApproveActions": {
+      "const": true
+    }
+  }
+}
+

@@ -1,0 +1,410 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.viridianai.in/promiseops/v1.0.0/deterministic-assessment.schema.json",
+  "title": "Vantix Control Value Deterministic Assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordType",
+    "assessmentId",
+    "correlationId",
+    "promiseId",
+    "accountKey",
+    "assessedAt",
+    "assessmentStage",
+    "syntheticData",
+    "rulesetVersion",
+    "evidenceCompleteness",
+    "evidenceStrength",
+    "likelihood",
+    "impact",
+    "priority",
+    "confidence",
+    "effort",
+    "calculationTrace"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/semanticVersion"
+    },
+    "recordType": {
+      "const": "DETERMINISTIC_ASSESSMENT"
+    },
+    "assessmentId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "correlationId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "promiseId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "accountKey": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "assessedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "assessmentStage": {
+      "type": "string",
+      "enum": [
+        "INTAKE",
+        "PRE_ACTION",
+        "POST_EXECUTION"
+      ]
+    },
+    "syntheticData": {
+      "type": "boolean"
+    },
+    "rulesetVersion": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/semanticVersion"
+    },
+    "evidenceCompleteness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requiredCategoryCount",
+        "presentCategoryCount",
+        "missingCategories",
+        "conflictingEvidenceRefs",
+        "malformedEvidenceRefs",
+        "staleEvidenceRefs",
+        "percent"
+      ],
+      "properties": {
+        "requiredCategoryCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "presentCategoryCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "missingCategories": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "conflictingEvidenceRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+          }
+        },
+        "malformedEvidenceRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+          }
+        },
+        "staleEvidenceRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+          }
+        },
+        "percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "evidenceStrength": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "categoryScores",
+        "averagePercent"
+      ],
+      "properties": {
+        "categoryScores": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "category",
+              "score",
+              "evidenceRefs"
+            ],
+            "properties": {
+              "category": {
+                "type": "string"
+              },
+              "score": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "evidenceRefs": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+                }
+              }
+            }
+          }
+        },
+        "averagePercent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "likelihood": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "score",
+        "label",
+        "rawSignalScore",
+        "signals",
+        "meaning"
+      ],
+      "properties": {
+        "score": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "label": {
+          "type": "string",
+          "enum": [
+            "VERY_LOW",
+            "LOW",
+            "MEDIUM",
+            "HIGH",
+            "VERY_HIGH"
+          ]
+        },
+        "rawSignalScore": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "signals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "signalCode",
+              "active",
+              "weight",
+              "evidenceRefs"
+            ],
+            "properties": {
+              "signalCode": {
+                "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+              },
+              "active": {
+                "type": "boolean"
+              },
+              "weight": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4
+              },
+              "evidenceRefs": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+                }
+              }
+            }
+          }
+        },
+        "meaning": {
+          "const": "LIKELIHOOD_OF_PROMISE_NON_DELIVERY_NOT_CHURN_PREDICTION"
+        }
+      }
+    },
+    "impact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "score",
+        "label",
+        "rawImpactScore",
+        "inputs"
+      ],
+      "properties": {
+        "score": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "label": {
+          "type": "string",
+          "enum": [
+            "VERY_LOW",
+            "LOW",
+            "MEDIUM",
+            "HIGH",
+            "VERY_HIGH"
+          ]
+        },
+        "rawImpactScore": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "inputs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "arrTierPoints",
+            "renewalProximityPoints",
+            "strategicStatusPoints",
+            "contractualExposurePoints"
+          ],
+          "properties": {
+            "arrTierPoints": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3
+            },
+            "renewalProximityPoints": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2
+            },
+            "strategicStatusPoints": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "contractualExposurePoints": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2
+            }
+          }
+        }
+      }
+    },
+    "priority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "score",
+        "tier",
+        "formula"
+      ],
+      "properties": {
+        "score": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 25
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "P1_CRITICAL",
+            "P2_URGENT",
+            "P3_PLANNED",
+            "P4_ROUTINE"
+          ]
+        },
+        "formula": {
+          "const": "LIKELIHOOD_SCORE_X_IMPACT_SCORE"
+        }
+      }
+    },
+    "confidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "score",
+        "label",
+        "formula",
+        "humanReviewRequired",
+        "reviewReasons"
+      ],
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "label": {
+          "type": "string",
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH"
+          ]
+        },
+        "formula": {
+          "const": "0.60_COMPLETENESS_PLUS_0.40_STRENGTH"
+        },
+        "humanReviewRequired": {
+          "type": "boolean"
+        },
+        "reviewReasons": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        }
+      }
+    },
+    "effort": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "estimate"
+      ],
+      "properties": {
+        "status": {
+          "const": "HUMAN_ESTIMATION_REQUIRED"
+        },
+        "estimate": {
+          "type": "null"
+        }
+      }
+    },
+    "calculationTrace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inputEvidenceRefs",
+        "calculatedBy",
+        "calculationHash"
+      ],
+      "properties": {
+        "inputEvidenceRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+          }
+        },
+        "calculatedBy": {
+          "const": "DETERMINISTIC_RULE_ENGINE"
+        },
+        "calculationHash": {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/sha256"
+        }
+      }
+    }
+  }
+}
+

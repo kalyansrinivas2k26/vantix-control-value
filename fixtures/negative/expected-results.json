@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.0.0",
+  "tests": [
+    {
+      "fixture": "malformed-ai-diagnosis.invalid.json",
+      "schema": "ai-diagnosis.schema.json",
+      "expectedSchemaValid": false,
+      "expectedReasonCodes": [
+        "MISSING_MODEL_IDENTIFIER",
+        "INVALID_ROOT_CAUSE_DOMAIN",
+        "FACT_WITHOUT_EVIDENCE"
+      ]
+    },
+    {
+      "fixture": "false-outcome-claim.business-invalid.json",
+      "schema": "outcome-verification.schema.json",
+      "expectedSchemaValid": true,
+      "expectedBusinessValid": false,
+      "expectedReasonCodes": [
+        "ACHIEVED_REQUIRES_TECHNICAL_AND_CUSTOMER_PASS",
+        "CLOSURE_NOT_ELIGIBLE"
+      ]
+    },
+    {
+      "fixture": "unknown-action.business-invalid.json",
+      "schema": "action-recommendation.schema.json",
+      "expectedSchemaValid": true,
+      "expectedBusinessValid": false,
+      "expectedReasonCodes": [
+        "ACTION_CODE_NOT_IN_CATALOGUE"
+      ]
+    },
+    {
+      "fixture": "missed-sla.business-invalid.json",
+      "schema": "outcome-verification.schema.json",
+      "expectedSchemaValid": true,
+      "expectedBusinessValid": false,
+      "expectedReasonCodes": [
+        "SLA_STATUS_MISMATCH"
+      ]
+    },
+    {
+      "fixture": "unexpected-route-value.invalid.json",
+      "schema": "outcome-verification.schema.json",
+      "expectedSchemaValid": false,
+      "expectedReasonCodes": [
+        "NEXT_DECISION_ENUM_VIOLATION"
+      ]
+    },
+    {
+      "fixture": "low-confidence-deferred-action.business-invalid.json",
+      "schema": "action-recommendation.schema.json",
+      "expectedSchemaValid": true,
+      "expectedBusinessValid": false,
+      "expectedReasonCodes": [
+        "CONFIDENCE_BELOW_MINIMUM_MUST_DEFER"
+      ]
+    },
+    {
+      "fixture": "reused-approval.business-invalid.json",
+      "schema": "human-decision.schema.json",
+      "expectedSchemaValid": true,
+      "expectedBusinessValid": false,
+      "expectedReasonCodes": [
+        "APPROVAL_DECISION_ID_REUSED"
+      ]
+    },
+    {
+      "fixture": "mismatched-payload-hash.business-invalid.json",
+      "schema": "human-decision.schema.json / action-recommendation.schema.json",
+      "expectedSchemaValid": true,
+      "expectedBusinessValid": false,
+      "expectedReasonCodes": [
+        "APPROVAL_PAYLOAD_HASH_MISMATCH"
+      ]
+    }
+  ]
+}
+

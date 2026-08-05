@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0.0",
+  "recordType": "ACTION_RECOMMENDATION",
+  "actionId": "ACT-NEG-UNKNOWN-001",
+  "correlationId": "PO-RUN-SYN-20260713-001",
+  "promiseId": "PRM-SYN-001",
+  "accountKey": "ACC-SYN-001",
+  "generatedAt": "2026-07-13T10:10:00+05:30",
+  "syntheticData": true,
+  "catalogVersion": "1.0.0",
+  "actionCode": "AI_INVENTED_LIVE_FIX",
+  "ownerRole": "SYSTEM",
+  "actionCategory": "READ_ONLY_DIAGNOSIS",
+  "description": "This structurally valid recommendation contains an action code that is absent from the approved catalogue.",
+  "rationale": "The cross-contract validator must deny unknown actions even when their JSON shape is valid.",
+  "evidenceRefs": [
+    {
+      "evidenceId": "EVD-SYN-007",
+      "relationship": "SUPPORTS",
+      "claimId": "CLM-SYN-002",
+      "required": true
+    }
+  ],
+  "requestedPayload": {
+    "payloadVersion": "1.0.0",
+    "targetKey": "SYN-REPORT-001",
+    "parameters": [
+      {
+        "name": "unsafeParameter",
+        "value": "invented",
+        "sensitivity": "INTERNAL"
+      }
+    ]
+  },
+  "payloadHash": "sha256:bc0eab6b4a56d1ee543f154f7ce26234634883a205264938ad1ec9d3b1c7ccb2",
+  "consequenceLevel": "NONE",
+  "executionMode": "READ_ONLY",
+  "policyDecision": "ALLOW_AUTO",
+  "policyReasons": [
+    "Intentional business-rule-negative test."
+  ],
+  "approvalRequired": false,
+  "requiredApproverRoles": [],
+  "minimumConfidence": 0,
+  "preconditions": [
+    {
+      "code": "STRUCTURE_ONLY",
+      "status": "PASS",
+      "detail": "The JSON shape is valid but the action code is not.",
+      "evidenceRefs": [
+        "EVD-SYN-007"
+      ]
+    }
+  ],
+  "verificationCriterionIds": [
+    "CRT-SYN-ACCESS-001"
+  ],
+  "idempotencyKey": "IDEMP:NEG:UNKNOWN-ACTION:V1",
+  "status": "PROPOSED",
+  "expiresAt": null
+}
+

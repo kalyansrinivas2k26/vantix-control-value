@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.viridianai.in/promiseops/v1.0.0/evidence-record.schema.json",
+  "title": "Vantix Control Value Evidence Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordType",
+    "evidenceId",
+    "promiseId",
+    "accountKey",
+    "source",
+    "createdAt",
+    "observedAt",
+    "syntheticData",
+    "evidenceCategory",
+    "evidenceType",
+    "evidenceClass",
+    "strengthClass",
+    "trustStatus",
+    "subject",
+    "contentSummary",
+    "factAssertions",
+    "verificationMethod",
+    "verifiedBy",
+    "supportsCriteria",
+    "warnings"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/semanticVersion"
+    },
+    "recordType": {
+      "const": "EVIDENCE_RECORD"
+    },
+    "evidenceId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "promiseId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "accountKey": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "source": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/dataSource"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "observedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "validUntil": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "syntheticData": {
+      "type": "boolean"
+    },
+    "evidenceCategory": {
+      "type": "string",
+      "enum": [
+        "PROMISE_SOURCE",
+        "ACCOUNT_IDENTITY",
+        "RENEWAL_CONTEXT",
+        "CSM_OWNERSHIP",
+        "ADMIN_OWNERSHIP",
+        "CUSTOMER_PROBLEM",
+        "ACCESS_DIAGNOSTIC",
+        "TARGET_CONFIGURATION",
+        "EXECUTION_RESULT",
+        "TECHNICAL_VERIFICATION",
+        "CUSTOMER_USE_CONFIRMATION",
+        "CLOSURE_AUTHORIZATION"
+      ]
+    },
+    "evidenceType": {
+      "type": "string",
+      "enum": [
+        "PROMISE_COMMITMENT",
+        "ACCOUNT_MASTER",
+        "RENEWAL_RECORD",
+        "OWNER_ASSIGNMENT",
+        "CUSTOMER_INCIDENT_ATTESTATION",
+        "SALESFORCE_ACCESS_OBSERVATION",
+        "SALESFORCE_REPORT_CONFIGURATION",
+        "ACTION_EXECUTION",
+        "SYSTEM_ACCESS_TEST",
+        "CUSTOMER_SUCCESS_CONFIRMATION",
+        "HUMAN_CLOSURE_DECISION"
+      ]
+    },
+    "evidenceClass": {
+      "type": "string",
+      "enum": [
+        "SYSTEM_OF_RECORD",
+        "SYSTEM_OBSERVATION",
+        "CUSTOMER_ATTESTATION",
+        "INTERNAL_HUMAN_ATTESTATION",
+        "EXECUTION_ARTIFACT"
+      ]
+    },
+    "strengthClass": {
+      "type": "string",
+      "enum": [
+        "AUTHORITATIVE",
+        "CORROBORATING",
+        "HUMAN_CONFIRMED",
+        "WEAK"
+      ]
+    },
+    "trustStatus": {
+      "type": "string",
+      "enum": [
+        "VERIFIED",
+        "UNVERIFIED",
+        "STALE",
+        "CONFLICTING",
+        "MALFORMED",
+        "REVOKED"
+      ]
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subjectType",
+        "subjectKey"
+      ],
+      "properties": {
+        "subjectType": {
+          "type": "string",
+          "enum": [
+            "PROMISE",
+            "ACCOUNT",
+            "RENEWAL",
+            "USER",
+            "REPORT",
+            "REPORT_FOLDER",
+            "ACTION",
+            "CUSTOMER_OUTCOME"
+          ]
+        },
+        "subjectKey": {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+        }
+      }
+    },
+    "contentSummary": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 2000
+    },
+    "factAssertions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "claimKey",
+          "value"
+        ],
+        "properties": {
+          "claimKey": {
+            "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+          },
+          "value": {
+            "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/jsonScalar"
+          },
+          "unit": {
+            "type": "string",
+            "maxLength": 50
+          }
+        }
+      }
+    },
+    "verificationMethod": {
+      "type": "string",
+      "enum": [
+        "API_READ",
+        "FIXTURE_ASSERTION",
+        "HUMAN_CONFIRMATION",
+        "SYSTEM_TEST",
+        "EXECUTION_RESULT"
+      ]
+    },
+    "verifiedBy": {
+      "oneOf": [
+        {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/actor"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "supportsCriteria": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/warning"
+      }
+    }
+  }
+}
+

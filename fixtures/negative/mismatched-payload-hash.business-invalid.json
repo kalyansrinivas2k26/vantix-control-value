@@ -1,0 +1,98 @@
+{
+  "note": "Test-harness wrapper. actionRecommendation and humanDecision are each individually schema-valid. The business-rule defect under test is that humanDecision.payloadHash does not equal actionRecommendation.payloadHash, i.e. the human approved a payload different from the one actually recommended for execution.",
+  "actionRecommendation": {
+    "schemaVersion": "1.0.0",
+    "recordType": "ACTION_RECOMMENDATION",
+    "actionId": "ACT-NEG-HASHMISMATCH-001",
+    "correlationId": "PO-RUN-SYN-20260713-001",
+    "promiseId": "PRM-SYN-001",
+    "accountKey": "ACC-SYN-001",
+    "generatedAt": "2026-07-13T10:10:00+05:30",
+    "syntheticData": true,
+    "catalogVersion": "1.0.0",
+    "actionCode": "ADMIN_SIMULATE_REPORT_ACCESS_REMEDIATION",
+    "ownerRole": "SALESFORCE_ADMINISTRATOR",
+    "actionCategory": "SALESFORCE_REMEDIATION",
+    "description": "Simulate adding the authorized synthetic customer user to the required report-folder access state.",
+    "rationale": "Canonical recommended payload for this action.",
+    "evidenceRefs": [
+      {
+        "evidenceId": "EVD-SYN-007",
+        "relationship": "SUPPORTS",
+        "claimId": "CLM-SYN-002",
+        "required": true
+      }
+    ],
+    "requestedPayload": {
+      "payloadVersion": "1.0.0",
+      "targetKey": "SYN-RPT-FOLDER-001",
+      "parameters": [
+        {
+          "name": "accessState",
+          "value": "GRANTED",
+          "sensitivity": "INTERNAL"
+        }
+      ]
+    },
+    "payloadHash": "sha256:261552334595c213d09bff2b04300b5bdbbf6229872bb7626559bb5493930afd",
+    "consequenceLevel": "HIGH",
+    "executionMode": "SIMULATED_WRITE",
+    "policyDecision": "REQUIRE_APPROVAL",
+    "policyReasons": [
+      "Access remediation is consequential."
+    ],
+    "approvalRequired": true,
+    "requiredApproverRoles": [
+      "SALESFORCE_ADMIN_APPROVER"
+    ],
+    "minimumConfidence": 85,
+    "preconditions": [
+      {
+        "code": "EVIDENCE_COMPLETE",
+        "status": "PASS",
+        "detail": "All pre-action evidence categories are present.",
+        "evidenceRefs": [
+          "EVD-SYN-007"
+        ]
+      }
+    ],
+    "verificationCriterionIds": [
+      "CRT-SYN-ACCESS-001"
+    ],
+    "idempotencyKey": "IDEMP:PRM-SYN-001:ADMIN-ACCESS:V1",
+    "status": "PROPOSED",
+    "expiresAt": "2026-07-14T10:10:00+05:30"
+  },
+  "humanDecision": {
+    "schemaVersion": "1.0.0",
+    "recordType": "HUMAN_DECISION",
+    "decisionId": "DEC-NEG-HASHMISMATCH-001",
+    "actionId": "ACT-NEG-HASHMISMATCH-001",
+    "correlationId": "PO-RUN-SYN-20260713-001",
+    "promiseId": "PRM-SYN-001",
+    "payloadHash": "sha256:aaaaaaaa00000000aaaaaaaa00000000aaaaaaaa00000000aaaaaaaa00000000",
+    "decision": "APPROVE",
+    "decisionStatus": "CONSUMED",
+    "decidedBy": {
+      "actorType": "HUMAN",
+      "actorId": "SYN-SFADMIN-APPROVER-001",
+      "role": "SALESFORCE_ADMIN_APPROVER",
+      "displayName": "Synthetic Salesforce Admin Approver"
+    },
+    "decidedAt": "2026-07-13T10:20:00+05:30",
+    "validUntil": "2026-07-14T10:20:00+05:30",
+    "consumedAt": "2026-07-13T10:25:00+05:30",
+    "rationale": "Intentional negative test: this approval's payloadHash does not match the recommended action's payloadHash.",
+    "conditions": [
+      "No Salesforce write is permitted."
+    ],
+    "separationOfDuties": {
+      "passed": true,
+      "requesterActorId": "PO-POLICY-ENGINE-001",
+      "approverActorId": "SYN-SFADMIN-APPROVER-001",
+      "policy": "Requester and approver are different actors."
+    },
+    "singleUse": true,
+    "syntheticData": true
+  }
+}

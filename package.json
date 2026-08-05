@@ -1,0 +1,22 @@
+{
+  "name": "vantix-control-value-foundation-gate-1",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "description": "Contract, policy and synthetic governed-control validation for Vantix Control Value.",
+  "type": "module",
+  "scripts": {
+    "build:gate2": "node scripts/build-gate2-workflows.mjs",
+    "test:foundation": "node scripts/validate-foundation.mjs",
+    "test:gate2": "node scripts/build-gate2-workflows.mjs && node scripts/validate-gate2.mjs",
+    "test": "npm run build:gate2 && npm run test:foundation && node scripts/validate-gate2.mjs",
+    "evidence:refresh": "npm run build:gate2 && node scripts/validate-foundation.mjs --write-report && node scripts/validate-gate2.mjs --write-report",
+    "checksums:refresh": "node scripts/generate-checksums.mjs",
+    "verify:checksums": "node scripts/verify-checksums.mjs",
+    "preview:live-ai": "node scripts/live-ai-diagnosis-preview.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  }
+}

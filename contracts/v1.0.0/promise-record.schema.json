@@ -1,0 +1,363 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.viridianai.in/promiseops/v1.0.0/promise-record.schema.json",
+  "title": "Vantix Control Value Promise Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordType",
+    "promiseId",
+    "accountKey",
+    "idempotencyKey",
+    "source",
+    "createdAt",
+    "updatedAt",
+    "syntheticData",
+    "category",
+    "promiseStatement",
+    "expectedOutcome",
+    "capturedAt",
+    "dueAt",
+    "businessCalendar",
+    "status",
+    "commitmentOwner",
+    "stakeholderKeys",
+    "impactContext"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/semanticVersion"
+    },
+    "recordType": {
+      "const": "PROMISE_RECORD"
+    },
+    "promiseId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "accountKey": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "idempotencyKey": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "source": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/dataSource"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "syntheticData": {
+      "type": "boolean"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "SALESFORCE_REPORT_ACCESS",
+        "DATA_REMEDIATION",
+        "OWNERSHIP_CORRECTION",
+        "AUTOMATION_INVESTIGATION",
+        "CONFIGURATION_REQUEST",
+        "CUSTOMER_SUCCESS_INTERVENTION",
+        "OTHER"
+      ]
+    },
+    "promiseStatement": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2000
+    },
+    "expectedOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summary",
+        "criteria"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 1000
+        },
+        "criteria": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "criterionId",
+              "criterionType",
+              "description",
+              "requiredEvidenceCategories"
+            ],
+            "properties": {
+              "criterionId": {
+                "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+              },
+              "criterionType": {
+                "type": "string",
+                "enum": [
+                  "SALESFORCE_ACCESS_RESTORED",
+                  "CUSTOMER_REPORT_ACCESSED",
+                  "PROMISE_WITHIN_SLA",
+                  "OTHER"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 1000
+              },
+              "requiredEvidenceCategories": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "TECHNICAL_VERIFICATION",
+                    "CUSTOMER_USE_CONFIRMATION",
+                    "EXECUTION_RESULT",
+                    "CLOSURE_AUTHORIZATION"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "capturedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "committedAt": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "dueAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "businessCalendar": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "calendarId",
+        "timezone",
+        "durationBusinessDays",
+        "weekendDays",
+        "holidayDates",
+        "startTreatment",
+        "deadlineTreatment"
+      ],
+      "properties": {
+        "calendarId": {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+        },
+        "timezone": {
+          "type": "string",
+          "const": "Asia/Kolkata"
+        },
+        "durationBusinessDays": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 365
+        },
+        "weekendDays": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ]
+          }
+        },
+        "holidayDates": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "startTreatment": {
+          "type": "string",
+          "enum": [
+            "START_EXCLUSIVE",
+            "START_INCLUSIVE"
+          ]
+        },
+        "deadlineTreatment": {
+          "type": "string",
+          "enum": [
+            "END_INCLUSIVE",
+            "END_EXCLUSIVE"
+          ]
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "CAPTURED",
+        "VALIDATED",
+        "IN_PROGRESS",
+        "AWAITING_APPROVAL",
+        "EXECUTING",
+        "VERIFYING",
+        "FULFILLED",
+        "BREACHED",
+        "ESCALATED",
+        "CLOSED"
+      ]
+    },
+    "commitmentOwner": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/actor"
+    },
+    "stakeholderKeys": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "csmOwnerKey",
+        "adminOwnerKey",
+        "customerUserKey"
+      ],
+      "properties": {
+        "csmOwnerKey": {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+        },
+        "adminOwnerKey": {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+        },
+        "customerUserKey": {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+        },
+        "executiveSponsorKey": {
+          "oneOf": [
+            {
+              "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "impactContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "arrTier",
+        "renewalSensitive",
+        "renewalDate",
+        "strategicStatus",
+        "contractualExposure",
+        "executiveSponsorRequired"
+      ],
+      "properties": {
+        "arrTier": {
+          "type": "string",
+          "enum": [
+            "TIER_1",
+            "TIER_2",
+            "TIER_3"
+          ]
+        },
+        "renewalSensitive": {
+          "type": "boolean"
+        },
+        "renewalDate": {
+          "oneOf": [
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "strategicStatus": {
+          "type": "boolean"
+        },
+        "contractualExposure": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "LOW",
+            "MEDIUM",
+            "HIGH"
+          ]
+        },
+        "executiveSponsorRequired": {
+          "type": "boolean"
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 500
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "impactContext": {
+            "type": "object",
+            "properties": {
+              "renewalSensitive": {
+                "const": true
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "impactContext": {
+            "type": "object",
+            "properties": {
+              "renewalDate": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

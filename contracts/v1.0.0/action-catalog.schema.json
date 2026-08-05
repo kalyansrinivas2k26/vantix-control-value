@@ -1,0 +1,236 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.viridianai.in/promiseops/v1.0.0/action-catalog.schema.json",
+  "title": "Vantix Control Value Action Catalogue",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "catalogVersion",
+    "catalogStatus",
+    "syntheticFirst",
+    "defaultUnknownActionPolicy",
+    "actions"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/semanticVersion"
+    },
+    "catalogVersion": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/semanticVersion"
+    },
+    "catalogStatus": {
+      "const": "ACTIVE"
+    },
+    "syntheticFirst": {
+      "const": true
+    },
+    "defaultUnknownActionPolicy": {
+      "const": "DENY"
+    },
+    "actions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "actionCode",
+          "name",
+          "description",
+          "ownerRole",
+          "actionCategory",
+          "enabled",
+          "futureOnly",
+          "permittedOperatingModes",
+          "permittedExecutionModes",
+          "consequenceLevel",
+          "policyDecision",
+          "approvalRequired",
+          "approverRoles",
+          "minimumConfidence",
+          "requiresEvidenceCategories",
+          "allowedParameterNames",
+          "verificationCriterionTypes",
+          "retryPolicy",
+          "securityControls"
+        ],
+        "properties": {
+          "actionCode": {
+            "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 150
+          },
+          "description": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 1000
+          },
+          "ownerRole": {
+            "type": "string",
+            "enum": [
+              "CUSTOMER_SUCCESS_MANAGER",
+              "SALESFORCE_ADMINISTRATOR",
+              "DELIVERY_LEAD",
+              "SYSTEM"
+            ]
+          },
+          "actionCategory": {
+            "type": "string",
+            "enum": [
+              "READ_ONLY_DIAGNOSIS",
+              "INTERNAL_DRAFT",
+              "SALESFORCE_REMEDIATION",
+              "CUSTOMER_COMMUNICATION",
+              "OUTCOME_VERIFICATION",
+              "CLOSURE",
+              "ESCALATION",
+              "DELIVERY_HANDOFF"
+            ]
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "futureOnly": {
+            "type": "boolean"
+          },
+          "permittedOperatingModes": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SYNTHETIC_VALIDATION",
+                "SANDBOX_READ_ONLY"
+              ]
+            }
+          },
+          "permittedExecutionModes": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "READ_ONLY",
+                "DRAFT_ONLY",
+                "SIMULATED_WRITE",
+                "SANDBOX_WRITE",
+                "LIVE_WRITE",
+                "HUMAN_TASK"
+              ]
+            }
+          },
+          "consequenceLevel": {
+            "type": "string",
+            "enum": [
+              "NONE",
+              "LOW",
+              "MEDIUM",
+              "HIGH",
+              "CRITICAL"
+            ]
+          },
+          "policyDecision": {
+            "type": "string",
+            "enum": [
+              "ALLOW_AUTO",
+              "REQUIRE_APPROVAL",
+              "DENY",
+              "DEFER_HUMAN_REVIEW"
+            ]
+          },
+          "approvalRequired": {
+            "type": "boolean"
+          },
+          "approverRoles": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "CSM_APPROVER",
+                "SALESFORCE_ADMIN_APPROVER",
+                "PRODUCT_OWNER",
+                "SECURITY_REVIEWER"
+              ]
+            }
+          },
+          "minimumConfidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "requiresEvidenceCategories": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "allowedParameterNames": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+            }
+          },
+          "verificationCriterionTypes": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SALESFORCE_ACCESS_RESTORED",
+                "CUSTOMER_REPORT_ACCESSED",
+                "PROMISE_WITHIN_SLA",
+                "OTHER"
+              ]
+            }
+          },
+          "retryPolicy": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "maxAttempts",
+              "blindRetryAllowed",
+              "ambiguousTimeoutPolicy"
+            ],
+            "properties": {
+              "maxAttempts": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10
+              },
+              "blindRetryAllowed": {
+                "type": "boolean"
+              },
+              "ambiguousTimeoutPolicy": {
+                "type": "string",
+                "enum": [
+                  "VERIFY_THEN_RETRY",
+                  "HUMAN_REVIEW",
+                  "NO_RETRY",
+                  "NOT_APPLICABLE"
+                ]
+              }
+            }
+          },
+          "securityControls": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 300
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

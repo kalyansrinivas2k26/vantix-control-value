@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.viridianai.in/promiseops/v1.0.0/audit-event.schema.json",
+  "title": "Vantix Control Value Audit Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordType",
+    "eventId",
+    "sequence",
+    "correlationId",
+    "promiseId",
+    "accountKey",
+    "occurredAt",
+    "actor",
+    "eventType",
+    "stage",
+    "objectType",
+    "objectId",
+    "action",
+    "result",
+    "evidenceRefs",
+    "previousEventId",
+    "payloadHash",
+    "containsSensitiveData",
+    "syntheticData",
+    "note"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/semanticVersion"
+    },
+    "recordType": {
+      "const": "AUDIT_EVENT"
+    },
+    "eventId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "correlationId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "promiseId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "accountKey": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actor": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/actor"
+    },
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "RUN_STARTED",
+        "PROMISE_CAPTURED",
+        "DUPLICATE_CHECK_PASSED",
+        "DUPLICATE_BLOCKED",
+        "EVIDENCE_VALIDATED",
+        "EVIDENCE_REVIEW_REQUIRED",
+        "ASSESSMENT_COMPLETED",
+        "AI_DIAGNOSIS_COMPLETED",
+        "AI_CRITIQUE_COMPLETED",
+        "POLICY_DECISION_RECORDED",
+        "HUMAN_DECISION_RECORDED",
+        "ACTION_EXECUTION_STARTED",
+        "ACTION_EXECUTION_COMPLETED",
+        "ACTION_RETRY_SCHEDULED",
+        "ACTION_DEAD_LETTERED",
+        "TECHNICAL_VERIFICATION_COMPLETED",
+        "CUSTOMER_CONFIRMATION_RECORDED",
+        "OUTCOME_VERIFIED",
+        "PROMISE_REROUTED",
+        "PROMISE_ESCALATED",
+        "PROMISE_CLOSED",
+        "REPORT_GENERATED"
+      ]
+    },
+    "stage": {
+      "type": "string",
+      "enum": [
+        "CAPTURE",
+        "VALIDATION",
+        "OBSERVATION",
+        "ASSESSMENT",
+        "DIAGNOSIS",
+        "CRITIQUE",
+        "POLICY",
+        "APPROVAL",
+        "EXECUTION",
+        "VERIFICATION",
+        "OUTCOME",
+        "RECOVERY",
+        "CLOSURE",
+        "REPORTING"
+      ]
+    },
+    "objectType": {
+      "type": "string",
+      "enum": [
+        "RUN",
+        "PROMISE",
+        "EVIDENCE",
+        "ASSESSMENT",
+        "DIAGNOSIS",
+        "CRITIQUE",
+        "ACTION",
+        "DECISION",
+        "EXECUTION",
+        "VERIFICATION",
+        "REPORT"
+      ]
+    },
+    "objectId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "action": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 300
+    },
+    "result": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "FAILURE",
+        "PENDING",
+        "REVIEW_REQUIRED",
+        "DENIED",
+        "SKIPPED"
+      ]
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+      }
+    },
+    "previousEventId": {
+      "oneOf": [
+        {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "payloadHash": {
+      "oneOf": [
+        {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "containsSensitiveData": {
+      "const": false
+    },
+    "syntheticData": {
+      "type": "boolean"
+    },
+    "note": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 1000
+    }
+  }
+}

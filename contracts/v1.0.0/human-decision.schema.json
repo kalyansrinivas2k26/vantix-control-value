@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.viridianai.in/promiseops/v1.0.0/human-decision.schema.json",
+  "title": "Vantix Control Value Human Decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordType",
+    "decisionId",
+    "actionId",
+    "correlationId",
+    "promiseId",
+    "payloadHash",
+    "decision",
+    "decisionStatus",
+    "decidedBy",
+    "decidedAt",
+    "validUntil",
+    "consumedAt",
+    "rationale",
+    "conditions",
+    "separationOfDuties",
+    "singleUse",
+    "syntheticData"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/semanticVersion"
+    },
+    "recordType": {
+      "const": "HUMAN_DECISION"
+    },
+    "decisionId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "actionId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "correlationId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "promiseId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "payloadHash": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/sha256"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "APPROVE",
+        "REJECT",
+        "REQUEST_CHANGES"
+      ]
+    },
+    "decisionStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "EXPIRED",
+        "CONSUMED",
+        "INVALIDATED"
+      ]
+    },
+    "decidedBy": {
+      "allOf": [
+        {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/actor"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "actorType": {
+              "const": "HUMAN"
+            }
+          }
+        }
+      ]
+    },
+    "decidedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "validUntil": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "consumedAt": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 1000
+    },
+    "conditions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 500
+      }
+    },
+    "separationOfDuties": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "passed",
+        "requesterActorId",
+        "approverActorId",
+        "policy"
+      ],
+      "properties": {
+        "passed": {
+          "type": "boolean"
+        },
+        "requesterActorId": {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+        },
+        "approverActorId": {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+        },
+        "policy": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 500
+        }
+      }
+    },
+    "singleUse": {
+      "const": true
+    },
+    "syntheticData": {
+      "type": "boolean"
+    }
+  }
+}

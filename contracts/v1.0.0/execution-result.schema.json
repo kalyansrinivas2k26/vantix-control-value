@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.viridianai.in/promiseops/v1.0.0/execution-result.schema.json",
+  "title": "Vantix Control Value Execution Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordType",
+    "executionId",
+    "actionId",
+    "actionCode",
+    "correlationId",
+    "promiseId",
+    "accountKey",
+    "attemptNumber",
+    "executionMode",
+    "executor",
+    "startedAt",
+    "completedAt",
+    "status",
+    "idempotencyKey",
+    "payloadHash",
+    "target",
+    "changeSummary",
+    "responseReference",
+    "retry",
+    "error",
+    "syntheticData"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/semanticVersion"
+    },
+    "recordType": {
+      "const": "EXECUTION_RESULT"
+    },
+    "executionId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "actionId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "actionCode": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "correlationId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "promiseId": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "accountKey": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "attemptNumber": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "executionMode": {
+      "type": "string",
+      "enum": [
+        "READ_ONLY",
+        "DRAFT_ONLY",
+        "SIMULATED_WRITE",
+        "SANDBOX_WRITE",
+        "LIVE_WRITE",
+        "HUMAN_TASK"
+      ]
+    },
+    "executor": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/actor"
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completedAt": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "SUCCEEDED",
+        "FAILED",
+        "PARTIAL",
+        "SKIPPED",
+        "DUPLICATE_BLOCKED",
+        "TIMED_OUT",
+        "AMBIGUOUS"
+      ]
+    },
+    "idempotencyKey": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+    },
+    "payloadHash": {
+      "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/sha256"
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "system",
+        "targetType",
+        "targetKey",
+        "environment"
+      ],
+      "properties": {
+        "system": {
+          "type": "string",
+          "enum": [
+            "SYNTHETIC_EXECUTOR",
+            "SALESFORCE",
+            "PROMISEOPS",
+            "CUSTOMER_COMMUNICATION_SIMULATOR"
+          ]
+        },
+        "targetType": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "targetKey": {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+        },
+        "environment": {
+          "type": "string",
+          "enum": [
+            "SYNTHETIC",
+            "SANDBOX",
+            "PRODUCTION"
+          ]
+        }
+      }
+    },
+    "changeSummary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "field",
+          "before",
+          "after"
+        ],
+        "properties": {
+          "field": {
+            "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+          },
+          "before": {
+            "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/jsonScalar"
+          },
+          "after": {
+            "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/jsonScalar"
+          }
+        }
+      }
+    },
+    "responseReference": {
+      "oneOf": [
+        {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/identifier"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "retry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "retryable",
+        "ambiguous",
+        "maxAttempts",
+        "attemptsRemaining",
+        "nextRetryAt"
+      ],
+      "properties": {
+        "retryable": {
+          "type": "boolean"
+        },
+        "ambiguous": {
+          "type": "boolean"
+        },
+        "maxAttempts": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "attemptsRemaining": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "nextRetryAt": {
+          "oneOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "error": {
+      "oneOf": [
+        {
+          "$ref": "https://schemas.viridianai.in/promiseops/v1.0.0/common.schema.json#/$defs/error"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "syntheticData": {
+      "type": "boolean"
+    }
+  }
+}
+
