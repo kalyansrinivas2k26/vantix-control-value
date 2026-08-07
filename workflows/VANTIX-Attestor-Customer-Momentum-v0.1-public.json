@@ -1,0 +1,580 @@
+{
+  "name": "VANTIX Attestor - Customer Momentum - Pre-Import Validated v0.1",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "9e0865ee-a5dd-40c5-ace7-dfd33980ac0b",
+      "name": "01 Manual Trigger - Synthetic Design",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const fixture={\"schemaVersion\":\"1.0.0\",\"recordType\":\"CUSTOMER_MOMENTUM_RUN\",\"syntheticData\":true,\"runMetadata\":{\"correlationId\":\"AT-CM-SYN-001\",\"runId\":\"RUN-CM-SYN-001\",\"module\":\"CUSTOMER_MOMENTUM\",\"policyVersion\":\"0.1.0\",\"startedAt\":\"2026-08-07T09:30:00+05:30\"},\"account\":{\"accountKey\":\"ACC-CM-SYN-001\",\"segment\":\"ENTERPRISE\",\"ownerRole\":\"CUSTOMER_SUCCESS_MANAGER\"},\"baseline\":{\"adoptionScore\":72,\"valueRealizationScore\":68,\"engagementScore\":75,\"measuredAt\":\"2026-07-31T09:00:00+05:30\"},\"currentSignals\":[{\"evidenceId\":\"CM-EVD-001\",\"category\":\"ADOPTION\",\"observedAt\":\"2026-08-06T12:00:00+05:30\",\"freshness\":\"CURRENT\",\"trustStatus\":\"VERIFIED\",\"facts\":{\"score\":61,\"changePct\":-15.3}},{\"evidenceId\":\"CM-EVD-002\",\"category\":\"ENGAGEMENT\",\"observedAt\":\"2026-08-06T14:00:00+05:30\",\"freshness\":\"CURRENT\",\"trustStatus\":\"VERIFIED\",\"facts\":{\"score\":70,\"executiveSponsorActive\":true}},{\"evidenceId\":\"CM-EVD-003\",\"category\":\"VALUE_REALIZATION\",\"observedAt\":\"2026-08-06T15:00:00+05:30\",\"freshness\":\"CURRENT\",\"trustStatus\":\"VERIFIED\",\"facts\":{\"score\":66,\"verifiedOutcomeCount\":3}},{\"evidenceId\":\"CM-EVD-004\",\"category\":\"CONTRADICTORY_SIGNAL\",\"observedAt\":\"2026-08-06T16:00:00+05:30\",\"freshness\":\"CURRENT\",\"trustStatus\":\"VERIFIED\",\"facts\":{\"renewalIntent\":\"POSITIVE\",\"riskNote\":\"USAGE_DECLINE\"}}],\"intervention\":{\"interventionId\":\"CM-INT-SYN-001\",\"type\":\"ADOPTION_RECOVERY_WORKSHOP\",\"ownerRole\":\"CUSTOMER_SUCCESS_MANAGER\",\"plannedAt\":\"2026-08-08T11:00:00+05:30\",\"successMetric\":\"ADOPTION_SCORE_PLUS_8\"},\"humanDecision\":{\"decisionId\":\"CM-DEC-SYN-001\",\"status\":\"APPROVED\",\"decidedByRole\":\"CUSTOMER_SUCCESS_LEADER\",\"decidedAt\":\"2026-08-07T09:15:00+05:30\",\"boundCorrelationId\":\"AT-CM-SYN-001\"},\"outcomeMeasurement\":{\"measuredAt\":\"2026-08-14T12:00:00+05:30\",\"adoptionScore\":78,\"valueRealizationScore\":72,\"engagementScore\":80},\"expected\":{\"changeClass\":\"NEGATIVE_CHANGE\",\"primaryHypothesis\":\"ADOPTION_FRICTION\",\"route\":\"APPROVED_INTERVENTION\",\"outcomeClass\":\"IMPROVING\",\"relapseStatus\":\"NO_RELAPSE\"}}; return [{json:{input:fixture,runtime:{checkpoints:[],warnings:[],errors:[]}}}];"
+      },
+      "id": "00212458-b061-44d3-9bdf-8272c47e9472",
+      "name": "02 Load Synthetic Customer Momentum Fixture",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json,i=s.input; if(!i.syntheticData) throw new Error('CM_SYNTHETIC_ONLY'); s.runtime.module='CUSTOMER_MOMENTUM'; s.runtime.correlationId=i.runMetadata.correlationId; s.runtime.runId=i.runMetadata.runId; s.runtime.checkpoints.push('CONTEXT_INITIALIZED'); return [{json:s}];"
+      },
+      "id": "72b34339-c19f-4611-aa3c-7e503222347a",
+      "name": "03 Initialize Shared Correlation Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json,i=s.input; const req=['schemaVersion','recordType','runMetadata','account','baseline','currentSignals','intervention','humanDecision','outcomeMeasurement']; const miss=req.filter(k=>i[k]===undefined); if(miss.length) throw new Error('CM_REQUIRED_MISSING:'+miss.join(',')); if(i.recordType!=='CUSTOMER_MOMENTUM_RUN'||i.runMetadata.module!=='CUSTOMER_MOMENTUM') throw new Error('CM_CONTRACT_MISMATCH'); const ids=i.currentSignals.map(e=>e.evidenceId); if(new Set(ids).size!==ids.length) throw new Error('CM_DUPLICATE_EVIDENCE_ID'); if(i.humanDecision.boundCorrelationId!==i.runMetadata.correlationId) throw new Error('CM_DECISION_BINDING_MISMATCH'); s.runtime.checkpoints.push('INTAKE_VALIDATED'); return [{json:s}];"
+      },
+      "id": "44664e81-4832-4d41-983a-72c45ab3a975",
+      "name": "04 Validate Customer Momentum Intake",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        672,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json; const now=new Date(s.input.runMetadata.startedAt); const stale=s.input.currentSignals.filter(e=>e.freshness!=='CURRENT'||Number.isNaN(new Date(e.observedAt).getTime())||new Date(e.observedAt)>now); s.runtime.staleEvidenceIds=stale.map(e=>e.evidenceId); s.runtime.checkpoints.push('FRESHNESS_CLASSIFIED'); return [{json:s}];"
+      },
+      "id": "da6e7715-f7e9-4e95-8cd0-a71c4d5efc5d",
+      "name": "05 Classify Evidence Freshness",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        896,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json,i=s.input; const latest=(cat)=>i.currentSignals.filter(e=>e.category===cat&&e.trustStatus==='VERIFIED'&&e.freshness==='CURRENT').sort((a,b)=>new Date(a.observedAt)-new Date(b.observedAt)).at(-1); const a=latest('ADOPTION'),v=latest('VALUE_REALIZATION'),g=latest('ENGAGEMENT'); const deltas={adoption:a?Number(a.facts.score)-Number(i.baseline.adoptionScore):null,value:v?Number(v.facts.score)-Number(i.baseline.valueRealizationScore):null,engagement:g?Number(g.facts.score)-Number(i.baseline.engagementScore):null}; if(Object.values(deltas).some(v=>v===null||!Number.isFinite(v))) throw new Error('CM_CHANGE_EVIDENCE_INCOMPLETE'); const avg=(deltas.adoption+deltas.value+deltas.engagement)/3; s.runtime.deltas=deltas; s.runtime.changeClass=avg<=-5?'NEGATIVE_CHANGE':avg>=5?'POSITIVE_CHANGE':'STABLE'; s.runtime.checkpoints.push('CHANGE_DETECTED'); return [{json:s}];"
+      },
+      "id": "162fa9f5-e8c7-495c-b000-ab588a9f9311",
+      "name": "06 Detect Momentum Change",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json,d=s.runtime.deltas; const h=[]; if(d.adoption<=-5) h.push({code:'ADOPTION_FRICTION',score:Math.min(1,Math.abs(d.adoption)/20)}); if(d.engagement<=-5) h.push({code:'STAKEHOLDER_DISENGAGEMENT',score:Math.min(1,Math.abs(d.engagement)/20)}); if(d.value<=-5) h.push({code:'VALUE_REALIZATION_GAP',score:Math.min(1,Math.abs(d.value)/20)}); if(!h.length) h.push({code:'NO_MATERIAL_DECLINE',score:1}); s.runtime.hypotheses=h.sort((a,b)=>b.score-a.score); s.runtime.checkpoints.push('HYPOTHESES_GENERATED'); return [{json:s}];"
+      },
+      "id": "7a8f68b6-2568-47a4-9d46-a8ea99fc9f9a",
+      "name": "07 Generate Competing Hypotheses",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1344,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json; const h=s.runtime.hypotheses.map(x=>({...x,supportingEvidenceRefs:[]})); for(const e of s.input.currentSignals){ if(e.category==='ADOPTION'&&h.some(x=>x.code==='ADOPTION_FRICTION')) h.find(x=>x.code==='ADOPTION_FRICTION').supportingEvidenceRefs.push(e.evidenceId); if(e.category==='ENGAGEMENT'&&h.some(x=>x.code==='STAKEHOLDER_DISENGAGEMENT')) h.find(x=>x.code==='STAKEHOLDER_DISENGAGEMENT').supportingEvidenceRefs.push(e.evidenceId); if(e.category==='VALUE_REALIZATION'&&h.some(x=>x.code==='VALUE_REALIZATION_GAP')) h.find(x=>x.code==='VALUE_REALIZATION_GAP').supportingEvidenceRefs.push(e.evidenceId); } s.runtime.hypotheses=h; s.runtime.checkpoints.push('SUPPORTING_EVIDENCE_COLLECTED'); return [{json:s}];"
+      },
+      "id": "ef3e0ced-68ca-45be-93f5-4fd5826ff1ff",
+      "name": "08 Collect Supporting Evidence",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1568,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json; const c=s.input.currentSignals.filter(e=>e.category==='CONTRADICTORY_SIGNAL'&&e.trustStatus==='VERIFIED'&&e.freshness==='CURRENT'); s.runtime.contradictoryEvidenceRefs=c.map(e=>e.evidenceId); s.runtime.contradictionPresent=c.length>0; s.runtime.checkpoints.push('CONTRADICTORY_EVIDENCE_SEARCHED'); return [{json:s}];"
+      },
+      "id": "36c485f5-2a46-422b-9017-47490ebbc839",
+      "name": "09 Search Contradictory Evidence",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1792,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json; const eligible=s.runtime.hypotheses.filter(h=>Array.isArray(h.supportingEvidenceRefs)&&h.supportingEvidenceRefs.length>0); s.runtime.primaryHypothesis=(eligible[0]||s.runtime.hypotheses[0]).code; s.runtime.checkpoints.push('PRIMARY_HYPOTHESIS_SELECTED'); return [{json:s}];"
+      },
+      "id": "1a6554f3-4bb3-4f0c-bb3e-6356fdcfdb14",
+      "name": "10 Select Primary Hypothesis Deterministically",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2016,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json; s.runtime.aiDraft={summary:'Synthetic bounded momentum narrative.',changeClass:s.runtime.changeClass,primaryHypothesis:s.runtime.primaryHypothesis,evidenceRefs:s.input.currentSignals.map(e=>e.evidenceId),confidence:0.86}; s.runtime.checkpoints.push('AI_DRAFT_REPLAYED'); return [{json:s}];"
+      },
+      "id": "ca41c342-18ac-43a3-a77a-88a8a83661c7",
+      "name": "11 AI Momentum Narrative - Synthetic Replay",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json; s.runtime.aiCritique={inventedContentFlag:false,missingEvidenceFlag:s.runtime.staleEvidenceIds.length>0,contradictionFlag:s.runtime.contradictionPresent,routeRecommendation:'DETERMINISTIC_POLICY'}; s.runtime.checkpoints.push('AI_CRITIQUE_REPLAYED'); return [{json:s}];"
+      },
+      "id": "cbdb12f0-676b-416f-aa66-a6e4f4058a5a",
+      "name": "12 Independent AI Critique - Synthetic Replay",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2464,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json,a=s.runtime.aiDraft,c=s.runtime.aiCritique; const ev=new Set(s.input.currentSignals.map(e=>e.evidenceId)),refs=Array.isArray(a.evidenceRefs)?a.evidenceRefs:[]; if(!a||!c||a.changeClass!==s.runtime.changeClass||a.primaryHypothesis!==s.runtime.primaryHypothesis||c.inventedContentFlag===true||!refs.length||!refs.every(r=>ev.has(r))||typeof a.confidence!=='number'||a.confidence<0||a.confidence>1) throw new Error('CM_AI_OUTPUT_INVALID'); s.runtime.checkpoints.push('AI_OUTPUTS_VALIDATED'); return [{json:s}];"
+      },
+      "id": "800bcfdf-3d73-4373-91ad-56fb0990956d",
+      "name": "13 Validate AI Outputs Deterministically",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2688,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json,d=s.input.humanDecision||{}; const dt=new Date(d.decidedAt); s.runtime.approvalValid=Boolean(d.decisionId)&&d.status==='APPROVED'&&d.boundCorrelationId===s.runtime.correlationId&&['CUSTOMER_SUCCESS_LEADER','CUSTOMER_SUCCESS_MANAGER','ACCOUNT_EXECUTIVE'].includes(d.decidedByRole)&&!Number.isNaN(dt.getTime()); s.runtime.checkpoints.push('HUMAN_APPROVAL_VALIDATED'); return [{json:s}];"
+      },
+      "id": "fa732c5d-d330-4da4-a0d0-fcec0f5936db",
+      "name": "14 Validate Human Approval Binding",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2912,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json; let route='HUMAN_REVIEW'; if(s.runtime.staleEvidenceIds.length) route='REQUEST_FRESH_EVIDENCE'; else if(!s.runtime.approvalValid) route='HUMAN_APPROVAL_REQUIRED'; else if(s.runtime.changeClass==='NEGATIVE_CHANGE') route='APPROVED_INTERVENTION'; else if(s.runtime.changeClass==='POSITIVE_CHANGE') route='SUSTAIN_AND_LEARN'; else route='MONITOR_MOMENTUM'; s.runtime.route=route; s.runtime.checkpoints.push('INTERVENTION_ROUTE_RECOMMENDED'); return [{json:s}];"
+      },
+      "id": "d44b885b-61ca-4ec4-8937-127e69d20245",
+      "name": "15 Recommend Governed Intervention Route",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3136,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json,b=s.input.baseline,o=s.input.outcomeMeasurement; const vals=[o.adoptionScore,o.valueRealizationScore,o.engagementScore].map(Number); if(vals.some(v=>!Number.isFinite(v))||Number.isNaN(new Date(o.measuredAt).getTime())) throw new Error('CM_OUTCOME_MEASUREMENT_INVALID'); s.runtime.outcomeDelta={adoption:vals[0]-Number(b.adoptionScore),value:vals[1]-Number(b.valueRealizationScore),engagement:vals[2]-Number(b.engagementScore)}; s.runtime.checkpoints.push('OUTCOME_MEASURED'); return [{json:s}];"
+      },
+      "id": "fa411383-d6a9-4984-a942-c59b8c4c0aef",
+      "name": "16 Measure Intervention Outcome",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3360,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json,d=s.runtime.outcomeDelta; const avg=(d.adoption+d.value+d.engagement)/3; s.runtime.outcomeClass=avg>=3?'IMPROVING':avg<=-3?'DECLINING':'NO_MATERIAL_CHANGE'; s.runtime.checkpoints.push('OUTCOME_CLASSIFIED'); return [{json:s}];"
+      },
+      "id": "3ea0ee61-fd98-447f-8e32-6fa4a73b5e26",
+      "name": "17 Classify Outcome",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3584,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json,d=s.runtime.outcomeDelta; s.runtime.relapseStatus=(s.runtime.outcomeClass==='IMPROVING'&&Object.values(d).some(v=>v<-3))?'POSSIBLE_RELAPSE':'NO_RELAPSE'; s.runtime.checkpoints.push('RELAPSE_CHECKED'); return [{json:s}];"
+      },
+      "id": "1afb0870-3037-4d40-8d5a-844ec7068626",
+      "name": "18 Detect Relapse",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3808,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json; s.runtime.learning={hypothesis:s.runtime.primaryHypothesis,interventionType:s.input.intervention.type,outcomeClass:s.runtime.outcomeClass,relapseStatus:s.runtime.relapseStatus,evidenceRefs:s.input.currentSignals.map(e=>e.evidenceId),approved:s.runtime.approvalValid}; s.runtime.checkpoints.push('LEARNING_CAPTURED'); return [{json:s}];"
+      },
+      "id": "9d4b9c80-9ae3-40c5-b990-357bc9726b6a",
+      "name": "19 Capture Governed Learning",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4032,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json; const defects={changeDetection:s.runtime.changeClass==='STABLE'&&Math.min(...Object.values(s.runtime.deltas))<=-5,hypothesisEvidence:s.runtime.hypotheses.some(h=>h.code!=='NO_MATERIAL_DECLINE'&&!h.supportingEvidenceRefs.length),contradictionHandling:s.runtime.contradictionPresent&&!s.runtime.contradictoryEvidenceRefs.length,approvalBinding:!s.runtime.approvalValid,outcomeMeasurement:!['IMPROVING','DECLINING','NO_MATERIAL_CHANGE'].includes(s.runtime.outcomeClass),relapseDetection:!['NO_RELAPSE','POSSIBLE_RELAPSE'].includes(s.runtime.relapseStatus)}; const defectCount=Object.values(defects).filter(Boolean).length; s.runtime.sixSigma={opportunities:6,defects,defectCount,dpmo:defectCount/6*1000000,denominator:'CUSTOMER_MOMENTUM_ONLY'}; s.runtime.checkpoints.push('CTQ_MEASURED'); return [{json:s}];"
+      },
+      "id": "4fdec483-bc2b-49fc-88c8-6000f1be7428",
+      "name": "20 Calculate Customer Momentum CTQs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4256,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json; const required=['changeClass','primaryHypothesis','route','approvalValid','outcomeClass','relapseStatus','sixSigma','learning']; for(const k of required){if(s.runtime[k]===undefined) throw new Error('CM_ENVELOPE_FIELD_MISSING:'+k);} s.output={schemaVersion:'1.0.0',recordType:'CUSTOMER_MOMENTUM_DECISION',syntheticData:true,runMetadata:s.input.runMetadata,account:s.input.account,changeClass:s.runtime.changeClass,primaryHypothesis:s.runtime.primaryHypothesis,contradictionPresent:s.runtime.contradictionPresent,route:s.runtime.route,humanApprovalValid:s.runtime.approvalValid,outcomeClass:s.runtime.outcomeClass,relapseStatus:s.runtime.relapseStatus,sixSigma:s.runtime.sixSigma,learning:s.runtime.learning,evidenceRefs:s.input.currentSignals.map(e=>e.evidenceId),checkpoints:s.runtime.checkpoints}; return [{json:s}];"
+      },
+      "id": "cae704bc-0dd5-47cf-b6a5-a96e7e850469",
+      "name": "21 Build Governed Decision Envelope",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4480,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json,e=s.input.expected,o=s.output; const checks={changeClass:o.changeClass===e.changeClass,primaryHypothesis:o.primaryHypothesis===e.primaryHypothesis,route:o.route===e.route,outcomeClass:o.outcomeClass===e.outcomeClass,relapseStatus:o.relapseStatus===e.relapseStatus}; const failed=Object.entries(checks).filter(([,v])=>!v).map(([k])=>k); if(failed.length) throw new Error('CM_EXPECTED_MISMATCH:'+failed.join(',')); s.runtime.checkpoints.push('EXPECTED_OUTCOME_VALIDATED'); s.output.checkpoints=s.runtime.checkpoints; return [{json:s}];"
+      },
+      "id": "3fb3b1b2-4785-4cae-a2e5-09284daa80c3",
+      "name": "22 Validate Expected Synthetic Outcome",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4704,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s=$input.first().json,o=s.output,esc=v=>String(v??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[c])); s.executiveHtml='<!doctype html><html><head><meta charset=\"utf-8\"><title>VANTIX Attestor Customer Momentum</title><style>body{font-family:Arial;margin:36px;color:#172033}.banner{padding:12px;background:#fff3cd;border:1px solid #d6b600}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{border:1px solid #ccd3df;padding:14px;border-radius:8px}</style></head><body><div class=\"banner\"><b>SYNTHETIC DESIGN VALIDATION ONLY</b></div><h1>VANTIX Attestor — Customer Momentum</h1><div class=\"grid\"><div class=\"card\"><b>Change</b><br>'+esc(o.changeClass)+'</div><div class=\"card\"><b>Hypothesis</b><br>'+esc(o.primaryHypothesis)+'</div><div class=\"card\"><b>Outcome</b><br>'+esc(o.outcomeClass)+'</div><div class=\"card\"><b>Route</b><br>'+esc(o.route)+'</div></div><p>Account: '+esc(o.account.accountKey)+' | Correlation: '+esc(o.runMetadata.correlationId)+'</p></body></html>'; return [{json:s}];"
+      },
+      "id": "81c1c10f-4a07-4ac7-8caa-fe7d272cfd19",
+      "name": "23 Build Executive HTML Report",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4928,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "executiveHtml",
+        "options": {
+          "fileName": "VANTIX-Attestor-Customer-Momentum-PreImport-v0.1.html"
+        }
+      },
+      "id": "a82a395c-0bec-4460-adae-12ec16e7de71",
+      "name": "24 Create Downloadable Executive Report",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        5152,
+        0
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "01 Manual Trigger - Synthetic Design": {
+      "main": [
+        [
+          {
+            "node": "02 Load Synthetic Customer Momentum Fixture",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "02 Load Synthetic Customer Momentum Fixture": {
+      "main": [
+        [
+          {
+            "node": "03 Initialize Shared Correlation Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "03 Initialize Shared Correlation Context": {
+      "main": [
+        [
+          {
+            "node": "04 Validate Customer Momentum Intake",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "04 Validate Customer Momentum Intake": {
+      "main": [
+        [
+          {
+            "node": "05 Classify Evidence Freshness",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05 Classify Evidence Freshness": {
+      "main": [
+        [
+          {
+            "node": "06 Detect Momentum Change",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "06 Detect Momentum Change": {
+      "main": [
+        [
+          {
+            "node": "07 Generate Competing Hypotheses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "07 Generate Competing Hypotheses": {
+      "main": [
+        [
+          {
+            "node": "08 Collect Supporting Evidence",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "08 Collect Supporting Evidence": {
+      "main": [
+        [
+          {
+            "node": "09 Search Contradictory Evidence",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "09 Search Contradictory Evidence": {
+      "main": [
+        [
+          {
+            "node": "10 Select Primary Hypothesis Deterministically",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "10 Select Primary Hypothesis Deterministically": {
+      "main": [
+        [
+          {
+            "node": "11 AI Momentum Narrative - Synthetic Replay",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "11 AI Momentum Narrative - Synthetic Replay": {
+      "main": [
+        [
+          {
+            "node": "12 Independent AI Critique - Synthetic Replay",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "12 Independent AI Critique - Synthetic Replay": {
+      "main": [
+        [
+          {
+            "node": "13 Validate AI Outputs Deterministically",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "13 Validate AI Outputs Deterministically": {
+      "main": [
+        [
+          {
+            "node": "14 Validate Human Approval Binding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "14 Validate Human Approval Binding": {
+      "main": [
+        [
+          {
+            "node": "15 Recommend Governed Intervention Route",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "15 Recommend Governed Intervention Route": {
+      "main": [
+        [
+          {
+            "node": "16 Measure Intervention Outcome",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "16 Measure Intervention Outcome": {
+      "main": [
+        [
+          {
+            "node": "17 Classify Outcome",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "17 Classify Outcome": {
+      "main": [
+        [
+          {
+            "node": "18 Detect Relapse",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "18 Detect Relapse": {
+      "main": [
+        [
+          {
+            "node": "19 Capture Governed Learning",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "19 Capture Governed Learning": {
+      "main": [
+        [
+          {
+            "node": "20 Calculate Customer Momentum CTQs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "20 Calculate Customer Momentum CTQs": {
+      "main": [
+        [
+          {
+            "node": "21 Build Governed Decision Envelope",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "21 Build Governed Decision Envelope": {
+      "main": [
+        [
+          {
+            "node": "22 Validate Expected Synthetic Outcome",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "22 Validate Expected Synthetic Outcome": {
+      "main": [
+        [
+          {
+            "node": "23 Build Executive HTML Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "23 Build Executive HTML Report": {
+      "main": [
+        [
+          {
+            "node": "24 Create Downloadable Executive Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  }
+}
