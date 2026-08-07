@@ -99,7 +99,7 @@ eae78638112cdcddda48ecff4b8f053fb17b29fa2a90ed800aeb472e41fa54c6  ./scripts/live
 07f187eabba925214c9eb77862cde8996e492eb94e43242d55e88445157ade71  ./scripts/validate-foundation.mjs
 0f2e914579239ad91f07e7773e50173e3829b482f00e848cd3d520473d5196c2  ./scripts/validate-gate2.mjs
 1210641d81b4c4fe7a07cee1f5b8c8ad1d0fcdc125a777000370a93a2e5321cc  ./scripts/verify-checksums.mjs
-a98c701086bfb795427bed6ecf3bb520652f9b1b8d0970f81481448c5dc57af0  ./SHA256SUMS.txt
+8ed1ddeb699b05919cf9ce0ff05d5448cf1c4724e65486668f22983014bf845b  ./SHA256SUMS.txt
 a49a9864d01986347bf1395deefcf3ca0d1500ee4fb3cadb9172d05b0dda383a  ./standards/VANTIX-EXECUTIVE-DOCUMENTATION-STANDARD-v1.0.md
 9e7a69c220a4cd793e32948864f0f88ace6f3c3694bda626a3009b6f0be56a28  ./validation/documentation-standard-check.json
 a99924567f0864e55e3bdfe47b673c79d8e3a2d148750b649dd558e8463123fe  ./validation/foundation-validation-report.json
