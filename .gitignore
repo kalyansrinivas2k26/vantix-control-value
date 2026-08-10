@@ -1,7 +1,29 @@
-node_modules/
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Secrets/environment
 .env
 .env.*
 !.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials/
+secrets/
+
+# Dependencies/runtime
+node_modules/
+.n8n/
+__pycache__/
+.venv/
+
+# Temporary/build
 *.log
-.DS_Store
+*.tmp
 coverage/
+dist/
+build/
