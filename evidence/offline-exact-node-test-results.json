@@ -1,0 +1,58 @@
+{
+  "evidenceClass": "OFFLINE_EXACT_NODE_CODE_EXECUTION",
+  "n8nRuntimeExecution": false,
+  "workflowSha256": "f9268e5814b12fcc9e8084dc22f4811b522568eafb8895693dc202dd2f4c7c58",
+  "testCount": 5,
+  "passCount": 5,
+  "failCount": 0,
+  "tests": [
+    {
+      "id": "CV-OFF-01_full_chain_to_executive_report",
+      "status": "PASS",
+      "details": {
+        "containsCloseState": true,
+        "outputKeys": [
+          "envelope",
+          "controls",
+          "runtime",
+          "executiveHtml"
+        ]
+      }
+    },
+    {
+      "id": "CV-OFF-02_deterministic_assessment_expected_markers",
+      "status": "PASS",
+      "details": {
+        "expectedMarkers": [
+          "HIGH",
+          "VERY_HIGH",
+          "P1_CRITICAL",
+          "98"
+        ]
+      }
+    },
+    {
+      "id": "CV-OFF-03_full_chain_preserves_synthetic_boundary",
+      "status": "PASS",
+      "details": {
+        "runEnvelopeProduced": true,
+        "syntheticBoundaryPreserved": true
+      }
+    },
+    {
+      "id": "CV-OFF-04_workflow_has_no_live_ai_node",
+      "status": "PASS",
+      "details": {
+        "liveAiNode": false,
+        "syntheticReplayLabels": true
+      }
+    },
+    {
+      "id": "CV-OFF-05_twenty_node_topology",
+      "status": "PASS",
+      "details": {
+        "nodeCount": 20
+      }
+    }
+  ]
+}
