@@ -1,0 +1,39 @@
+name: Validate Control Value Portfolio Preview
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate repository integrity and evidence boundaries
+        run: python scripts/validate_project3.py
+      - name: Validate governed workflow graph
+        run: python scripts/validate_graph.py
+      - name: Reproduce exact-node offline evidence
+        run: |
+          node tests/offline_exact_node_tests.cjs workflows/VANTIX-Control-Value-v0.2-public.json /tmp/control-value-offline.json
+          python - <<'PY'
+          import json
+          a=json.load(open('evidence/offline-exact-node-test-results.json'))
+          b=json.load(open('/tmp/control-value-offline.json'))
+          assert a==b, 'offline exact-node evidence drift'
+          print('OFFLINE EXACT-NODE EVIDENCE REPRODUCED')
+          PY
+      - name: Verify SHA-256 ledger
+        run: python scripts/checksums.py --check
