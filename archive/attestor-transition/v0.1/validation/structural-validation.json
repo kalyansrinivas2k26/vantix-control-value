@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "workflows": [
+    {
+      "file": "VANTIX-Attestor-Commitment-Assurance-Error-Handler-v0.3-public.json",
+      "jsonValid": true,
+      "activeFalse": true,
+      "nodeCount": 3,
+      "connectionEdgeCount": 2,
+      "duplicateNodeNames": false,
+      "brokenTargets": [],
+      "publicMetadataAbsent": true
+    },
+    {
+      "file": "VANTIX-Attestor-Commitment-Assurance-v0.3-public.json",
+      "jsonValid": true,
+      "activeFalse": true,
+      "nodeCount": 20,
+      "connectionEdgeCount": 19,
+      "duplicateNodeNames": false,
+      "brokenTargets": [],
+      "publicMetadataAbsent": true
+    },
+    {
+      "file": "VANTIX-Attestor-Customer-Momentum-v0.1-public.json",
+      "jsonValid": true,
+      "activeFalse": true,
+      "nodeCount": 24,
+      "connectionEdgeCount": 23,
+      "duplicateNodeNames": false,
+      "brokenTargets": [],
+      "publicMetadataAbsent": true
+    },
+    {
+      "file": "VANTIX-Attestor-Service-Recovery-v0.2-public.json",
+      "jsonValid": true,
+      "activeFalse": true,
+      "nodeCount": 20,
+      "connectionEdgeCount": 19,
+      "duplicateNodeNames": false,
+      "brokenTargets": [],
+      "publicMetadataAbsent": true
+    }
+  ],
+  "errors": []
+}
